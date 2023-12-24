@@ -2,7 +2,7 @@ import morgan from "morgan";
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import connection from "../db/connection";
+import connection from "../db/[mongo]connection";
 import http from "http";
 import colors from "colors";
 import routerHome from "../routes/home/router";
