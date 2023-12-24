@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import employees from "../../controllers/employees/employees.controller";
-import cacheInit from "../../middlewares/cache.config";
+import employees from "../controllers/employees.controller";
+import cacheInit from "../middlewares/cache.config";
 
 const employeesController = new employees();
 const path = "/api/v1";
@@ -17,7 +17,7 @@ routerEmployees.get(
 
 // todo: render employee by id
 routerEmployees.get(
-  `${path}/employees/:employeeId`,
+  `${path}/employee/:employeeId`,
   cacheInit,
   (req: Request, res: Response) => {
     employeesController.getEmployeeById(req, res);
@@ -25,16 +25,13 @@ routerEmployees.get(
 );
 
 // todo: create a new employee
-routerEmployees.post(
-  `${path}/employees/new`,
-  (req: Request, res: Response) => {
-    employeesController.createEmployee(req, res);
-  }
-);
+routerEmployees.post(`${path}/employee /new`, (req: Request, res: Response) => {
+  employeesController.createEmployee(req, res);
+});
 
-// todo: edit a employee
-routerEmployees.put(
-  `${path}/employees/edit/:id`,
+// todo: edit a employee PENDIENTE POR HACER
+routerEmployees.patch(
+  `${path}/employee/edit/:id`,
   (req: Request, res: Response) => {
     employeesController.editEmployee(req, res);
   }
@@ -42,7 +39,7 @@ routerEmployees.put(
 
 // todo: delete a employee
 routerEmployees.delete(
-  `${path}/employees/delete/:id`,
+  `${path}/employee/delete/:id`,
   (req: Request, res: Response) => {
     employeesController.deleteEmployee(req, res);
   }
