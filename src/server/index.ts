@@ -5,9 +5,9 @@ import cors from "cors";
 import connection from "../db/[mongo]connection";
 import http from "http";
 import colors from "colors";
-import routerHome from "../routes/home/router";
-import routerEmployees from "../routes/employees/router";
-import routerUnitCars from "../routes/units-cars/router";
+import routerHome from "../routes/home.router";
+import routerEmployees from "../routes/employees.router";
+import routerUnitCars from "../routes/unit-cars.router";
 
 dotenv.config();
 connection();

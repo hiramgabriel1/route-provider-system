@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import unitCarsController from "../../controllers/units-cars/units-cars.controllers";
-import cacheInit from "../../middlewares/cache.config";
+import unitCarsController from "../controllers/units-cars.controllers";
+import cacheInit from "../middlewares/cache.config";
 
 const unitCar = new unitCarsController();
 const path = "/api/v1";
@@ -21,11 +21,11 @@ routerUnitCars.post(`${path}/car-unit/new`, (req: Request, res: Response) => {
 });
 
 // todo: edit a unit car PENDIENTE POR HACER
-// routerEmployees.patch(
-//   `${path}/employee/edit/:id`,
+// routerUnitCars.patch(
+//   `${path}/car-unit/edit/:id`,
 //   (req: Request, res: Response) => {
-//     employeesController.editEmployee(req, res);
-//   }
+//     routerUnitCars.modifyUnitCar(req, res)
+// }
 // );
 
 // todo: delete a unit car

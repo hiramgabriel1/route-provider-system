@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import unitModel from "../../models/units.model";
+import unitModel from "../models/units.model";
 
 class unitCarsController {
   async getCarsUnit(req: Request, res: Response) {
@@ -39,7 +39,7 @@ class unitCarsController {
     }
   }
 
-  async editCarUnit(req: Request, res: Response) {
+  async modifyUnitCar(req: Request, res: Response) {
     try {
       const { id } = req.params;
       // const { }

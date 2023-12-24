@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import employees from "../../controllers/employees/employees.controller";
-import cacheInit from "../../middlewares/cache.config";
+import employees from "../controllers/employees.controller";
+import cacheInit from "../middlewares/cache.config";
 
 const employeesController = new employees();
 const path = "/api/v1";
@@ -30,12 +30,12 @@ routerEmployees.post(`${path}/employee /new`, (req: Request, res: Response) => {
 });
 
 // todo: edit a employee PENDIENTE POR HACER
-// routerEmployees.patch(
-//   `${path}/employee/edit/:id`,
-//   (req: Request, res: Response) => {
-//     employeesController.editEmployee(req, res);
-//   }
-// );
+routerEmployees.patch(
+  `${path}/employee/edit/:id`,
+  (req: Request, res: Response) => {
+    employeesController.editEmployee(req, res);
+  }
+);
 
 // todo: delete a employee
 routerEmployees.delete(
