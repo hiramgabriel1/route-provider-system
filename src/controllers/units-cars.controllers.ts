@@ -42,7 +42,19 @@ class unitCarsController {
   async modifyUnitCar(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      // const { }
+      const carUnitModify = req.body;
+
+      const modifyUnit = await unitModel.findByIdAndUpdate(
+        { _id: id },
+        { $set: carUnitModify },
+        { new: true }
+      );
+
+      modifyUnit
+        ? res
+            .status(200)
+            .json({ message: "modify data successfully!", details: modifyUnit })
+        : res.status(404).json({ message: "error", details: false });
     } catch (error) {
       console.error(error);
     }
