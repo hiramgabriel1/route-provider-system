@@ -17,7 +17,7 @@ routerEmployees.get(
 
 // todo: render employee by id
 routerEmployees.get(
-  `${path}/employees/:employeeId`,
+  `${path}/employee/:employeeId`,
   cacheInit,
   (req: Request, res: Response) => {
     employeesController.getEmployeeById(req, res);
@@ -26,15 +26,15 @@ routerEmployees.get(
 
 // todo: create a new employee
 routerEmployees.post(
-  `${path}/employees/new`,
+  `${path}/employee /new`,
   (req: Request, res: Response) => {
     employeesController.createEmployee(req, res);
   }
 );
 
 // todo: edit a employee
-routerEmployees.put(
-  `${path}/employees/edit/:id`,
+routerEmployees.patch(
+  `${path}/employee/edit/:id`,
   (req: Request, res: Response) => {
     employeesController.editEmployee(req, res);
   }
@@ -42,7 +42,7 @@ routerEmployees.put(
 
 // todo: delete a employee
 routerEmployees.delete(
-  `${path}/employees/delete/:id`,
+  `${path}/employee/delete/:id`,
   (req: Request, res: Response) => {
     employeesController.deleteEmployee(req, res);
   }
