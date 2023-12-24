@@ -4,7 +4,11 @@ import employeeModel from "../../models/employees.model"
 class employees {
     async getEmployees(req: Request, res: Response){
         try {
-            
+            const renderData = await employeeModel.find()
+
+            renderData 
+                ? res.status(200).json({ message: renderData, details: true })
+                : res.status(500).json({ messageError: "error internal brother, de pana xd", details: false })
         } catch (error) {
             console.error(error)
         }
