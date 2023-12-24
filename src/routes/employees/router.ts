@@ -25,20 +25,17 @@ routerEmployees.get(
 );
 
 // todo: create a new employee
-routerEmployees.post(
-  `${path}/employee /new`,
-  (req: Request, res: Response) => {
-    employeesController.createEmployee(req, res);
-  }
-);
+routerEmployees.post(`${path}/employee /new`, (req: Request, res: Response) => {
+  employeesController.createEmployee(req, res);
+});
 
-// todo: edit a employee
-routerEmployees.patch(
-  `${path}/employee/edit/:id`,
-  (req: Request, res: Response) => {
-    employeesController.editEmployee(req, res);
-  }
-);
+// todo: edit a employee PENDIENTE POR HACER
+// routerEmployees.patch(
+//   `${path}/employee/edit/:id`,
+//   (req: Request, res: Response) => {
+//     employeesController.editEmployee(req, res);
+//   }
+// );
 
 // todo: delete a employee
 routerEmployees.delete(
