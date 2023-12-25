@@ -109,6 +109,7 @@ class employees {
 class routesEmployees extends employees {
   async getEmployeeRoute(req: Request, res: Response) {
     try {
+      res.send("hello world")
     } catch (error) {
       console.error(error);
     }
