@@ -1,10 +1,11 @@
 import { Request, Response, Router } from "express";
-import employees from "../controllers/employees.controller";
+import { employees, routesEmployees } from "../controllers/employees.controller";
 import cacheInit from "../middlewares/cache.config";
 
 const employeesController = new employees();
-const path = "/api/v1";
+const subRoutesEmployees = new routesEmployees()
 const routerEmployees = Router();
+const path = "/api/v1";
 
 // todo: render all employees
 routerEmployees.get(

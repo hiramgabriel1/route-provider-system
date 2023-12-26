@@ -44,13 +44,10 @@ class employees {
       );
 
       updateUserData
-        ? res
-            .status(200)
-            .json({ message: updateUserData, details: true })
+        ? res.status(200).json({ message: updateUserData, details: true })
         : res
             .status(404)
             .json({ messageError: "error internal", details: false });
-
     } catch (error) {
       console.error(error);
     }
@@ -109,4 +106,14 @@ class employees {
   }
 }
 
-export default employees;
+class routesEmployees extends employees {
+  async getEmployeeRoute(req: Request, res: Response) {
+    try {
+      res.send("hello world")
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
+export { employees, routesEmployees };
