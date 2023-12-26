@@ -1,25 +1,5 @@
-import mongoose, { model } from "mongoose";
+import { Sequelize } from "sequelize";
 
-const login = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-  },
+// export const loginModel = new Sequelize{
 
-  email: {
-    type: String,
-    required: true,
-  },
-
-  role: {
-    type: String,
-    required: true,
-  },
-
-  password: {
-    type: String,
-    required: true,
-  },
-});
-
-export const loginModel = model("login-users", login)
+// }

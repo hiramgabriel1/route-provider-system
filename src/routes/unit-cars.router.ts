@@ -20,13 +20,13 @@ routerUnitCars.post(`${path}/car-unit/new`, (req: Request, res: Response) => {
   unitCar.createCarUnit(req, res);
 });
 
-// todo: edit a unit car PENDIENTE POR HACER
-// routerUnitCars.patch(
-//   `${path}/car-unit/edit/:id`,
-//   (req: Request, res: Response) => {
-//     routerUnitCars.modifyUnitCar(req, res)
-// }
-// );
+// todo: edit a unit car 
+routerUnitCars.patch(
+  `${path}/car-unit/edit/:id`,
+  (req: Request, res: Response) => {
+    unitCar.modifyUnitCar(req, res)
+}
+);
 
 // todo: delete a unit car
 routerUnitCars.delete(
