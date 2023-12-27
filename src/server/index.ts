@@ -8,6 +8,7 @@ import colors from "colors";
 import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
+import routerRutas from "../routes/rutas.router";
 
 dotenv.config();
 connection();
@@ -24,8 +25,9 @@ app.use(morgan("dev"));
 
 // & endpoints here
 app.use(routerHome);
-app.use(routerEmployees);
+//app.use(routerEmployees);
 app.use(routerUnitCars);
+app.use(routerRutas);
 
 // io.on("connection", (socket) => {
 //   console.log(`user connected ${socket.id}`);
