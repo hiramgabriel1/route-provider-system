@@ -16,9 +16,10 @@ export const verifyPasswordSecurity = async (
 ) => {
   try {
     const verify = await bcrypt.compare(password, hashPassword);
-
     return verify;
   } catch (error) {
     console.error(error);
+    console.log('Error al comparar contraseñas'+ error);
   }
 };
+

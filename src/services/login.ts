@@ -1,24 +1,22 @@
-import Usuario from "../models/login.model";
-import {
-  verifyPasswordSecurity,
-  encryptPasswordSecurity,
-} from "../validators/bcrypt.config";
+import employeeModel from "../models/employees.model";
+import {verifyPasswordSecurity,encryptPasswordSecurity} from "../validators/bcrypt.config";
 
 export class LoginSystem {
+
   async loginUser(username: string, password: string) {
     try {
-      const usuario = await Usuario.findOne({ where: { nombre: username } });
+      const usuario = await employeeModel.findOne({ where: { nombre: username } });
 
       if (!usuario) {
         console.log("Usuario no encontrado");
-        return;
+        return undefined;
       }
 
-      const passwordValid = "s"; //await verifyPasswordSecurity(password, usuario.password);
+      const passwordValid =await verifyPasswordSecurity(password, usuario.password);
 
       passwordValid
-        ? console.log("Inicio de sesión exitoso")
-        : console.log("Contraseña incorrecta");
+        ?  true // console.log("Inicio de sesión exitoso")
+        : false //console.log("Contraseña incorrecta");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
@@ -26,23 +24,31 @@ export class LoginSystem {
 
   async registerUser(username: string, password: string) {
     try {
-      const usuario = await Usuario.findOne({ where: { nombre: username } });
+      const usuario = await employeeModel.findOne({ where: { nombre: username } });
 
       if (usuario) {
         console.log("Ya existe el usuario");
-        return;
+        return false;
       }
 
       const passwordHash = await encryptPasswordSecurity(password);
-      await Usuario.create({
+      await employeeModel.create({
         nombre: username,
         password: passwordHash,
         rol: false,
       });
 
       console.log("Usuario registrado exitosamente");
+
+      return true
     } catch (error) {
       console.error("Error al registrar usuario:", error);
     }
   }
+
+  async logout(){
+    //implementar logica
+  }
+
 }
+export default LoginSystem
