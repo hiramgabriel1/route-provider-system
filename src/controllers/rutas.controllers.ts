@@ -79,7 +79,7 @@ class rutasController {
         LastMinuteSale: LastMinuteSale,
       });
 
-      return isExists
+      isExists
         ? res.json({ message: "La ruta ya existe", details: dataUser })
         : false;
 
