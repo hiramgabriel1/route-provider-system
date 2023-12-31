@@ -1,5 +1,5 @@
-import { Sequelize } from "sequelize";
+// login.model.ts
+import { DataTypes, Model } from "sequelize";
+import db from "../db/[mysql]connection";
 
-// export const loginModel = new Sequelize{
 
-// }
