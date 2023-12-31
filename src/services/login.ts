@@ -1,12 +1,12 @@
 import employeeModel from "../models/employees.model";
 import {verifyPasswordSecurity,encryptPasswordSecurity} from "../validators/bcrypt.config";
 
+
 export class LoginSystem {
 
   async loginUser(username: string, password: string) {
     try {
       const usuario = await employeeModel.findOne({ where: { nombre: username } });
-
       if (!usuario) {
         console.log("Usuario no encontrado");
         return undefined;
@@ -15,14 +15,14 @@ export class LoginSystem {
       const passwordValid =await verifyPasswordSecurity(password, usuario.password);
 
       passwordValid
-        ?  true // console.log("Inicio de sesión exitoso")
-        : false //console.log("Contraseña incorrecta");
+        ? usuario
+        : false //Contraseña incorrecta
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
   }
 
-  async registerUser(username: string, password: string) {
+  async registerUser(user:String,username: string,lastnames:String, password: string,rol:Boolean) {
     try {
       const usuario = await employeeModel.findOne({ where: { nombre: username } });
 
@@ -33,9 +33,11 @@ export class LoginSystem {
 
       const passwordHash = await encryptPasswordSecurity(password);
       await employeeModel.create({
-        nombre: username,
+        user: user,
+        username: username,
+        lastnames: lastnames,
         password: passwordHash,
-        rol: false,
+        rol: rol,
       });
 
       console.log("Usuario registrado exitosamente");
