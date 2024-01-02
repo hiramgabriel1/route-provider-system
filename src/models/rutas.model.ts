@@ -12,11 +12,13 @@ const rutasSchema = new mongoose.Schema({
   },
 
   start: {
-    //posible latitud y longitud
+    type: [Number], 
+    required: true,
   },
 
   end: {
-    //posible latitud y longitud
+    type: [Number], 
+    required: true,
   },
 
   status: {

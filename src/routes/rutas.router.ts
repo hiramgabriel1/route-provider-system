@@ -11,7 +11,7 @@ routerRutas.get(`${path}/rutas`, cacheInit, (req: Request, res: Response) => {
 });
 
 routerRutas.get(
-  `${path}/rutas/:id`,
+  `${path}/rutas/:rutaId`,
   cacheInit,
   (req: Request, res: Response) => {
     controllerRutas.getRutaById(req, res);
@@ -22,12 +22,12 @@ routerRutas.post(`${path}/rutas/new`, (req: Request, res: Response) => {
   controllerRutas.createRuta(req, res);
 });
 
-routerRutas.patch(`${path}/rutas/edit/:id`, (req: Request, res: Response) => {
+routerRutas.patch(`${path}/rutas/edit/:rutaId`, (req: Request, res: Response) => {
   controllerRutas.editRuta(req, res);
 });
 
 routerRutas.delete(
-  `${path}/rutas/:id`,
+  `${path}/rutas/:rutaId`,
   cacheInit,
   (req: Request, res: Response) => {
     controllerRutas.deleteRutas(req, res);
