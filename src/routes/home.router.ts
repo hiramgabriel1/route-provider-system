@@ -6,6 +6,7 @@ const home = new homeController();
 const path = "/api/v1";
 const routerHome = Router();
 
+
 routerHome.get(`${path}/home`, cacheInit, (req: Request, res: Response) => {
   home.getDataParams(req, res);
 });

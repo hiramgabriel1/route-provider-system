@@ -8,6 +8,8 @@ import colors from "colors";
 import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
+import routerRutas from "../routes/rutas.router";
+import routerLogin from "../routes/login.router";
 
 dotenv.config();
 connection();
@@ -26,6 +28,8 @@ app.use(morgan("dev"));
 app.use(routerHome);
 app.use(routerEmployees);
 app.use(routerUnitCars);
+app.use(routerRutas);
+app.use(routerLogin)
 
 // io.on("connection", (socket) => {
 //   console.log(`user connected ${socket.id}`);
@@ -42,7 +46,7 @@ app.use(routerUnitCars);
 const bootstrap = () => {
   try {
     server.listen(PORT);
-    // console.log(`Server listening on http://localhost:${PORT}`.blue);
+    //console.log(`Server listening on http://localhost:${PORT}`.blue);
   } catch (error) {
     console.error(error);
   }
