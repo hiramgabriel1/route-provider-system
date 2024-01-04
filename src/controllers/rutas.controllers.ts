@@ -58,7 +58,7 @@ class rutasController {
         LastMinuteSale,
       } = req.body;
 
-      const dataUser = {
+      const dataUser:userRoute = {
         empleado: empleado,
         vehicle: vehicle,
         start: start,
