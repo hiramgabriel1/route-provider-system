@@ -9,7 +9,7 @@ import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
-import routerLogin from "../routes/login.router";
+// import routerLogin from "../routes/login.router";
 
 
 
@@ -32,7 +32,7 @@ app.use(routerHome);
 app.use(routerEmployees);
 app.use(routerUnitCars);
 app.use(routerRutas);
-app.use(routerLogin)
+// app.use(routerLogin)
 
 // io.on("connection", (socket) => {
 //   console.log(`user connected ${socket.id}`);
