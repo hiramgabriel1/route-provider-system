@@ -27,12 +27,12 @@ const rutasSchema = new mongoose.Schema({
   },
 
   amountOfMerchandise: {
-    type: Boolean,
+    type: Number,
     required: true,
   },
 
   LastMinuteSale: {
-    type: Boolean,
+    type: String,
     required: true,
   },
 });
