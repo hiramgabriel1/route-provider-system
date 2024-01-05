@@ -12,11 +12,13 @@ const rutasSchema = new mongoose.Schema({
   },
 
   start: {
-    //posible latitud y longitud
+    type: [Number], 
+    required: true,
   },
 
   end: {
-    //posible latitud y longitud
+    type: [Number], 
+    required: true,
   },
 
   status: {
@@ -25,12 +27,12 @@ const rutasSchema = new mongoose.Schema({
   },
 
   amountOfMerchandise: {
-    type: Boolean,
+    type: Number,
     required: true,
   },
 
   LastMinuteSale: {
-    type: Boolean,
+    type: String,
     required: true,
   },
 });

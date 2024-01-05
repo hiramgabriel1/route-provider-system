@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { LoginSystem } from "../services/login";
+import { destroyToken,verifyToken,generateToken } from "../validators/jwt.config";
+
 
 const LoginSystemServices = new LoginSystem();
 
@@ -15,15 +17,17 @@ class loginController {
         return;
       }
 
-      const result = await LoginSystemServices.loginUser(username, password);
+      const userdata = await LoginSystemServices.loginUser(username, password);
 
-      result === undefined
-        ? res
-            .status(404)
-            .json({ error: "El usuario no existe, debes registrarte" })
-        : result
-        ? res.json({ message: "Inicio de sesión exitoso" })
-        : res.status(401).json({ error: "Contraseña incorrecta" });
+      userdata === undefined
+  ? res.status(404).json({ error: "El usuario no existe, debes registrarte" })
+  : userdata
+  ? (() => {
+    const token = generateToken({ userdata: userdata });
+          res.send({msg:'success', token:token})
+    })()
+  : res.status(401).json({ error: "Contraseña incorrecta" });
+
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       res.status(500).json({ error: "Error en el servidor" });
@@ -32,16 +36,16 @@ class loginController {
 
   async registerUser(req: Request, res: Response) {
     try {
-      const { username, password } = req.body;
+      const { user, username,lastname,role, password } = req.body;
 
-      if (!username || !password) {
+      if (!user || !username||!lastname||role===undefined||!password) {
         res
           .status(400)
           .json({ error: "Nombre de usuario y contraseña son requeridos" });
         return;
       }
       
-      const result = await LoginSystemServices.registerUser(username, password);
+      const result = await LoginSystemServices.registerUser(user,username,lastname,role, password);
       
       result
         ? res.json({ message: "Usuario registrado exitosamente" })
@@ -53,7 +57,11 @@ class loginController {
   }
 
   async logout(req: Request, res: Response) {
-    //implementar logica de logout
+   try{
+    destroyToken(req, res);
+   }catch(error){
+    res.status(500).json({ error: "Error en el servidor" });
+   }
   }
 }
 

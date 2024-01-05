@@ -39,7 +39,7 @@ class rutasController {
         { new: true }
       );
 
-      updateDataRuta
+      updateUserData
         ? res.status(200).json({ message: updateDataRuta, details: true })
         : res.status(404).json({ message: "No existen rutas", details: false });
     } catch (error) {
@@ -95,9 +95,9 @@ class rutasController {
 
   async deleteRutas(req: Request, res: Response) {
     try {
-      const { idRuta } = req.params;
+      const { rutaId } = req.params;
 
-      const deleteRuta = await rutasModels.findByIdAndDelete(idRuta);
+      const deleteRuta = await rutasModels.findByIdAndDelete(rutaId);
 
       deleteRuta
         ? res.status(200).json({
