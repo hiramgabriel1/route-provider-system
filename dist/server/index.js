@@ -13,6 +13,7 @@ const home_router_1 = __importDefault(require("../routes/home.router"));
 const employees_router_1 = __importDefault(require("../routes/employees.router"));
 const unit_cars_router_1 = __importDefault(require("../routes/unit-cars.router"));
 const rutas_router_1 = __importDefault(require("../routes/rutas.router"));
+const products_router_1 = __importDefault(require("../routes/products.router"));
 // import routerLogin from "../routes/login.router";
 dotenv_1.default.config();
 (0, _mongo_connection_1.default)();
@@ -29,6 +30,7 @@ app.use(home_router_1.default);
 app.use(employees_router_1.default);
 app.use(unit_cars_router_1.default);
 app.use(rutas_router_1.default);
+app.use(products_router_1.default);
 // app.use(routerLogin)
 // io.on("connection", (socket) => {
 //   console.log(`user connected ${socket.id}`);
