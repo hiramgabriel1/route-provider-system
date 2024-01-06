@@ -3,7 +3,6 @@
 // // import loginController from "../controllers/login.controller";
 // // import { verifyToken } from "../validators/jwt.config";
 
-// // const controllerLogin=  new loginController()
 // const routerLogin = Router();
 // const path = "/api/v1";
 

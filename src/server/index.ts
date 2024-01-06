@@ -1,4 +1,4 @@
-import morgan from "morgan";
+// import morgan from "morgan";
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -9,10 +9,9 @@ import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
+
 import routerProducts from "../routes/products.router";
 // import routerLogin from "../routes/login.router";
-
-
 
 dotenv.config();
 connection();
@@ -25,7 +24,7 @@ const server = http.createServer(app);
 // & middlewares here
 app.use(express.json());
 app.use(cors());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 
 // & endpoints here
@@ -33,7 +32,6 @@ app.use(routerHome);
 app.use(routerEmployees);
 app.use(routerUnitCars);
 app.use(routerRutas);
-app.use(routerProducts);
 // app.use(routerLogin)
 
 // io.on("connection", (socket) => {
