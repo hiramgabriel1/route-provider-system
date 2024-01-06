@@ -9,6 +9,8 @@ import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
+
+import routerProducts from "../routes/products.router";
 // import routerLogin from "../routes/login.router";
 
 dotenv.config();
