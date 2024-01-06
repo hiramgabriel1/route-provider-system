@@ -13,8 +13,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "dev": "nodemon ./src/server/index.js",
-    "start": "ts-node ./src/server/index.ts",
-    "start:prod": "node ./dist/server/index.js"
+    "start": "node ./dist/server/index.js",
+    "start:dev": "node ./dist/server/index.js"
   },
   "repository": {
     "type": "git",
