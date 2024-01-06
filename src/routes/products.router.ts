@@ -6,28 +6,28 @@ const controllerProducts = new productsController();
 const routerProducts = Router();
 const path = "/api/v1";
 
-routerProducts.get(`${path}/rutas`, cacheInit, (req: Request, res: Response) => {
+routerProducts.get(`${path}/products`, cacheInit, (req: Request, res: Response) => {
   controllerProducts.getProducts(req, res);
 });
 
 routerProducts.get(
-  `${path}/rutas/:productId`,
+  `${path}/products/:productId`,
   cacheInit,
   (req: Request, res: Response) => {
     controllerProducts.getProductById(req, res);
   }
 );
 
-routerProducts.post(`${path}/rutas/new`, (req: Request, res: Response) => {
+routerProducts.post(`${path}/products/new`, (req: Request, res: Response) => {
   controllerProducts.createProduct(req, res);
 });
 
-routerProducts.patch(`${path}/rutas/edit/:productId`, (req: Request, res: Response) => {
+routerProducts.patch(`${path}/products/edit/:productId`, (req: Request, res: Response) => {
   controllerProducts.editProduct(req, res);
 });
 
 routerProducts.delete(
-  `${path}/rutas/:productId`,
+  `${path}/products/:productId`,
   cacheInit,
   (req: Request, res: Response) => {
     controllerProducts.deleteProduct(req, res);
