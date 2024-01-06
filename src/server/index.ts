@@ -1,4 +1,4 @@
-import morgan from "morgan";
+// import morgan from "morgan";
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -9,6 +9,7 @@ import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
+
 import routerProducts from "../routes/products.router";
 import routerLogin from "../routes/login.router";
 import session from "express-session";
@@ -25,7 +26,7 @@ const server = http.createServer(app);
 // & middlewares here
 app.use(express.json());
 app.use(cors());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 declare module "express-session" {
   interface Session {
