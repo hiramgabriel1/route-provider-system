@@ -18,5 +18,5 @@ const productsSchema = new mongoose_1.default.Schema({
         required: true,
     },
 });
-const productsModel = mongoose_1.default.model("employees", productsSchema);
+const productsModel = mongoose_1.default.model("productos", productsSchema);
 exports.default = productsModel;

@@ -10,8 +10,8 @@ import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
 import routerProducts from "../routes/products.router";
-// import routerLogin from "../routes/login.router";
-
+import routerLogin from "../routes/login.router";
+import session from "express-session";
 
 
 dotenv.config();
@@ -27,6 +27,22 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 
+declare module "express-session" {
+  interface Session {
+    user: any; 
+  }
+}
+
+
+app.use(
+  session({
+    secret: 'asdasdas',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+
 
 // & endpoints here
 app.use(routerHome);
@@ -34,7 +50,7 @@ app.use(routerEmployees);
 app.use(routerUnitCars);
 app.use(routerRutas);
 app.use(routerProducts);
-// app.use(routerLogin)
+app.use(routerLogin)
 
 // io.on("connection", (socket) => {
 //   console.log(`user connected ${socket.id}`);
