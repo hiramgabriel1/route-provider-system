@@ -2,6 +2,7 @@
 // import { Request, Response } from "express";
 // import { LoginSystem } from "../services/login";
 // import { destroyToken,verifyToken,generateToken } from "../validators/jwt.config";
+Object.defineProperty(exports, "__esModule", { value: true });
 // const LoginSystemServices = new LoginSystem();
 // class loginController {
 //   async loginUser(req: Request, res: Response) {
