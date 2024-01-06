@@ -21,6 +21,7 @@ connection();
 const PORT = process.env.PORT;
 const app: Express = express();
 const server = http.createServer(app);
+const secretKeySession = process.env.SECRET_KET
 // const io = new Server(server);
 
 // & middlewares here
@@ -34,16 +35,13 @@ declare module "express-session" {
   }
 }
 
-
 app.use(
   session({
-    secret: 'asdasdas',
+    secret: "3903DJS_DJSDKSddew@-dsjk2983",
     resave: false,
     saveUninitialized: true,
   })
 );
-
-
 
 // & endpoints here
 app.use(routerHome);
@@ -53,22 +51,10 @@ app.use(routerRutas);
 app.use(routerProducts);
 app.use(routerLogin)
 
-// io.on("connection", (socket) => {
-//   console.log(`user connected ${socket.id}`);
-
-//   // handle chat event
-//   socket.on("chat message", (msg) => {
-//     io.emit("chat message", msg);
-//   });
-// });
-
-// // routes
-
 // todo: run server!
 const bootstrap = () => {
   try {
     server.listen(PORT);
-    //console.log(`Server listening on http://localhost:${PORT}`.blue);
   } catch (error) {
     console.error(error);
   }
