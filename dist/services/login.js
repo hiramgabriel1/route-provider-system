@@ -31,7 +31,7 @@ class LoginSystem {
                 return false;
             }
             const passwordHash = await (0, bcrypt_config_1.encryptPasswordSecurity)(password);
-            await employees_model_1.default.create({
+            const usercreated = await employees_model_1.default.create({
                 user: user,
                 username: username,
                 lastnames: lastnames,
@@ -39,14 +39,11 @@ class LoginSystem {
                 rol: rol,
             });
             console.log("Usuario registrado exitosamente");
-            return true;
+            return usercreated;
         }
         catch (error) {
             console.error("Error al registrar usuario:", error);
         }
-    }
-    async logout() {
-        //implementar logica
     }
 }
 exports.LoginSystem = LoginSystem;
