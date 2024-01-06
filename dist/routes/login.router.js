@@ -3,7 +3,6 @@
 // import cacheInit from "../middlewares/cache.config";
 // // import loginController from "../controllers/login.controller";
 // // import { verifyToken } from "../validators/jwt.config";
-// // const controllerLogin=  new loginController()
 // const routerLogin = Router();
 // const path = "/api/v1";
 // routerLogin.post(`${path}/login`,verifyToken, async (req:Request, res:Response) => {
