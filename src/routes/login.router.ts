@@ -1,9 +1,9 @@
 // import { Request, Response, Router } from "express";
 // import cacheInit from "../middlewares/cache.config";
-// // import loginController from "../controllers/login.controller";
-// // import { verifyToken } from "../validators/jwt.config";
+// import loginController from "../controllers/login.controller";
+// import { verifyToken } from "../validators/jwt.config";
 
-// // const controllerLogin=  new loginController()
+// const controllerLogin=  new loginController()
 // const routerLogin = Router();
 // const path = "/api/v1";
 

@@ -1,4 +1,4 @@
-import morgan from "morgan";
+// import morgan from "morgan";
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -11,8 +11,6 @@ import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
 // import routerLogin from "../routes/login.router";
 
-
-
 dotenv.config();
 connection();
 
@@ -24,7 +22,7 @@ const server = http.createServer(app);
 // & middlewares here
 app.use(express.json());
 app.use(cors());
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 
 // & endpoints here
