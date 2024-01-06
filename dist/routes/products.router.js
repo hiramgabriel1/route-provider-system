@@ -9,19 +9,19 @@ const cache_config_1 = __importDefault(require("../middlewares/cache.config"));
 const controllerProducts = new products_controllers_1.default();
 const routerProducts = (0, express_1.Router)();
 const path = "/api/v1";
-routerProducts.get(`${path}/rutas`, cache_config_1.default, (req, res) => {
+routerProducts.get(`${path}/products`, cache_config_1.default, (req, res) => {
     controllerProducts.getProducts(req, res);
 });
-routerProducts.get(`${path}/rutas/:productId`, cache_config_1.default, (req, res) => {
+routerProducts.get(`${path}/products/:productId`, cache_config_1.default, (req, res) => {
     controllerProducts.getProductById(req, res);
 });
-routerProducts.post(`${path}/rutas/new`, (req, res) => {
+routerProducts.post(`${path}/products/new`, (req, res) => {
     controllerProducts.createProduct(req, res);
 });
-routerProducts.patch(`${path}/rutas/edit/:productId`, (req, res) => {
+routerProducts.patch(`${path}/products/edit/:productId`, (req, res) => {
     controllerProducts.editProduct(req, res);
 });
-routerProducts.delete(`${path}/rutas/:productId`, cache_config_1.default, (req, res) => {
+routerProducts.delete(`${path}/products/:productId`, cache_config_1.default, (req, res) => {
     controllerProducts.deleteProduct(req, res);
 });
 exports.default = routerProducts;
