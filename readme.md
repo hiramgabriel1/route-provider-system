@@ -32,6 +32,9 @@ EMPLOYES
      sirve para eliminar un empleado, se debera intriducir en la url del id del empleado a eliminar
 
 
+
+
+
 PRODUCTS
 
   --- GET: /api/v1/products
@@ -61,6 +64,10 @@ PRODUCTS
 
 --- DELETE: /api/v1/products/delete/:productId
      sirve para eliminar un producto, se debera intriducir en la url del id del empleado a eliminar
+
+
+
+
 
 
 RUTAS
@@ -99,6 +106,11 @@ RUTAS
 
 --- DELETE: /api/v1/rutas/delete/:rutaId
      sirve para eliminar una ruta, se debera intriducir en la url del id del empleado a eliminar
+
+
+
+
+
 
 
 
