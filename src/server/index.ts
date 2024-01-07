@@ -4,16 +4,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connection from "../db/[mongo]connection";
 import http from "http";
-import colors from "colors";
 import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
-
 import routerProducts from "../routes/products.router";
-import routerLogin from "../routes/login.router";
+import routerSession from "../routes/session.router";
 import session from "express-session";
-
 
 dotenv.config();
 connection();
@@ -21,7 +18,7 @@ connection();
 const PORT = process.env.PORT;
 const app: Express = express();
 const server = http.createServer(app);
-const secretKeySession = process.env.SECRET_KET
+const secretKeySession = process.env.SECRET_KET;
 // const io = new Server(server);
 
 // & middlewares here
@@ -31,7 +28,7 @@ app.use(cors());
 
 declare module "express-session" {
   interface Session {
-    user: any; 
+    user: any;
   }
 }
 
@@ -49,7 +46,7 @@ app.use(routerEmployees);
 app.use(routerUnitCars);
 app.use(routerRutas);
 app.use(routerProducts);
-app.use(routerLogin)
+app.use(routerSession);
 
 // todo: run server!
 const bootstrap = () => {
