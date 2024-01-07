@@ -25,7 +25,6 @@ class homeController {
       console.log(getUsersAll);
       res.status(200).json({
         filterTypeUser: filterUserToTypeRole,
-        employeesTotal: getUsersAll,
         numberEmployees: convertObjectToArray.length,
         productsTotal: productsTotal.length,
         totalRoutes: totalRoutes.length,
