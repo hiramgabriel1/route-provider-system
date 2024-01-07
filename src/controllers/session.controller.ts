@@ -40,9 +40,9 @@ class sessionController {
       const verifySessionAndTypeRole = await employeeModel
         .find({
           username: username,
-          role: role
+          role: role,
         })
-        .exec()
+        .exec();
 
       verifySessionAndTypeRole.length > 0
         ? res.json({ response: true, data: verifySessionAndTypeRole })

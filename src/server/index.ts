@@ -10,8 +10,9 @@ import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
 import routerProducts from "../routes/products.router";
 import routerSession from "../routes/session.router";
-import routerBrokerSystem from "../routes/system-broker.router";
+import routerBrokerCourt from "../routes/system.broker.router";
 import session from "express-session";
+import morgan from "morgan";
 
 dotenv.config();
 connection();
@@ -25,7 +26,7 @@ const secretKeySession = process.env.SECRET_KET;
 // & middlewares here
 app.use(express.json());
 app.use(cors());
-// app.use(morgan("dev"));
+app.use(morgan("dev"));
 
 declare module "express-session" {
   interface Session {
@@ -48,7 +49,7 @@ app.use(routerUnitCars);
 app.use(routerRutas);
 app.use(routerProducts);
 app.use(routerSession);
-app.use(routerBrokerSystem)
+app.use(routerBrokerCourt);
 
 // todo: run server!
 const bootstrap = () => {
