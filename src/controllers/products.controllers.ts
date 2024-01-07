@@ -17,22 +17,29 @@ class productsController {
        }
     }
 
-    async getProductById(req:Request,res:Response){
+    async getProductById(req: Request, res: Response) {
         try {
-            const {productId}= req.params
+            const { productId } = req.params;
             
-            const product= await productsModel.findById({productId})
-
-            product
-            ? res.status(200).json({message:product, details: true})
-            : res.status(500).json({
-                messageError: "the product does not exist",
+            const product = await productsModel.findById(productId);
+    
+            if (product) {
+                res.status(200).json({ message: product, details: true });
+            } else {
+                res.status(404).json({
+                    message: "The product does not exist",
+                    details: false,
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: "Internal server error",
                 details: false,
             });
-        } catch (error) {
-            console.log(error);
         }
     }
+    
 
     async editProduct(req: Request, res:Response){
         try{
@@ -75,7 +82,7 @@ class productsController {
               const createProduct= await productsModel.create(dataProduct)
 
               createProduct
-              ? res.status(200).json({ message: "product created" })
+              ? res.status(200).json({ message: "product created" ,createProduct})
               : res.status(500).json({message:"product could not be created"})
 
         } catch (error) {
