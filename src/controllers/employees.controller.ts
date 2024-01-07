@@ -6,8 +6,12 @@ class employees {
     try {
       const renderData = await employeeModel.find();
 
+      const filterEmployees = renderData.filter(
+        (employee) => employee.role === "empleado"
+      );
+
       renderData
-        ? res.status(200).json({ message: renderData, details: true })
+        ? res.status(200).json({ message: filterEmployees, details: true })
         : res.status(500).json({
             messageError: "error internal brother, de pana xd",
             details: false,
@@ -109,7 +113,7 @@ class employees {
 class routesEmployees extends employees {
   async getEmployeeRoute(req: Request, res: Response) {
     try {
-      res.send("hello world")
+      res.send("hello world");
     } catch (error) {
       console.error(error);
     }
