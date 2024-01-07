@@ -18,5 +18,4 @@ routerSession.post(`${path}/validate-session`, (req, res) => {
 // remove session to user
 // routerSession.delete(`${path}/remove-session`, (()))
 
-
 export default routerSession;
