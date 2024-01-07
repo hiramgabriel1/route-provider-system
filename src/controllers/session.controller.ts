@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 // import { LoginSystem } from "../services/login";
-import session from "../models/session.model";
+import employeeModel from "../models/employees.model";
 import {
   encryptPasswordSecurity,
   verifyPasswordSecurity,
@@ -35,9 +35,9 @@ class sessionController {
 
   async validateSessionInput(req: Request, res: Response) {
     try {
-      const { username, role, password } = req.body;
+      const { username, role } = req.body;
 
-      const verifySessionAndTypeRole = await session
+      const verifySessionAndTypeRole = await employeeModel
         .find({
           username: username,
           role: role,
