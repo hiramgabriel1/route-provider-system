@@ -45,7 +45,7 @@ class systemBroker {
       // }, 0);
 
       // diferencia terminar
-      
+
       queryUserInfo
         ? res.status(200).json({
             response: "found",

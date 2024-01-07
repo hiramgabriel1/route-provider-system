@@ -3,6 +3,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connection from "../db/[mongo]connection";
+import { employeesDatabaseConnection } from "../services/employees/db/db";
 import http from "http";
 import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
@@ -13,9 +14,11 @@ import routerSession from "../routes/session.router";
 import routerBrokerCourt from "../routes/system.broker.router";
 import session from "express-session";
 import morgan from "morgan";
+import colors from "colors"
 
 dotenv.config();
 connection();
+employeesDatabaseConnection()
 
 const PORT = process.env.PORT;
 const app: Express = express();
