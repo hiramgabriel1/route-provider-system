@@ -35,7 +35,7 @@ class sessionController {
 
   async validateSessionInput(req: Request, res: Response) {
     try {
-      const { username, role, password } = req.body;
+      const { username, role } = req.body;
 
       const verifySessionAndTypeRole = await session
         .find({
@@ -44,7 +44,7 @@ class sessionController {
         })
         .exec();
 
-      verifySessionAndTypeRole.length > 0
+      verifySessionAndTypeRole
         ? res.json({ response: true, data: verifySessionAndTypeRole })
         : res.json({ response: false });
     } catch (error) {

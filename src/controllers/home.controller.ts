@@ -25,7 +25,7 @@ class homeController {
       res.status(200).json({
         filterTypeUser: filterUserToTypeRole,
         numberEmployees: convertObjectToArray.length,
-        productsTotal: productsTotal.length,
+        productsTotal: productsTotal,
         totalRoutes: totalRoutes.length,
       });
     } catch (error) {

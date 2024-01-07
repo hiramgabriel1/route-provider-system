@@ -10,6 +10,7 @@ import routerUnitCars from "../routes/unit-cars.router";
 import routerRutas from "../routes/rutas.router";
 import routerProducts from "../routes/products.router";
 import routerSession from "../routes/session.router";
+import routerBrokerSystem from "../routes/system-broker.router";
 import session from "express-session";
 
 dotenv.config();
@@ -47,6 +48,7 @@ app.use(routerUnitCars);
 app.use(routerRutas);
 app.use(routerProducts);
 app.use(routerSession);
+app.use(routerBrokerSystem)
 
 // todo: run server!
 const bootstrap = () => {
