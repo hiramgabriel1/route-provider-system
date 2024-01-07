@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 
 class homeController {
-  async getDataParams(req: Request, res: Response) {
+  async getDataParams(__req: Request, res: Response) {
     try {
       const getUsersAll = await employeeModel.find();
 
@@ -17,9 +17,14 @@ class homeController {
           );
         }
       );
+      
+      res.status(200).json({
+        filterTypeUser: filterUserToTypeRole,
+        numberEmployees: convertObjectToArray.length,
+        productsTotal: productsTotal.length,
+        totalRoutes: totalRoutes.length,
+      });
 
-      console.log(getUsersAll);
-      res.json({ response: filterUserToTypeRole });
     } catch (error) {
       console.error(error);
     }

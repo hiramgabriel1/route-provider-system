@@ -11,7 +11,7 @@ export class LoginSystem {
         return undefined;
       }
 
-      const passwordValid =await verifyPasswordSecurity(password, usuario.password);
+      const passwordValid = await verifyPasswordSecurity(password, usuario.password);
 
       passwordValid
         ? usuario

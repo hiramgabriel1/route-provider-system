@@ -21,13 +21,13 @@ dotenv_1.default.config();
 const PORT = process.env.PORT;
 const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
+const secretKeySession = process.env.SECRET_KET;
 // const io = new Server(server);
 // & middlewares here
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-app.use((0, morgan_1.default)("dev"));
 app.use((0, express_session_1.default)({
-    secret: 'asdasdas',
+    secret: "3903DJS_DJSDKSddew@-dsjk2983",
     resave: false,
     saveUninitialized: true,
 }));
@@ -38,19 +38,10 @@ app.use(unit_cars_router_1.default);
 app.use(rutas_router_1.default);
 app.use(products_router_1.default);
 app.use(login_router_1.default);
-// io.on("connection", (socket) => {
-//   console.log(`user connected ${socket.id}`);
-//   // handle chat event
-//   socket.on("chat message", (msg) => {
-//     io.emit("chat message", msg);
-//   });
-// });
-// // routes
 // todo: run server!
 const bootstrap = () => {
     try {
         server.listen(PORT);
-        //console.log(`Server listening on http://localhost:${PORT}`.blue);
     }
     catch (error) {
         console.error(error);

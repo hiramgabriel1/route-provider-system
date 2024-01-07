@@ -7,3 +7,5 @@ interface userRoute{
     amountOfMerchandise: number,
     LastMinuteSale: number
 }
+
+// decorators
