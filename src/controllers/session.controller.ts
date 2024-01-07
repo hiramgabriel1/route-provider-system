@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 // import { LoginSystem } from "../services/login";
-import session from "../models/session.model";
+import employeeModel from "../models/employees.model";
 import {
   encryptPasswordSecurity,
   verifyPasswordSecurity,
@@ -37,14 +37,14 @@ class sessionController {
     try {
       const { username, role } = req.body;
 
-      const verifySessionAndTypeRole = await session
+      const verifySessionAndTypeRole = await employeeModel
         .find({
           username: username,
-          role: role,
+          role: role
         })
-        .exec();
+        .exec()
 
-      verifySessionAndTypeRole
+      verifySessionAndTypeRole.length > 0
         ? res.json({ response: true, data: verifySessionAndTypeRole })
         : res.json({ response: false });
     } catch (error) {
