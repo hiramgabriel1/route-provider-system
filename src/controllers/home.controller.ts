@@ -4,7 +4,7 @@ import productsModel from "../models/products.model";
 import rutasModels from "../models/rutas.model";
 
 class homeController {
-  async getDataParams(req: Request, res: Response) {
+  async getDataParams(__req: Request, res: Response) {
     try {
       const getUsersAll = await employeeModel.find();
       const totalRoutes = await rutasModels.find();
@@ -22,14 +22,12 @@ class homeController {
         }
       );
 
-      console.log(getUsersAll);
       res.status(200).json({
         filterTypeUser: filterUserToTypeRole,
         numberEmployees: convertObjectToArray.length,
         productsTotal: productsTotal.length,
         totalRoutes: totalRoutes.length,
       });
-
     } catch (error) {
       console.error(error);
     }
