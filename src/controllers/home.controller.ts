@@ -6,18 +6,20 @@ class homeController {
     try {
       const getUsersAll = await employeeModel.find();
 
-      const convertObjectToArray = Object.values(await getUsersAll);
-      const filterUserAdmin = convertObjectToArray.filter((userTypeRole) => {
-        return userTypeRole.role === "administrador";
-      });
+      const convertObjectToArray = Object.values(getUsersAll);
+      const filterUserToTypeRole = convertObjectToArray.filter(
+        (userTypeRole) => {
+          return (
+            userTypeRole.role === "Administrador" ||
+            userTypeRole.role === "Empleado" ||
+            userTypeRole.role === "administrador" ||
+            userTypeRole.role === "empleado"
+          );
+        }
+      );
 
-      const filterUserEmployee = convertObjectToArray.filter((userTypeRole) => {
-        return userTypeRole.role === "empleado";
-      });
-
-      console.log(filterUserAdmin);
-
-      res.json({ response: convertObjectToArray });
+      console.log(getUsersAll);
+      res.json({ response: filterUserToTypeRole });
     } catch (error) {
       console.error(error);
     }
