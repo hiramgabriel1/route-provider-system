@@ -22,7 +22,9 @@ const productsMark = new mongoose.Schema({
   },
 });
 
-export const productMarks = mongoose.model("productos-marcados", productsMark);
+const productMarks = mongoose.model("productos", productsMark);
+
+export default productMarks
 // import mongoose from "mongoose";
 
 // const productsSchema = new mongoose.Schema({

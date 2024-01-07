@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { productMarks } from "../models/products.model";
+import productMarks from "../models/products.model";
 
 class productsController {
   async getProducts(req: Request, res: Response) {

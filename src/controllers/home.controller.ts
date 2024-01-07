@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
-import productsModel from "../models/products.model";
+import { productMarks } from "../services/employees/models/products";
 import rutasModels from "../models/rutas.model";
 
 class homeController {
@@ -8,7 +8,7 @@ class homeController {
     try {
       const getUsersAll = await employeeModel.find();
       const totalRoutes = await rutasModels.find();
-      const productsTotal = await productsModel.find();
+      const productsTotal = await productMarks.find();
 
       const convertObjectToArray = Object.values(getUsersAll);
       const filterUserToTypeRole = convertObjectToArray.filter(
