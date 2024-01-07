@@ -12,7 +12,7 @@ const productsControllers = new products();
 // })
 
 // ? endpoint para marcar como vendidos
-routerMarkProducts.post(`${path}/mark-sold`, (req: Request, res: Response) => {
+routerMarkProducts.post(`${path}/mark-sold/:productId`, (req: Request, res: Response) => {
   productsControllers.markProductIsSold(req, res);
 });
 

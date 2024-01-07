@@ -1,38 +1,42 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
+import { productMarks } from "../../../models/products.model";
 
 class products {
-
-    async createProduct(req: Request, res: Response){
-        try {
-            
-        } catch (error) {
-            console.error(error)
-        }
+  async createProduct(req: Request, res: Response) {
+    try {
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    async markProductIsSold(req: Request, res: Response){
-        try {
-            
-        } catch (error) {
-            console.error(error)
-        }
-    }
+  async markProductIsSold(req: Request, res: Response) {
+    try {
+      const { productId } = req.params;
+      console.log(productId);
 
-    async productsSolds(req: Request, res: Response){
-        try {
-            
-        } catch (error) {
-            console.error(error)
-        }
-    }
+      // ? query db to find data product
+      const queryProductID = await productMarks.find({ _id: productId });
+      const isSoldProduct = queryProductID.filter(sold => sold.productIsSold === true)
 
-    async productsUnsolds(req: Request, res: Response){
-        try {
-            
-        } catch (error) {
-            console.error(error)
-        }
+      res.json(isSoldProduct)
+    } catch (error) {
+      console.error(error);
     }
+  }
+
+  async productsSolds(req: Request, res: Response) {
+    try {
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async productsUnsolds(req: Request, res: Response) {
+    try {
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
-export default products
+export default products;
