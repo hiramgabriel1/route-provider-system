@@ -11,9 +11,9 @@ routerSession.post(`${path}/validate-session`, (req, res) => {
 })
 
 // new session to user
-routerSession.post(`${path}/new-session`, (req, res)=> {
-  session.createNewSessionUser(req, res)
-})
+// routerSession.post(`${path}/new-session`, (req, res)=> {
+//   session.createNewSessionUser(req, res)
+// })
 
 // remove session to user
 // routerSession.delete(`${path}/remove-session`, (()))
