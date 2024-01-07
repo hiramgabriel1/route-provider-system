@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
+import productsModel from "../models/products.model";
+import rutasModels from "../models/rutas.model";
 
 class homeController {
   async getDataParams(req: Request, res: Response) {
     try {
       const getUsersAll = await employeeModel.find();
+      const totalRoutes = await rutasModels.find();
+      const productsTotal = await productsModel.find();
 
       const convertObjectToArray = Object.values(getUsersAll);
       const filterUserToTypeRole = convertObjectToArray.filter(
@@ -19,7 +23,14 @@ class homeController {
       );
 
       console.log(getUsersAll);
-      res.json({ response: filterUserToTypeRole });
+      res.status(200).json({
+        filterTypeUser: filterUserToTypeRole,
+        employeesTotal: getUsersAll,
+        numberEmployees: convertObjectToArray.length,
+        productsTotal: productsTotal.length,
+        totalRoutes: totalRoutes.length,
+      });
+
     } catch (error) {
       console.error(error);
     }

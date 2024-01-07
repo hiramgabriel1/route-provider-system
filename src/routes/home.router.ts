@@ -11,6 +11,4 @@ routerHome.get(`${path}/home`, cacheInit, (req: Request, res: Response) => {
   home.getDataParams(req, res);
 });
 
-// routerHome.get()
-
 export default routerHome;
