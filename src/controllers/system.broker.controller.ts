@@ -36,13 +36,25 @@ class systemBroker {
       const filterUnsoldProducts = products.filter(
         (unsoldProducts) => unsoldProducts.productFinish === false
       );
+      const filterProductsPrices = products.filter(
+        (productPrices) => productPrices.productPrice
+      );
 
+      // const totalPrice = filterProductsPrices.reduce((accumulator, product) => {
+      //   return accumulator + product.productPrice;
+      // }, 0);
+
+      // diferencia terminar
+      
       queryUserInfo
         ? res.status(200).json({
             response: "found",
             userInfo: queryUserInfo,
-            soldProducts: filterSoldProducts,
-            unsoldProducts: filterUnsoldProducts,
+            productosVendidos: filterSoldProducts,
+            countProductsSolds: filterSoldProducts.length,
+            productosNoVendidos: filterUnsoldProducts,
+            countProductsUnsolds: filterUnsoldProducts.length,
+            estimatedPrices: filterProductsPrices,
           })
         : res.status(404).json({ response: "not found" });
 
@@ -50,6 +62,8 @@ class systemBroker {
 
       // const products = // productos que el empleado marcó como vendidos --> desc, cantidad, precio y que productos fueron en un PDF
       // const productsNotBuy = // productos que el empleado  marcó como NO vendidos --> desc, cantidad y precio
+
+      // todo
 
       // const estimatedPrices = //descripción de --> salió con "$16mil pesos", vendió "$13400 pesos", entregó en efectivo "$5mil pesos", entregó en mercancia "$900 pesos"
 
