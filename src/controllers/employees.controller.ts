@@ -16,6 +16,7 @@ class employees {
             messageError: "error internal brother, de pana xd",
             details: false,
           });
+
     } catch (error) {
       console.error(error);
     }
