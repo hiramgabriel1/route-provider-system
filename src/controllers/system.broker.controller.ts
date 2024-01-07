@@ -31,10 +31,10 @@ class systemBroker {
       // const filterUnsoldProducts = filterProductsByFinish(products, false);
 
       const filterSoldProducts = products.filter(
-        (productsBuy) => productsBuy.productFinish === true
+        (productsBuy) => productsBuy.productIsSold === true
       );
       const filterUnsoldProducts = products.filter(
-        (unsoldProducts) => unsoldProducts.productFinish === false
+        (unsoldProducts) => unsoldProducts.productIsSold === false
       );
       const filterProductsPrices = products.filter(
         (productPrices) => productPrices.productPrice
