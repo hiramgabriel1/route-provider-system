@@ -22,9 +22,12 @@ routerRutas.post(`${path}/rutas/new`, (req: Request, res: Response) => {
   controllerRutas.createRuta(req, res);
 });
 
-routerRutas.patch(`${path}/rutas/edit/:rutaId`, (req: Request, res: Response) => {
-  controllerRutas.editRuta(req, res);
-});
+routerRutas.patch(
+  `${path}/rutas/edit/:rutaId`,
+  (req: Request, res: Response) => {
+    controllerRutas.editRuta(req, res);
+  }
+);
 
 routerRutas.delete(
   `${path}/rutas/delete/:rutaId`,

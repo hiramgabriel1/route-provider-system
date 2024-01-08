@@ -21,10 +21,10 @@ routerMarkProducts.post(
 
 // ? endpoint para mostrar los que no fueron vendidos
 routerMarkProducts.get(
-  `${path}/unsold-products`,
+  `${path}/unsolds-products`,
   cacheInit,
   (req: Request, res: Response) => {
-    productsControllers.productsUnsolds(req, res);
+    productsControllers.showProductsUnsolds(req, res);
   }
 );
 
@@ -33,7 +33,8 @@ routerMarkProducts.get(
   `${path}/solds-products`,
   cacheInit,
   (req: Request, res: Response) => {
-    productsControllers.productsSolds(req, res);
+    productsControllers.showProductsSolds(req, res);
   }
 );
+
 export default routerMarkProducts;
