@@ -16,9 +16,36 @@ class products {
 
       // ? query db to find data product
       const queryProductID = await productMarks.find({ _id: productId });
-      const isSoldProduct = queryProductID.filter(sold => sold.productIsSold === true)
+      const isSold = queryProductID.find((sold) => sold.productIsSold);
 
-      res.json(isSoldProduct)
+      if (isSold) {
+        return res.json({
+          response: "product already is mark at sold!",
+          details: queryProductID,
+        });
+      }
+
+      const markIsSold = await productMarks.findOneAndUpdate(
+        { _id: productId },
+        { $set: { productIsSold: true } },
+        { new: true }
+      );
+
+      res.json({
+        response: "marcado como vendido éxitosamente",
+        details: markIsSold,
+      });
+      //   const isSoldProduct = queryProductID.filter((sold) => sold.productIsSold);
+      //   //   const isUnsoldProduct = queryProductID.filter(
+      //   //     (unsold) => unsold.productIsSold === false
+      //   //   );
+
+      //   // validate and send to response
+      //   isSoldProduct
+      //     ? res
+      //         .status(200)
+      //         .json({ response: "products solds", details: isSoldProduct })
+      //     : res.status(500).json({ response: "error internal" });
     } catch (error) {
       console.error(error);
     }

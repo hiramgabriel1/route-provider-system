@@ -56,18 +56,21 @@ class productsController {
 
   async createProduct(req: Request, res: Response) {
     try {
-      const { nombre, descripcion, precio } = req.body;
+      const { productName, productDescription, productPrice, productIsSold } =
+        req.body;
 
       const dataProduct = {
-        nombre: nombre,
-        descripcion: descripcion,
-        precio: precio,
+        productName: productName,
+        productDescription: productDescription,
+        productPrice: productPrice,
+        productIsSold: productIsSold,
       };
 
       const isExists = await productMarks.findOne({
-        nombre: nombre,
-        descripcion: descripcion,
-        precio: precio,
+        productName: productName,
+        productDescription: productDescription,
+        productPrice: productPrice,
+        productIsSold: productIsSold,
       });
 
       if (isExists) {
