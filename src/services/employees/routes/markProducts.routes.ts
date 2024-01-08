@@ -12,9 +12,12 @@ const productsControllers = new products();
 // })
 
 // ? endpoint para marcar como vendidos
-routerMarkProducts.post(`${path}/mark-sold`, (req: Request, res: Response) => {
-  productsControllers.markProductIsSold(req, res);
-});
+routerMarkProducts.post(
+  `${path}/mark-sold/:productId`,
+  (req: Request, res: Response) => {
+    productsControllers.markProductIsSold(req, res);
+  }
+);
 
 // ? endpoint para mostrar los que no fueron vendidos
 routerMarkProducts.get(
