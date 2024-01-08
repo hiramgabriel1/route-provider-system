@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import productMarks from "../../../models/products.model";
 
 class products {
+  // ! dont take
   async createProduct(req: Request, res: Response) {
     try {
     } catch (error) {
@@ -20,7 +21,7 @@ class products {
 
       if (isSold) {
         return res.json({
-          response: "product already is mark at sold!",
+          response: "el producto ya está marcado como vendido!",
           details: queryProductID,
         });
       }
@@ -54,13 +55,34 @@ class products {
 
   async showProductsSolds(req: Request, res: Response) {
     try {
+      const queryProductsMarkedSold = await productMarks.find({
+        productIsSold: true,
+      });
+
+      queryProductsMarkedSold
+        ? res.json({
+            response: queryProductsMarkedSold,
+            cantidad: queryProductsMarkedSold.length,
+          })
+        : res.status(404).json({ response: "not found" });
     } catch (error) {
+      res.status(500).json({ response: "internal error" });
       console.error(error);
     }
   }
 
   async showProductsUnsolds(req: Request, res: Response) {
     try {
+      const queryProductsMarkedUnsold = await productMarks.find({
+        productIsSold: false,
+      });
+
+      queryProductsMarkedUnsold
+        ? res.json({
+            response: queryProductsMarkedUnsold,
+            cantidad: queryProductsMarkedUnsold.length,
+          })
+        : res.status(404).json({ response: "not found" });
     } catch (error) {
       console.error(error);
     }

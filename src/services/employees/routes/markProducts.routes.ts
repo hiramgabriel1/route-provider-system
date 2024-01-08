@@ -21,7 +21,7 @@ routerMarkProducts.post(
 
 // ? endpoint para mostrar los que no fueron vendidos
 routerMarkProducts.get(
-  `${path}/unsold-products`,
+  `${path}/unsolds-products`,
   cacheInit,
   (req: Request, res: Response) => {
     productsControllers.showProductsUnsolds(req, res);
