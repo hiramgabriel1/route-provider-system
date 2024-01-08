@@ -35,6 +35,7 @@ class products {
         response: "marcado como vendido éxitosamente",
         details: markIsSold,
       });
+
       //   const isSoldProduct = queryProductID.filter((sold) => sold.productIsSold);
       //   //   const isUnsoldProduct = queryProductID.filter(
       //   //     (unsold) => unsold.productIsSold === false
@@ -51,14 +52,14 @@ class products {
     }
   }
 
-  async productsSolds(req: Request, res: Response) {
+  async showProductsSolds(req: Request, res: Response) {
     try {
     } catch (error) {
       console.error(error);
     }
   }
 
-  async productsUnsolds(req: Request, res: Response) {
+  async showProductsUnsolds(req: Request, res: Response) {
     try {
     } catch (error) {
       console.error(error);
