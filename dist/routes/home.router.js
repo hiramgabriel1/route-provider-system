@@ -12,5 +12,4 @@ const routerHome = (0, express_1.Router)();
 routerHome.get(`${path}/home`, cache_config_1.default, (req, res) => {
     home.getDataParams(req, res);
 });
-// routerHome.get()
 exports.default = routerHome;
