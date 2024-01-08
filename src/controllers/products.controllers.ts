@@ -45,7 +45,7 @@ class productsController {
         { new: true }
       );
       updateProduct
-        ? res.status(200).json({ message: updateProduct, details: true })
+        ? res.status(200).json({ response: "product edit successfully", message: updateProduct, details: true })
         : res
             .status(404)
             .json({ messageError: "error internal", details: false });

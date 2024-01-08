@@ -15,7 +15,7 @@ routerProducts.get(
 );
 
 routerProducts.get(
-  `${path}/products/:productId`,
+  `${path}/product/:productId`,
   cacheInit,
   (req: Request, res: Response) => {
     controllerProducts.getProductById(req, res);
@@ -34,7 +34,7 @@ routerProducts.patch(
 );
 
 routerProducts.delete(
-  `${path}/products/:productId`,
+  `${path}/products/delete/:productId`,
   cacheInit,
   (req: Request, res: Response) => {
     controllerProducts.deleteProduct(req, res);
