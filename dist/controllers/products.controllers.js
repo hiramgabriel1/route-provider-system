@@ -22,23 +22,16 @@ class productsController {
     async getProductById(req, res) {
         try {
             const { productId } = req.params;
-            const product = await products_model_1.default.findById(productId);
-            if (product) {
-                res.status(200).json({ message: product, details: true });
-            }
-            else {
-                res.status(404).json({
-                    message: "The product does not exist",
+            const product = await products_model_1.default.findById({ productId });
+            product
+                ? res.status(200).json({ message: product, details: true })
+                : res.status(500).json({
+                    messageError: "the product does not exist",
                     details: false,
                 });
-            }
         }
         catch (error) {
-            console.error(error);
-            res.status(500).json({
-                message: "Internal server error",
-                details: false,
-            });
+            console.log(error);
         }
     }
     async editProduct(req, res) {
@@ -47,8 +40,10 @@ class productsController {
             const updateFiledsDataProduct = req.body;
             const updateProduct = await products_model_1.default.findByIdAndUpdate({ _id: productId }, { $set: updateFiledsDataProduct }, { new: true });
             updateProduct
-                ? res.status(200).json({ message: updateProduct, details: true })
-                : res.status(404).json({ messageError: "error internal", details: false });
+                ? res.status(200).json({ response: "product edit successfully", message: updateProduct, details: true })
+                : res
+                    .status(404)
+                    .json({ messageError: "error internal", details: false });
         }
         catch (error) {
             console.log(error);
@@ -56,23 +51,28 @@ class productsController {
     }
     async createProduct(req, res) {
         try {
-            const { nombre, descripcion, precio } = req.body;
+            const { productName, productDescription, productPrice, productIsSold } = req.body;
             const dataProduct = {
-                nombre: nombre,
-                descripcion: descripcion,
-                precio: precio
+                productName: productName,
+                productDescription: productDescription,
+                productPrice: productPrice,
+                productIsSold: productIsSold,
             };
             const isExists = await products_model_1.default.findOne({
-                nombre: nombre,
-                descripcion: descripcion,
-                precio: precio
+                productName: productName,
+                productDescription: productDescription,
+                productPrice: productPrice,
+                productIsSold: productIsSold,
             });
             if (isExists) {
-                return res.json({ message: "the product already exists", details: dataProduct });
+                return res.json({
+                    message: "the product already exists",
+                    details: dataProduct,
+                });
             }
             const createProduct = await products_model_1.default.create(dataProduct);
             createProduct
-                ? res.status(200).json({ message: "product created", createProduct })
+                ? res.status(200).json({ message: "product created" })
                 : res.status(500).json({ message: "product could not be created" });
         }
         catch (error) {
