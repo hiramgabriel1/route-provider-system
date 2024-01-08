@@ -17,7 +17,7 @@ const productsMark = new mongoose.Schema(
             require: true
         },
 
-        productFinish: {
+        productIsSold: {
             type: Boolean,
             require: true
         }
