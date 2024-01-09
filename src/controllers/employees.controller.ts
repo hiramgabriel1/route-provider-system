@@ -1,17 +1,23 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
+import { encryptPasswordSecurity,verifyPasswordSecurity } from "../validators/bcrypt.config";
 
 class employees {
   async getEmployees(req: Request, res: Response) {
     try {
       const renderData = await employeeModel.find();
 
+      const filterEmployees = renderData.filter(
+        (employee) => employee.role === "empleado"
+      );
+
       renderData
-        ? res.status(200).json({ message: renderData, details: true })
+        ? res.status(200).json({ message: filterEmployees, details: true })
         : res.status(500).json({
             messageError: "error internal brother, de pana xd",
             details: false,
           });
+
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +68,7 @@ class employees {
         username: username,
         lastnames: lastnames,
         role: role,
-        password: password,
+        password:  await encryptPasswordSecurity(password)
       };
 
       // todo: verify data
@@ -109,7 +115,7 @@ class employees {
 class routesEmployees extends employees {
   async getEmployeeRoute(req: Request, res: Response) {
     try {
-      res.send("hello world")
+      res.send("hello world");
     } catch (error) {
       console.error(error);
     }

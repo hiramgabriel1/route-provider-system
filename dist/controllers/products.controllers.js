@@ -40,8 +40,10 @@ class productsController {
             const updateFiledsDataProduct = req.body;
             const updateProduct = await products_model_1.default.findByIdAndUpdate({ _id: productId }, { $set: updateFiledsDataProduct }, { new: true });
             updateProduct
-                ? res.status(200).json({ message: updateProduct, details: true })
-                : res.status(404).json({ messageError: "error internal", details: false });
+                ? res.status(200).json({ response: "product edit successfully", message: updateProduct, details: true })
+                : res
+                    .status(404)
+                    .json({ messageError: "error internal", details: false });
         }
         catch (error) {
             console.log(error);
@@ -49,19 +51,24 @@ class productsController {
     }
     async createProduct(req, res) {
         try {
-            const { nombre, descripcion, precio } = req.body;
+            const { productName, productDescription, productPrice, productIsSold } = req.body;
             const dataProduct = {
-                nombre: nombre,
-                descripcion: descripcion,
-                precio: precio
+                productName: productName,
+                productDescription: productDescription,
+                productPrice: productPrice,
+                productIsSold: productIsSold,
             };
             const isExists = await products_model_1.default.findOne({
-                nombre: nombre,
-                descripcion: descripcion,
-                precio: precio
+                productName: productName,
+                productDescription: productDescription,
+                productPrice: productPrice,
+                productIsSold: productIsSold,
             });
             if (isExists) {
-                return res.json({ message: "the product already exists", details: dataProduct });
+                return res.json({
+                    message: "the product already exists",
+                    details: dataProduct,
+                });
             }
             const createProduct = await products_model_1.default.create(dataProduct);
             createProduct

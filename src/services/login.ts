@@ -1,7 +1,6 @@
 import employeeModel from "../models/employees.model";
 import {verifyPasswordSecurity,encryptPasswordSecurity} from "../validators/bcrypt.config";
 
-
 export class LoginSystem {
 
   async loginUser(username: string, password: string) {
@@ -12,7 +11,7 @@ export class LoginSystem {
         return undefined;
       }
 
-      const passwordValid =await verifyPasswordSecurity(password, usuario.password);
+      const passwordValid = await verifyPasswordSecurity(password, usuario.password);
 
       passwordValid
         ? usuario
@@ -32,7 +31,7 @@ export class LoginSystem {
       }
 
       const passwordHash = await encryptPasswordSecurity(password);
-      await employeeModel.create({
+      const usercreated = await employeeModel.create({
         user: user,
         username: username,
         lastnames: lastnames,
@@ -40,17 +39,12 @@ export class LoginSystem {
         rol: rol,
       });
 
-      console.log("Usuario registrado exitosamente");
+      
 
-      return true
+      return usercreated
     } catch (error) {
       console.error("Error al registrar usuario:", error);
     }
   }
-
-  async logout(){
-    //implementar logica
-  }
-
 }
 export default LoginSystem

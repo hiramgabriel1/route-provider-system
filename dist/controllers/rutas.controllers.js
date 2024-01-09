@@ -55,24 +55,30 @@ class rutasController {
             };
             // todo: verify data
             const isExists = await rutas_model_1.default.findOne({
-                empleado: empleado,
-                vehicle: vehicle,
-                start: start,
-                end: end,
-                status: status,
-                amountOfMerchandise: amountOfMerchandise,
-                LastMinuteSale: LastMinuteSale,
+                empleado,
+                vehicle,
+                start,
+                end,
+                status,
+                amountOfMerchandise,
+                LastMinuteSale,
             });
-            isExists
-                ? res.json({ message: "La ruta ya existe", details: dataUser })
-                : false;
+            if (isExists) {
+                return res.json({ message: "La ruta ya existe", details: dataUser });
+            }
             const createRuta = await rutas_model_1.default.create(dataUser);
-            createRuta
-                ? res.status(200).json({ message: "Ruta creada exitosamente" })
-                : res.status(500).json({ message: "No se logró crear la ruta" });
+            if (createRuta) {
+                return res.status(200).json({ message: "Ruta creada exitosamente" });
+            }
+            else {
+                return res.status(500).json({ message: "No se logró crear la ruta" });
+            }
         }
         catch (error) {
-            console.error(error);
+            return res.status(500).json({
+                message: "Error en el servidor",
+                details: error,
+            });
         }
     }
     async deleteRutas(req, res) {

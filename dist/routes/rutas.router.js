@@ -21,7 +21,7 @@ routerRutas.post(`${path}/rutas/new`, (req, res) => {
 routerRutas.patch(`${path}/rutas/edit/:rutaId`, (req, res) => {
     controllerRutas.editRuta(req, res);
 });
-routerRutas.delete(`${path}/rutas/:rutaId`, cache_config_1.default, (req, res) => {
+routerRutas.delete(`${path}/rutas/delete/:rutaId`, cache_config_1.default, (req, res) => {
     controllerRutas.deleteRutas(req, res);
 });
 exports.default = routerRutas;

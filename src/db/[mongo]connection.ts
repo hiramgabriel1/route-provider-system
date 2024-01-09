@@ -8,7 +8,6 @@ const connection = async () => {
 
     // @ts-ignore
     await mongoose.connect(process.env.MONGO_URI);
-    // console.log("connection is successfully!".rainbow);
 
 } catch (error) {
     console.error(error);

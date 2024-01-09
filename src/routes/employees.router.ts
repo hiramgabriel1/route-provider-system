@@ -1,15 +1,19 @@
 import { Request, Response, Router } from "express";
-import { employees, routesEmployees } from "../controllers/employees.controller";
+import {
+  employees,
+  routesEmployees,
+} from "../controllers/employees.controller";
 import cacheInit from "../middlewares/cache.config";
 
 const employeesController = new employees();
-const subRoutesEmployees = new routesEmployees()
+const subRoutesEmployees = new routesEmployees();
 const routerEmployees = Router();
 const path = "/api/v1";
 
 // todo: render all employees
 routerEmployees.get(
   `${path}/employees`,
+  cacheInit,
   (req: Request, res: Response) => {
     employeesController.getEmployees(req, res);
   }
@@ -18,7 +22,6 @@ routerEmployees.get(
 // todo: render employee by id
 routerEmployees.get(
   `${path}/employee/:employeeId`,
-  // cacheInit
   (req: Request, res: Response) => {
     employeesController.getEmployeeById(req, res);
   }

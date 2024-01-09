@@ -5,12 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.routesEmployees = exports.employees = void 0;
 const employees_model_1 = __importDefault(require("../models/employees.model"));
+const bcrypt_config_1 = require("../validators/bcrypt.config");
 class employees {
     async getEmployees(req, res) {
         try {
             const renderData = await employees_model_1.default.find();
+            const filterEmployees = renderData.filter((employee) => employee.role === "empleado");
             renderData
-                ? res.status(200).json({ message: renderData, details: true })
+                ? res.status(200).json({ message: filterEmployees, details: true })
                 : res.status(500).json({
                     messageError: "error internal brother, de pana xd",
                     details: false,
@@ -56,7 +58,7 @@ class employees {
                 username: username,
                 lastnames: lastnames,
                 role: role,
-                password: password,
+                password: await (0, bcrypt_config_1.encryptPasswordSecurity)(password)
             };
             // todo: verify data
             const isExists = await employees_model_1.default.findOne({
