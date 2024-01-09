@@ -39,7 +39,7 @@ export class LoginSystem {
         rol: rol,
       });
 
-      console.log("Usuario registrado exitosamente");
+      
 
       return usercreated
     } catch (error) {
