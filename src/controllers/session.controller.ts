@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
-import {
-  encryptPasswordSecurity,
-  verifyPasswordSecurity,
-} from "../validators/bcrypt.config";
 
 class sessionController {
   // async createNewSessionUser(req: Request, res: Response) {
@@ -40,16 +36,17 @@ class sessionController {
         .find({
           username: username,
           role: role,
-          // password:
         })
-        .exec();
 
-      verifySessionAndTypeRole.length > 0
-        ? res.json({ response: "user found", data: verifySessionAndTypeRole })
-        : res.json({
-            response: "user not found",
-            data: verifySessionAndTypeRole,
-          });
+        if(verifySessionAndTypeRole) return res.status(200).json({ response: verifySessionAndTypeRole })
+        
+
+      // verifySessionAndTypeRole.length > 0
+      //   ? res.json({ response: "user found", data: verifySessionAndTypeRole })
+      //   : res.status(404).json({
+      //       response: "user not found",
+      //       data: verifySessionAndTypeRole,
+      //     });
     } catch (error) {
       res.status(500).json({ messageError: error });
       console.error(error);
