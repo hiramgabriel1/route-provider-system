@@ -35,7 +35,6 @@ class sessionController {
   async validateSessionInput(req: Request, res: Response) {
     try {
       const { username, role, password } = req.body;
-
       // const verifyPassword = verifyPasswordSecurity(password)
 
       const verifySessionAndTypeRole = await employeeModel
