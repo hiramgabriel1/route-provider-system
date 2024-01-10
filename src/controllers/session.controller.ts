@@ -11,7 +11,8 @@ class sessionController {
   //     const { username, role, password } = req.body;
 
   //     // todo: encrypt password!
-  //     const encrypt = encryptPasswordSecurity(password);
+
+  //     const encrypt =  await encryptPasswordSecurity(password);
 
   //     const dataSessionUser = {
   //       username: username,
@@ -35,8 +36,6 @@ class sessionController {
   async validateSessionInput(req: Request, res: Response) {
     try {
       const { username, role, password } = req.body;
-      // const verifyPassword = verifyPasswordSecurity(password)
-
       const verifySessionAndTypeRole = await employeeModel
         .find({
           username: username,
