@@ -40,6 +40,11 @@ class systemBroker {
         (productPrices) => productPrices.productPrice
       );
 
+      let totalPriceProducts =0;
+      products.forEach(product => {
+        totalPriceProducts+=product.productPrice??0;
+      });
+
       // const totalPrice = filterProductsPrices.reduce((accumulator, product) => {
       //   return accumulator + product.productPrice;
       // }, 0);
@@ -55,6 +60,7 @@ class systemBroker {
             productosNoVendidos: filterUnsoldProducts,
             countProductsUnsolds: filterUnsoldProducts.length,
             estimatedPrices: filterProductsPrices,
+            totalProductsPrice: totalPriceProducts
           })
         : res.status(404).json({ response: "not found" });
 
