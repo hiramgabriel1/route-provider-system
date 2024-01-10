@@ -37,7 +37,7 @@ class sessionController {
   async validateSessionInput(req: Request, res: Response) {
     try {
       const { username, role, password } = req.body;
-    
+
       const verifySessionAndTypeRole = await employeeModel
         .find({
           username: username,
@@ -46,8 +46,13 @@ class sessionController {
         .exec();
 
       verifySessionAndTypeRole.length > 0
-        ? res.json({ response: true, data: verifySessionAndTypeRole })
-        : res.json({ response: false });
+        ? (await verifyPasswordSecurity(
+            password,
+            verifySessionAndTypeRole[0].password
+          ))
+          ? { response: true, data: verifySessionAndTypeRole }
+          : { response: false, message: "Contraseña incorrecta" }
+        : { response: false, message: "Usuario no encontrado" };
     } catch (error) {
       res.status(500).json({ messageError: error });
       console.error(error);
