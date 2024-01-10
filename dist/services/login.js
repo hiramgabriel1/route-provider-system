@@ -38,7 +38,6 @@ class LoginSystem {
                 password: passwordHash,
                 rol: rol,
             });
-            console.log("Usuario registrado exitosamente");
             return usercreated;
         }
         catch (error) {

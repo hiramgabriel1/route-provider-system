@@ -1,6 +1,7 @@
 "use strict";
 // import jwt from "jsonwebtoken";
 // import { Request, Response, NextFunction } from "express";
+Object.defineProperty(exports, "__esModule", { value: true });
 // const SECRET_KEY = "tu_clave_secreta";
 // export const generateToken = (userData:Object) => {
 //   return jwt.sign(userData, SECRET_KEY, { expiresIn: "1h" });
