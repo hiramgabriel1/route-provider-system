@@ -38,7 +38,7 @@ class sessionController {
           role: role,
         })
 
-        if(verifySessionAndTypeRole) return res.status(200).json({ response: verifySessionAndTypeRole })
+        if(verifySessionAndTypeRole) return res.status(200).json({ message: "user found" , response: verifySessionAndTypeRole })
         
 
       // verifySessionAndTypeRole.length > 0

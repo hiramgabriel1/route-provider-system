@@ -24,7 +24,7 @@ employeesDatabaseConnection()
 const PORT = process.env.PORT;
 const app: Express = express();
 const server = http.createServer(app);
-const secretKeySession = process.env.SECRET_KET;
+// const secretKeySession = process.env.SECRET_KET;
 // const io = new Server(server);
 
 // & middlewares here
