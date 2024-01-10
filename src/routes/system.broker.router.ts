@@ -8,7 +8,6 @@ const path = "/api/v1";
 
 routerBrokerCourt.get(
   `${path}/view-history/:id`,
-  cacheInit,
   (req: Request, res: Response) => {
     system.viewHistoryCourt(req, res);
   }

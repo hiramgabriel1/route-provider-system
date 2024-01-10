@@ -1,34 +1,17 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 import { productMarks } from "../services/employees/models/products";
+// import { createFileInventary } from "../services/employees/utils/pdf-create";
+import pdf from "html-pdf";
 
 class systemBroker {
-  async closeCourt(req: Request, res: Response) {
-    try {
-      // const {  }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   async viewHistoryCourt(req: Request, res: Response) {
     try {
       const { id } = req.params;
       console.log("id input: " + id);
 
-      // interface Product {
-      //   productFinish: boolean
-      // }
-
       const products = await productMarks.find();
       const queryUserInfo = await employeeModel.find({ _id: id });
-
-      // const filterProductsByFinish = (products: Product[], isProductFinish: Product[]) =>
-      //   products.filter((product: any) => product.productFinish === isProductFinish);
-
-      // // ? filter products sold and not solds!
-      // const filterSoldProducts = filterProductsByFinish(products, true);
-      // const filterUnsoldProducts = filterProductsByFinish(products, false);
 
       const filterSoldProducts = products.filter(
         (productsBuy) => productsBuy.productIsSold === true
@@ -40,13 +23,18 @@ class systemBroker {
         (productPrices) => productPrices.productPrice
       );
 
+      const totalPrice = filterProductsPrices.find(
+        (prices) => prices.productPrice
+      );
+
+      // res.json({ response: totalPrice });
       // const totalPrice = filterProductsPrices.reduce((accumulator, product) => {
       //   return accumulator + product.productPrice;
       // }, 0);
 
-      // diferencia terminar
+      // !! diferencia terminar
 
-      queryUserInfo
+      return queryUserInfo
         ? res.status(200).json({
             response: "found",
             userInfo: queryUserInfo,
@@ -55,6 +43,7 @@ class systemBroker {
             productosNoVendidos: filterUnsoldProducts,
             countProductsUnsolds: filterUnsoldProducts.length,
             estimatedPrices: filterProductsPrices,
+            prices: totalPrice
           })
         : res.status(404).json({ response: "not found" });
 
@@ -70,6 +59,29 @@ class systemBroker {
       // const differenceCount = // la diferencia de dinero es "$10 pesos"
     } catch (error) {
       console.error(error);
+      res.status(500).json({ responseError: error, details: false });
+    }
+  }
+
+  // todo: create pdf with information to products
+  // !! todo: @roman
+  async closeCourt(req: Request, res: Response) {
+    try {
+      // const {  }
+      res.json({ message: "corte finalizado" });
+      const pathPDF = "../pdf";
+      const content = "";
+
+      pdf.create(content).toFile(pathPDF, (err, res) => {
+        try {
+          console.log(`PDF CREATED: ${res}`);
+        } catch (error) {
+          console.error(`error in create pdf ${error}`);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ responseError: error });
     }
   }
 }
