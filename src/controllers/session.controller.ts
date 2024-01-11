@@ -1,16 +1,19 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
+import { verifyPasswordSecurity } from "../validators/bcrypt.config";
+
 
 class sessionController {
   async validateSessionInput(req: Request, res: Response) {
     try {
-      const { username, role } = req.body;
+      const { username, role, password } = req.body;
       const verifySessionAndTypeRole = await employeeModel.find({
         username: username,
         role: role,
       });
+       const isValid= await verifyPasswordSecurity(password, verifySessionAndTypeRole[0].password)
 
-      if (verifySessionAndTypeRole)
+      if (isValid)
         return res
           .status(200)
           .json({ message: "user found", response: verifySessionAndTypeRole });
