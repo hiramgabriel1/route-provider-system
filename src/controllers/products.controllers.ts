@@ -21,7 +21,7 @@ class productsController {
     try {
       const { productId } = req.params;
 
-      const product = await productMarks.findById({ productId });
+      const product = await productMarks.findById( productId );
 
       product
         ? res.status(200).json({ message: product, details: true })

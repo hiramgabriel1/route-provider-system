@@ -22,7 +22,7 @@ class productsController {
     async getProductById(req, res) {
         try {
             const { productId } = req.params;
-            const product = await products_model_1.default.findById({ productId });
+            const product = await products_model_1.default.findById(productId);
             product
                 ? res.status(200).json({ message: product, details: true })
                 : res.status(500).json({
