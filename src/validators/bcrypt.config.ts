@@ -10,15 +10,12 @@ export const encryptPasswordSecurity = async (password: string) => {
   }
 };
 
-export const verifyPasswordSecurity = async (
-  password: string,
-  hashPassword: string
-) => {
+export async function verifyPasswordSecurity(plainPassword: string, hashedPassword: string): Promise<boolean> {
   try {
-    const verify = await bcrypt.compare(password, hashPassword);
-    return verify;
+    const match = await bcrypt.compare(plainPassword, hashedPassword);
+    return match;
   } catch (error) {
-    console.error(error);
-    console.log("Error al comparar contraseñas" + error);
+    console.error("Error al comparar contraseñas:", error);
+    throw error; 
   }
-};
+}
