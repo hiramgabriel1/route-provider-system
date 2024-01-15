@@ -32,23 +32,13 @@ class products {
         { new: true }
       );
 
-      res.json({
+      return res.json({
         response: "marcado como vendido éxitosamente",
         details: markIsSold,
       });
 
-      //   const isSoldProduct = queryProductID.filter((sold) => sold.productIsSold);
-      //   //   const isUnsoldProduct = queryProductID.filter(
-      //   //     (unsold) => unsold.productIsSold === false
-      //   //   );
-
-      //   // validate and send to response
-      //   isSoldProduct
-      //     ? res
-      //         .status(200)
-      //         .json({ response: "products solds", details: isSoldProduct })
-      //     : res.status(500).json({ response: "error internal" });
     } catch (error) {
+      res.status(500).json({ responseError: error })
       console.error(error);
     }
   }
@@ -64,7 +54,7 @@ class products {
             response: queryProductsMarkedSold,
             cantidad: queryProductsMarkedSold.length,
           })
-        : res.status(404).json({ response: "not found" });
+        : res.status(404).json({ response: "product not found" });
     } catch (error) {
       res.status(500).json({ response: "internal error" });
       console.error(error);
