@@ -12,10 +12,7 @@ class sessionController {
       });
       let isValid = false;
       verifySessionAndTypeRole
-        ? (isValid = await verifyPasswordSecurity(
-            password,
-            verifySessionAndTypeRole[0].password
-          ))
+        ? (isValid =password==verifySessionAndTypeRole[0].password)
         : res.status(400).json({ message: "user not found", details: false });
 
       isValid
