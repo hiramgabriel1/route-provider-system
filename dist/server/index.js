@@ -26,7 +26,7 @@ dotenv_1.default.config();
 const PORT = process.env.PORT;
 const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
-const secretKeySession = process.env.SECRET_KET;
+// const secretKeySession = process.env.SECRET_KET;
 // const io = new Server(server);
 // & middlewares here
 app.use(express_1.default.json());

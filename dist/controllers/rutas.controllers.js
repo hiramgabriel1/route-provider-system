@@ -25,6 +25,7 @@ class rutasController {
                 : res.status(404).json({ message: "No existen rutas", details: false });
         }
         catch (error) {
+            res.status(500).json({ response: "error internal" });
             console.error(error);
         }
     }

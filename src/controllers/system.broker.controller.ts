@@ -66,7 +66,6 @@ class systemBroker {
   // !! todo: @roman
   async closeCourt(req: Request, res: Response) {
     try {
-      // const {  }
       res.json({ message: "corte finalizado" });
       const pathPDF = "../pdf";
       const content = "";

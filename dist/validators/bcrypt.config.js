@@ -15,14 +15,14 @@ const encryptPasswordSecurity = async (password) => {
     }
 };
 exports.encryptPasswordSecurity = encryptPasswordSecurity;
-const verifyPasswordSecurity = async (password, hashPassword) => {
+async function verifyPasswordSecurity(plainPassword, hashedPassword) {
     try {
-        const verify = await bcrypt_1.default.compare(password, hashPassword);
-        return verify;
+        const match = await bcrypt_1.default.compare(plainPassword, hashedPassword);
+        return match;
     }
     catch (error) {
-        console.error(error);
-        console.log("Error al comparar contraseñas" + error);
+        console.error("Error al comparar contraseñas:", error);
+        throw error;
     }
-};
+}
 exports.verifyPasswordSecurity = verifyPasswordSecurity;
