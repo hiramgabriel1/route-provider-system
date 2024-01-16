@@ -27,10 +27,12 @@ class sessionController {
             data: verifySessionAndTypeRole,
           });
     } catch (error) {
-      res.status(500).json({ messageError: error });
-      console.error(error);
+        res.status(500).json({ messageError: error });
+        console.error(error);
     }
-  }
+}
+
+
 }
 
 export default sessionController;
