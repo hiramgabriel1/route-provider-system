@@ -11,22 +11,20 @@ class sessionController {
             role: role,
         });
 
-        if (verifySessionAndTypeRole.length > 0) {
-            const isValid = password === verifySessionAndTypeRole[0].password;
+        const isValid =
+            verifySessionAndTypeRole.length > 0
+                ? password === verifySessionAndTypeRole[0].password
+                : false;
 
-            if (isValid) {
-                res.status(200).json({ message: "user found", response: verifySessionAndTypeRole });
-            } else {
-                res.status(400).json({ message: "Incorrect password", details: false });
-            }
-        } else {
-            res.status(400).json({ message: "User not found", details: false });
-        }
+        isValid
+            ? res.status(200).json({ message: "user found", response: verifySessionAndTypeRole })
+            : res.status(400).json({ message: "User not found or incorrect password", details: false });
     } catch (error) {
         res.status(500).json({ messageError: error });
         console.error(error);
     }
 }
+
 
 }
 
