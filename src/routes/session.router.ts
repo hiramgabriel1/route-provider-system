@@ -7,7 +7,7 @@ const routerSession = Router();
 const path = "/api/v1";
 
 // input session 
-routerSession.post(`${path}/validate-session`, (req, res) => {
+routerSession.post(`${path}/validate-session`, (req:Request, res:Response) => {
   session.validateSessionInput(req, res)
 })
 

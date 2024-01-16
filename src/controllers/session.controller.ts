@@ -10,26 +10,29 @@ class sessionController {
         username: username,
         role: role,
       });
-      let isValid = false;
-      verifySessionAndTypeRole
-        ? (isValid = await verifyPasswordSecurity(
-            password,
-            verifySessionAndTypeRole[0].password
-          ))
-        : res.status(400).json({ message: "user not found", details: false });
+      const isValid = await verifyPasswordSecurity(
+        password,
+        verifySessionAndTypeRole[0].password
+      );
 
-      isValid
-        ? res
-            .status(200)
-            .json({ message: "user found", response: verifySessionAndTypeRole })
-        : res
-            .status(400)
-            .json({ message: "Contrasenia incorrecta", details: false });
+      if (isValid)
+        return res
+          .status(200)
+          .json({ message: "user found", response: verifySessionAndTypeRole });
+
+      verifySessionAndTypeRole.length > 0
+        ? res.json({ response: "user found", data: verifySessionAndTypeRole })
+        : res.status(404).json({
+            response: "user not found",
+            data: verifySessionAndTypeRole,
+          });
     } catch (error) {
-      res.status(500).json({ messageError: error });
-      console.error(error);
+        res.status(500).json({ messageError: error });
+        console.error(error);
     }
-  }
+}
+
+
 }
 
 export default sessionController;
