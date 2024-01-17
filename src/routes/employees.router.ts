@@ -49,3 +49,61 @@ routerEmployees.delete(
 );
 
 export default routerEmployees;
+
+/**
+ * @swagger
+ * /api/v1/employees:
+ *  get:
+ *    summary: Obtener todos los empleados registrados
+ *    tags:
+ *      - administrador
+ *    responses:
+ *      200:
+ *        description: muestra un json con información de todos los usuarios
+ *      500:
+ *        description: error interno del servidor
+ *
+ * /api/v1/employee/{employeeId}:
+ *  get:
+ *    summary: Obtener información del usuario por su id
+ *    tags:
+ *      - administrador
+ *    responses:
+ *      200:
+ *        description: muestra un json con información del usuario específico
+ *      404:
+ *        description: no se ha encontrado el usuario buscado
+ *      500:
+ *        description: error interno del servidor
+ * 
+ * /api/v1/employee/new:
+ *  post:
+ *    summary: Te permite crear un nuevo empleado
+ *    tags:
+ *      - administrador
+ *    responses:
+ *      200:
+ *        description: te devuelve un 200 además del usuario creado
+ *        content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: El ID del empleado.
+ *                 name:
+ *                   type: string
+ *                   description: El nombre del empleado.
+ *                 role:
+ *                   type: string
+ *                   description: El rol del empleado.
+ *             example:
+ *               id: 1
+ *               name: "Juan"
+ *               role: "Administrador"
+ *      404:
+ *        description: no se ha encontrado el usuario buscado
+ *      500:
+ *        description: error interno del servidor
+*/
