@@ -1,6 +1,14 @@
 import { Request, Response } from "express";
 import rutasModels from "../models/rutas.model";
 
+/* 
+ * @swagger
+      get: 
+        summary: obtiene todas las rutas
+        responses: 
+          '200':
+            description: Boolean --> true
+*/
 class rutasController {
   async getRutas(req: Request, res: Response) {
     try {
