@@ -12,3 +12,26 @@ routerSession.post(`${path}/validate-session`, (req:Request, res:Response) => {
 })
 
 export default routerSession;
+
+/**
+ * @swagger
+ *   /api/v1/validate-session:
+ *    post:
+ *      summary: Valdiar una session con los datos del usuario
+ *      tags:
+ *        - administrador
+ *      responses:
+ *        200:
+ *          description: muestra un json con información del usuario
+ *        404:
+ *          description: el usuario no fue encontrado
+ *        500:
+ *          description: error interno del servidor
+ *   
+ *   example:
+ *      user{
+ *        "username": "pepito"
+ *        "rol": "empleado"
+ *        "password": "Pepito123"
+ *        }
+ */

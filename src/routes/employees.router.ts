@@ -63,7 +63,11 @@ export default routerEmployees;
  *      500:
  *        description: error interno del servidor
  *
- * /api/v1/employee/{employeeId}:
+ *
+ *
+ * 
+ * 
+ * /api/v1/employee/:employeeId
  *  get:
  *    summary: Obtener información del usuario por su id
  *    tags:
@@ -75,6 +79,11 @@ export default routerEmployees;
  *        description: no se ha encontrado el usuario buscado
  *      500:
  *        description: error interno del servidor
+ *
+ *
+ *
+ *
+ * 
  * 
  * /api/v1/employee/new:
  *  post:
@@ -106,4 +115,57 @@ export default routerEmployees;
  *        description: no se ha encontrado el usuario buscado
  *      500:
  *        description: error interno del servidor
-*/
+ *
+ *
+ * 
+ * 
+ * 
+ * /api/v1/employee/edit/:idEmploye
+ *  patch:
+ *    summary: Te permite editar un empleado apartir de su id
+ *    tags:
+ *      - administrador
+ *    responses:
+ *      200:
+ *        description: te devuelve un 200 además del usuario editado
+ *        content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: El ID del empleado.
+ *                 name:
+ *                   type: string
+ *                   description: El nombre del empleado.
+ *                 role:
+ *                   type: string
+ *                   description: El rol del empleado.
+ * 
+ * 
+ *             example:
+ *               id: 1
+ *               name: "Juan"
+ *               role: "Administrador"
+ *      404:
+ *        description: no se ha encontrado el usuario buscado
+ *      500:
+ *        description: error interno del servidor
+ *
+ *
+ * 
+ * 
+ *     /api/v1/employee/delete/idEmploye:
+ *      delete:
+ *        summary: Eliminar un usuario a partir de su id
+ *        tags:
+ *          - administrador
+ *        responses:
+ *          200:
+ *            description: muestra un json con información del usuario eliminado
+ *          500:
+ *            description: error interno del servidor
+ *
+ *
+ */
