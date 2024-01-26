@@ -16,7 +16,7 @@ import routerMarkProducts from "../services/employees/routes/products.routes";
 import session from "express-session";
 import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
-import specs from "../doc/swagger";
+// import specs from "../doc/swagger";
 
 dotenv.config();
 connection();
@@ -58,7 +58,7 @@ app.use(routerBrokerCourt);
 app.use(routerMarkProducts);
 
 // & endpoint to documentation api here
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 // app.use("api-docs", SwaggerUiOptions, swaggerUi.setup(specs));
 
 // todo: run server!
