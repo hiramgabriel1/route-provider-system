@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import systemBroker from "../controllers/system.broker.controller";
-import cacheInit from "../middlewares/cache.config";
 
 const system = new systemBroker();
 const routerBrokerCourt = Router();

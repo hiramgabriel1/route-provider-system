@@ -23,9 +23,9 @@ class systemBroker {
         (productPrices) => productPrices.productPrice
       );
 
-      let totalPriceProducts =0;
-      products.forEach(product => {
-        totalPriceProducts+=product.productPrice??0;
+      let totalPriceProducts = 0;
+      products.forEach((product) => {
+        totalPriceProducts += product.productPrice ?? 0;
       });
 
       // const totalPrice = filterProductsPrices.reduce((accumulator, product) => {
