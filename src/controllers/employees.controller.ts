@@ -17,7 +17,6 @@ class employees {
             messageError: "error internal brother, de pana xd",
             details: false,
           });
-
     } catch (error) {
       console.error(error);
     }
@@ -68,7 +67,7 @@ class employees {
         username: username,
         lastnames: lastnames,
         role: role,
-        password:  await encryptPasswordSecurity(password)
+        password: await encryptPasswordSecurity(password),
       };
 
       // todo: verify data
