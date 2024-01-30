@@ -7,7 +7,6 @@ const express_1 = require("express");
 const employees_controller_1 = require("../controllers/employees.controller");
 const cache_config_1 = __importDefault(require("../middlewares/cache.config"));
 const employeesController = new employees_controller_1.employees();
-const subRoutesEmployees = new employees_controller_1.routesEmployees();
 const routerEmployees = (0, express_1.Router)();
 const path = "/api/v1";
 // todo: render all employees

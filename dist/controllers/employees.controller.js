@@ -58,7 +58,7 @@ class employees {
                 username: username,
                 lastnames: lastnames,
                 role: role,
-                password: await (0, bcrypt_config_1.encryptPasswordSecurity)(password)
+                password: await (0, bcrypt_config_1.encryptPasswordSecurity)(password),
             };
             // todo: verify data
             const isExists = await employees_model_1.default.findOne({
