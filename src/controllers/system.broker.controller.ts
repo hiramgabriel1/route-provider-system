@@ -13,7 +13,7 @@ class systemBroker {
       const products = await productMarks.find();
       const queryUserInfo = await employeeModel.find({ _id: id });
 
-      const filterSoldProducts = products.filter(
+      const filterSoldProducts: any = products.filter(
         (productsBuy) => productsBuy.productIsSold === true
       );
       const filterUnsoldProducts = products.filter(
