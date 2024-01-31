@@ -6,10 +6,10 @@ const session = new sessionController();
 const routerSession = Router();
 const path = "/api/v1";
 
-// input session 
-routerSession.post(`${path}/validate-session`, (req:Request, res:Response) => {
-  session.validateSessionInput(req, res)
+routerSession.post(`${path}/createtoken`,(req:Request,res:Response)=>{
+  session.createToken(req,res)
 })
+
 
 export default routerSession;
 
