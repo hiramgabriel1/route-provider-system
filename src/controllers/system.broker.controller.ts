@@ -28,12 +28,7 @@ class systemBroker {
         totalPriceProducts += product.productPrice ?? 0;
       });
 
-      // const totalPrice = filterProductsPrices.reduce((accumulator, product) => {
-      //   return accumulator + product.productPrice;
-      // }, 0);
-
       // !! diferencia terminar
-
       return queryUserInfo
         ? res.status(200).json({
             response: "found",
