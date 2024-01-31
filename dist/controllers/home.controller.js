@@ -23,7 +23,7 @@ class homeController {
                 filterTypeUser: filterUserToTypeRole,
                 numberEmployees: convertObjectToArray.length,
                 productsTotal: productsTotal,
-                totalRoutes: totalRoutes.length,
+                totalRoutesActivas: totalRoutes.length,
             });
         }
         catch (error) {

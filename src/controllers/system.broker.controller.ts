@@ -13,7 +13,7 @@ class systemBroker {
       const products = await productMarks.find();
       const queryUserInfo = await employeeModel.find({ _id: id });
 
-      const filterSoldProducts = products.filter(
+      const filterSoldProducts: any = products.filter(
         (productsBuy) => productsBuy.productIsSold === true
       );
       const filterUnsoldProducts = products.filter(
@@ -23,17 +23,12 @@ class systemBroker {
         (productPrices) => productPrices.productPrice
       );
 
-      let totalPriceProducts =0;
-      products.forEach(product => {
-        totalPriceProducts+=product.productPrice??0;
+      let totalPriceProducts = 0;
+      products.forEach((product) => {
+        totalPriceProducts += product.productPrice ?? 0;
       });
 
-      // const totalPrice = filterProductsPrices.reduce((accumulator, product) => {
-      //   return accumulator + product.productPrice;
-      // }, 0);
-
       // !! diferencia terminar
-
       return queryUserInfo
         ? res.status(200).json({
             response: "found",

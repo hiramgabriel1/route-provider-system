@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import systemBroker from "../controllers/system.broker.controller";
-import cacheInit from "../middlewares/cache.config";
 
 const system = new systemBroker();
 const routerBrokerCourt = Router();
@@ -18,6 +17,3 @@ routerBrokerCourt.post(`${path}/close-court`, (req: Request, res: Response) => {
 });
 
 export default routerBrokerCourt;
-
-
-
