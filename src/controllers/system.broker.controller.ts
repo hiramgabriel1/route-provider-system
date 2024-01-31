@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 import { productMarks } from "../services/employees/models/products";
 // import { createFileInventary } from "../services/employees/utils/pdf-create";
-import pdf from "html-pdf";
 
 class systemBroker {
   async viewHistoryCourt(req: Request, res: Response) {
@@ -61,17 +60,7 @@ class systemBroker {
   // !! todo: @roman
   async closeCourt(req: Request, res: Response) {
     try {
-      res.json({ message: "corte finalizado" });
-      const pathPDF = "../pdf";
-      const content = "";
 
-      pdf.create(content).toFile(pathPDF, (err, res) => {
-        try {
-          console.log(`PDF CREATED: ${res}`);
-        } catch (error) {
-          console.error(`error in create pdf ${error}`);
-        }
-      });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ responseError: error });
