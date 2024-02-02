@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
-import { encryptPasswordSecurity,verifyPasswordSecurity } from "../validators/bcrypt.config";
+
 
 class employees {
   async getEmployees(req: Request, res: Response) {
@@ -68,7 +68,7 @@ class employees {
         username: username,
         lastnames: lastnames,
         role: role,
-        password:  await encryptPasswordSecurity(password)
+        password: password
       };
 
       // todo: verify data

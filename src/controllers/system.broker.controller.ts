@@ -7,11 +7,9 @@ import pdf from "html-pdf";
 class systemBroker {
   async viewHistoryCourt(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      console.log("id input: " + id);
 
       const products = await productMarks.find();
-      const queryUserInfo = await employeeModel.find({ _id: id });
+      const queryUserInfo = await employeeModel.find();
 
       const filterSoldProducts = products.filter(
         (productsBuy) => productsBuy.productIsSold === true
