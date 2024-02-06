@@ -1,4 +1,3 @@
-// import morgan from "morgan";
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -15,8 +14,6 @@ import routerBrokerCourt from "../routes/system.broker.router";
 import routerMarkProducts from "../services/employees/routes/products.routes";
 import session from "express-session";
 import morgan from "morgan";
-//import swaggerUi from "swagger-ui-express";
-import specs from "../doc/swagger";
 
 dotenv.config();
 connection();
@@ -42,8 +39,10 @@ app.use(
     secret: "3903DJS_DJSDKSddew@-dsjk2983",
     resave: false,
     saveUninitialized: true,
+    // role: false
   })
 );
+// devolver un role en la sessión tambien ademas de la secret
 
 // & endpoints administrador here
 app.use(routerHome);
@@ -56,10 +55,6 @@ app.use(routerBrokerCourt);
 
 // & endpoints employees here
 app.use(routerMarkProducts);
-
-// & endpoint to documentation api here
-//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-// app.use("api-docs", SwaggerUiOptions, swaggerUi.setup(specs));
 
 // todo: run server!
 const bootstrap = () => {
