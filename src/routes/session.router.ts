@@ -15,14 +15,14 @@ export default routerSession;
 
 /**
  * @swagger
- *   /api/v1/validate-session:
+ *   /api/v1/createtoken:
  *    post:
- *      summary: Valdiar una session con los datos del usuario
+ *      summary: Crea token a partir de los datos del ususario
  *      tags:
  *        - administrador
  *      responses:
  *        200:
- *          description: muestra un json con información del usuario
+ *          description: muestra un token
  *        404:
  *          description: el usuario no fue encontrado
  *        500:
