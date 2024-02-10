@@ -23,14 +23,14 @@ class sessionController {
       verifySessionAndTypeRole.length > 0
         ? res.json({ response: "user found", data: verifySessionAndTypeRole })
         : res.status(404).json({
-            response: "user not found",
-            data: verifySessionAndTypeRole,
-          });
+          response: "user not found",
+          data: verifySessionAndTypeRole,
+        });
     } catch (error) {
-        res.status(500).json({ messageError: error });
-        console.error(error);
+      res.status(500).json({ messageError: error });
+      console.error(error);
     }
-}
+  }
 
 
 }

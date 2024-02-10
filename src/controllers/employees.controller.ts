@@ -14,9 +14,9 @@ class employees {
       renderData
         ? res.status(200).json({ message: filterEmployees, details: true })
         : res.status(500).json({
-            messageError: "error internal brother, de pana xd",
-            details: false,
-          });
+          messageError: "error internal brother, de pana xd",
+          details: false,
+        });
     } catch (error) {
       console.error(error);
     }
@@ -51,8 +51,8 @@ class employees {
       updateUserData
         ? res.status(200).json({ message: updateUserData, details: true })
         : res
-            .status(404)
-            .json({ messageError: "error internal", details: false });
+          .status(404)
+          .json({ messageError: "error internal", details: false });
     } catch (error) {
       console.error(error);
     }
@@ -98,13 +98,13 @@ class employees {
 
       deleteEmployee
         ? res.status(200).json({
-            message: "deleted successfully!",
-            details: deleteEmployee,
-            response: true,
-          })
+          message: "deleted successfully!",
+          details: deleteEmployee,
+          response: true,
+        })
         : res
-            .status(404)
-            .json({ messageError: "deleted error", details: false });
+          .status(404)
+          .json({ messageError: "deleted error", details: false });
     } catch (error) {
       console.error(error);
     }

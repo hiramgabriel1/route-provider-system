@@ -30,14 +30,14 @@ class systemBroker {
       // !! diferencia terminar
       return queryUserInfo
         ? res.status(200).json({
-            response: "found",
-            userInfo: queryUserInfo,
-            productosVendidos: filterSoldProducts,
-            countProductsSolds: filterSoldProducts.length,
-            productosNoVendidos: filterUnsoldProducts,
-            countProductsUnsolds: filterUnsoldProducts.length,
-            estimatedPrices: filterProductsPrices,
-          })
+          response: "found",
+          userInfo: queryUserInfo,
+          productosVendidos: filterSoldProducts,
+          countProductsSolds: filterSoldProducts.length,
+          productosNoVendidos: filterUnsoldProducts,
+          countProductsUnsolds: filterUnsoldProducts.length,
+          estimatedPrices: filterProductsPrices,
+        })
         : res.status(404).json({ response: "not found" });
 
       // const userInfo = { } // información del empleado al que se le quiere ver la info --> { username, vehicleAssignament, stateRoute },
