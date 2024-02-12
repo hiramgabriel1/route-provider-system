@@ -77,6 +77,19 @@ class products {
       console.error(error);
     }
   }
+
+  async scanProduct(req:Request,res:Response){
+    try{
+      const {idproduct} = req.params
+      const productScan = await productMarks.findOne({productId:idproduct})
+
+      productScan
+      ? res.status(200).json({productScan, details:true})
+      : res.status(400).json({response:"No se ha encontrado el producto en la base de datos", details:false})
+    }catch(error){
+      console.error(error);
+    }
+  }
 }
 
 export default products;
