@@ -37,4 +37,13 @@ routerMarkProducts.get(
   }
 );
 
+routerMarkProducts.get(
+  `${path}/scan-product/:idproduct`,
+  cacheInit,
+  (req: Request, res: Response) => {
+    productsControllers.scanProduct(req, res);
+  }
+);
+
+
 export default routerMarkProducts;
