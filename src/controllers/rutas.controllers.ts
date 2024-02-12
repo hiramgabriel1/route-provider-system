@@ -107,13 +107,13 @@ class rutasController {
 
       deleteRuta
         ? res.status(200).json({
-            message: "Deleted successfully!",
-            details: deleteRuta,
-            response: true,
-          })
+          message: "Deleted successfully!",
+          details: deleteRuta,
+          response: true,
+        })
         : res
-            .status(404)
-            .json({ messageError: "Delete error", details: false });
+          .status(404)
+          .json({ messageError: "Delete error", details: false });
     } catch (error) {
       console.error(error);
     }

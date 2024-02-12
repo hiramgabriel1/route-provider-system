@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 import { productMarks } from "../services/employees/models/products";
 // import { createFileInventary } from "../services/employees/utils/pdf-create";
-import pdf from "html-pdf";
+// import pdf from "html-pdf";
 
 class systemBroker {
   async viewHistoryCourt(req: Request, res: Response) {
@@ -29,14 +29,14 @@ class systemBroker {
       // !! diferencia terminar
       return queryUserInfo
         ? res.status(200).json({
-            response: "found",
-            userInfo: queryUserInfo,
-            productosVendidos: filterSoldProducts,
-            countProductsSolds: filterSoldProducts.length,
-            productosNoVendidos: filterUnsoldProducts,
-            countProductsUnsolds: filterUnsoldProducts.length,
-            estimatedPrices: filterProductsPrices,
-          })
+          response: "found",
+          userInfo: queryUserInfo,
+          productosVendidos: filterSoldProducts,
+          countProductsSolds: filterSoldProducts.length,
+          productosNoVendidos: filterUnsoldProducts,
+          countProductsUnsolds: filterUnsoldProducts.length,
+          estimatedPrices: filterProductsPrices,
+        })
         : res.status(404).json({ response: "not found" });
 
       // const userInfo = { } // información del empleado al que se le quiere ver la info --> { username, vehicleAssignament, stateRoute },
@@ -57,24 +57,17 @@ class systemBroker {
 
   // todo: create pdf with information to products
   // !! todo: @roman
-  async closeCourt(req: Request, res: Response) {
-    try {
-      res.json({ message: "corte finalizado" });
-      const pathPDF = "../pdf";
-      const content = "";
+  // async closeCourt(req: Request, res: Response) {
+  //   try {
+  //     res.json({ message: "corte finalizado" });
+  //     const pathPDF = "../pdf";
+  //     const content = "";
 
-      pdf.create(content).toFile(pathPDF, (err, res) => {
-        try {
-          console.log(`PDF CREATED: ${res}`);
-        } catch (error) {
-          console.error(`error in create pdf ${error}`);
-        }
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ responseError: error });
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error);
+  //     return res.status(500).json({ responseError: error });
+  //   }
+  // }
 }
 
 export default systemBroker;
