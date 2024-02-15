@@ -22,7 +22,6 @@ routerMarkProducts.post(
 // ? endpoint para mostrar los que no fueron vendidos
 routerMarkProducts.get(
   `${path}/unsolds-products`,
-  cacheInit,
   (req: Request, res: Response) => {
     productsControllers.showProductsUnsolds(req, res);
   }
@@ -31,7 +30,6 @@ routerMarkProducts.get(
 // ? endpoint para mostrar los que ya fueron vendidos
 routerMarkProducts.get(
   `${path}/solds-products`,
-  cacheInit,
   (req: Request, res: Response) => {
     productsControllers.showProductsSolds(req, res);
   }
@@ -39,11 +37,9 @@ routerMarkProducts.get(
 
 routerMarkProducts.get(
   `${path}/scan-product/:idproduct`,
-  cacheInit,
   (req: Request, res: Response) => {
     productsControllers.scanProduct(req, res);
   }
 );
-
 
 export default routerMarkProducts;

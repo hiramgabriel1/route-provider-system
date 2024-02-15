@@ -6,13 +6,12 @@ const controllerRutas = new rutasController();
 const routerRutas = Router();
 const path = "/api/v1";
 
-routerRutas.get(`${path}/rutas`, cacheInit, (req: Request, res: Response) => {
+routerRutas.get(`${path}/rutas`, (req: Request, res: Response) => {
   controllerRutas.getRutas(req, res);
 });
 
 routerRutas.get(
   `${path}/rutas/:rutaId`,
-  cacheInit,
   (req: Request, res: Response) => {
     controllerRutas.getRutaById(req, res);
   }
@@ -31,7 +30,6 @@ routerRutas.patch(
 
 routerRutas.delete(
   `${path}/rutas/delete/:rutaId`,
-  cacheInit,
   (req: Request, res: Response) => {
     controllerRutas.deleteRutas(req, res);
   }

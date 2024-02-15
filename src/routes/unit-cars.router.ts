@@ -9,7 +9,6 @@ const routerUnitCars = Router();
 // todo: render all cars unit
 routerUnitCars.get(
   `${path}/cars-units`,
-  cacheInit,
   (req: Request, res: Response) => {
     unitCar.getCarsUnit(req, res);
   }

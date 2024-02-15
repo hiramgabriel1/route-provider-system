@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const productsMark = new mongoose.Schema({
   productIdScan: {
-    type: String
+    type: Number,
+    require: true
   },
 
   productName: {
@@ -22,7 +23,7 @@ const productsMark = new mongoose.Schema({
 
   productIsSold: {
     type: Boolean,
-    // require: true,
+    require: true,
   },
 });
 
