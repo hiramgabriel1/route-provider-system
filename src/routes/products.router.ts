@@ -43,8 +43,6 @@ routerProducts.delete(
 
 export default routerProducts;
 
-
-
 /**
  * @swagger
  * /api/v1/products:
@@ -170,5 +168,3 @@ export default routerProducts;
  *          500:
  *            description: error interno del servidor
 */
-
-
