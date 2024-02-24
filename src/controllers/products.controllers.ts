@@ -6,12 +6,15 @@ class productsController {
     try {
       const products = await productMarks.find();
 
-      products
-        ? res.status(200).json({ message: products, details: true })
-        : res.status(500).json({
-            messageError: "error internal brother, de pana xd",
-            details: false,
-          });
+      if (products) {
+        res.json({ details: products });
+      }
+      // products
+      //   ? res.status(200).json({ message: products, details: true })
+      //   : res.status(500).json({
+      //     messageError: "error internal brother, de pana xd",
+      //     details: false,
+      //   });
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +24,7 @@ class productsController {
     try {
       const { productId } = req.params;
 
-      const product = await productMarks.findById( productId );
+      const product = await productMarks.findById(productId);
 
       product
         ? res.status(200).json({ message: product, details: true })
@@ -45,7 +48,11 @@ class productsController {
         { new: true }
       );
       updateProduct
-        ? res.status(200).json({ response: "product edit successfully", message: updateProduct, details: true })
+        ? res.status(200).json({
+            response: "product edit successfully",
+            message: updateProduct,
+            details: true,
+          })
         : res
             .status(404)
             .json({ messageError: "error internal", details: false });
@@ -56,10 +63,16 @@ class productsController {
 
   async createProduct(req: Request, res: Response) {
     try {
-      const { productName, productDescription, productPrice, productIsSold } =
-        req.body;
+      const {
+        productIdScan,
+        productName,
+        productDescription,
+        productPrice,
+        productIsSold,
+      } = req.body;
 
       const dataProduct = {
+        productIdScan: productIdScan,
         productName: productName,
         productDescription: productDescription,
         productPrice: productPrice,
@@ -67,6 +80,7 @@ class productsController {
       };
 
       const isExists = await productMarks.findOne({
+        productIdScan: productIdScan,
         productName: productName,
         productDescription: productDescription,
         productPrice: productPrice,
@@ -83,7 +97,9 @@ class productsController {
       const createProduct = await productMarks.create(dataProduct);
 
       createProduct
-        ? res.status(200).json({ message: "product created" })
+        ? res
+            .status(200)
+            .json({ message: "product created", details: createProduct })
         : res.status(500).json({ message: "product could not be created" });
     } catch (error) {
       console.log(error);

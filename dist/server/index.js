@@ -33,7 +33,9 @@ app.use((0, express_session_1.default)({
     secret: "3903DJS_DJSDKSddew@-dsjk2983",
     resave: false,
     saveUninitialized: true,
+    // role: false
 }));
+// devolver un role en la sessión tambien ademas de la secret
 // & endpoints administrador here
 app.use(home_router_1.default);
 app.use(employees_router_1.default);

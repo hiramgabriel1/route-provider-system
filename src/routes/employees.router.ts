@@ -9,7 +9,6 @@ const path = "/api/v1";
 // todo: render all employees
 routerEmployees.get(
   `${path}/employees`,
-  cacheInit,
   (req: Request, res: Response) => {
     employeesController.getEmployees(req, res);
   }

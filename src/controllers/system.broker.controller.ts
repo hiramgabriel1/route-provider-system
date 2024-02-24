@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 import { productMarks } from "../services/employees/models/products";
+// import { createFileInventary } from "../services/employees/utils/pdf-create";
+// import pdf from "html-pdf";
 
 class systemBroker {
   async viewHistoryCourt(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      console.log("id input: " + id);
 
       const products = await productMarks.find();
-      const queryUserInfo = await employeeModel.find({ _id: id });
+      const queryUserInfo = await employeeModel.find();
 
       const filterSoldProducts: any = products.filter(
         (productsBuy) => productsBuy.productIsSold === true
@@ -57,14 +57,17 @@ class systemBroker {
 
   // todo: create pdf with information to products
   // !! todo: @roman
-  async closeCourt(req: Request, res: Response) {
-    try {
+  // async closeCourt(req: Request, res: Response) {
+  //   try {
+  //     res.json({ message: "corte finalizado" });
+  //     const pathPDF = "../pdf";
+  //     const content = "";
 
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ responseError: error });
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error);
+  //     return res.status(500).json({ responseError: error });
+  //   }
+  // }
 }
 
 export default systemBroker;
