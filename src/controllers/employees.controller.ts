@@ -62,8 +62,7 @@ class employees {
 
   async createEmployee(req: Request, res: Response) {
     try {
-      const { user, username, lastnames, role, password } =
-        req.body;
+      const { user, username, lastnames, role, password } = req.body;
 
       const dataUser = {
         user: user,
