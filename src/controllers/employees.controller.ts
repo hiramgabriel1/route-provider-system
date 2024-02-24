@@ -60,7 +60,7 @@ class employees {
 
   async createEmployee(req: Request, res: Response) {
     try {
-      const { user, username, lastnames, role, password, salesProducts } =
+      const { user, username, lastnames, role, password } =
         req.body;
 
       const dataUser = {
@@ -69,7 +69,6 @@ class employees {
         lastnames: lastnames,
         role: role,
         password: await encryptPasswordSecurity(password),
-        salesProducts: salesProducts,
       };
 
       // todo: verify data

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 import { productMarks } from "../services/employees/models/products";
-// import { createFileInventary } from "../services/employees/utils/pdf-create";
 
 class systemBroker {
   async viewHistoryCourt(req: Request, res: Response) {

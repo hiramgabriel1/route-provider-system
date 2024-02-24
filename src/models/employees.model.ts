@@ -29,6 +29,10 @@ const employeesModel = new mongoose.Schema({
   salesProducts: {
     type: Number,
   },
+
+  productPrice: {
+    type: Number,
+  },
 });
 
 const employeeModel = mongoose.model("employees", employeesModel);
