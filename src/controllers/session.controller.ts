@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 class sessionController {
   async createToken(req: Request, res: Response) {
     try {
-
       const { username, password, role } = req.body;
       const existUser = await employeeModel.find({
         username: username,
@@ -30,6 +29,7 @@ class sessionController {
         const token = jwt.sign(
           {
             username,
+            role: role,
             exp: Date.now() + 60 * 1000,
           },
           secret
