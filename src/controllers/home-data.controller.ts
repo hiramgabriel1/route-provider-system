@@ -6,14 +6,18 @@ import rutasModels from "../models/rutas.model";
 class homeDataController {
   async getCountData(req: Request, res: Response) {
     try {
-      const renderEmployeesLength = await employeeModel.countDocuments();
-      const renderRoutesLength = await rutasModels.countDocuments();
-      const renderProductLength = await productMarks.countDocuments();
+      const renderData = await employeeModel.find();
+      const filterEmployees = renderData.filter(
+        (employee) => employee.role === "empleado"
+      );
 
-      renderEmployeesLength
+      const renderRoutesLength = await rutasModels.estimatedDocumentCount();
+      const renderProductLength = await productMarks.estimatedDocumentCount();
+
+      renderData != null
         ? res.status(200).json({
             message: {
-              employees: renderEmployeesLength,
+              employees: filterEmployees.length,
               routes: renderRoutesLength,
               products: renderProductLength,
             },
