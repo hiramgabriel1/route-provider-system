@@ -14,6 +14,7 @@ import routerBrokerCourt from "../routes/system.broker.router";
 import routerMarkProducts from "../services/employees/routes/products.routes";
 import session from "express-session";
 import morgan from "morgan";
+import routerHomeData from "../routes/home-data.router";
 
 dotenv.config();
 connection();
@@ -52,6 +53,7 @@ app.use(routerRutas);
 app.use(routerProducts);
 app.use(routerSession);
 app.use(routerBrokerCourt);
+app.use(routerHomeData);
 
 // & endpoints employees here
 app.use(routerMarkProducts);
