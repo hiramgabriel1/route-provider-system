@@ -22,15 +22,17 @@ class sessionController {
       }
 
       // Acceder al primer documento si existe
-      const user = existUser[0];
+      const userCurrent = existUser[0];
 
       // Comparar la contraseña directamente
-      if (password == user.password) {
+      if (password == userCurrent.password) {
         const token = jwt.sign(
           {
             username,
             role: role,
+            _id: userCurrent._id,
             exp: Date.now() + 60 * 1000,
+            
           },
           secret
         );
