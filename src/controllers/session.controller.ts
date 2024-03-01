@@ -10,7 +10,7 @@ class sessionController {
         username: username,
         role: role,
       });
-      const secret = process.env.JWTSECRET;
+      const secret = process.env.JWTSECRET || "passrowdCodeCol12@";
 
       // Verificar si existen documentos en el array
       if (!existUser || existUser.length === 0) {
