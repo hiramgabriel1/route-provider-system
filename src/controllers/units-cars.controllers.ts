@@ -29,11 +29,11 @@ class unitCarsController {
 
       saveUnitCarInDatabase
         ? res
-            .status(200)
-            .json({ message: saveUnitCarInDatabase, details: true })
+          .status(200)
+          .json({ message: saveUnitCarInDatabase, details: true })
         : res
-            .status(500)
-            .json({ messageError: "error internal", details: false });
+          .status(500)
+          .json({ messageError: "error internal", details: false });
     } catch (error) {
       console.error(error);
     }
@@ -52,8 +52,8 @@ class unitCarsController {
 
       modifyUnit
         ? res
-            .status(200)
-            .json({ message: "modify data successfully!", details: modifyUnit })
+          .status(200)
+          .json({ message: "modify data successfully!", details: modifyUnit })
         : res.status(404).json({ message: "error", details: false });
     } catch (error) {
       console.error(error);
@@ -69,8 +69,8 @@ class unitCarsController {
       deleteUnitById
         ? res.status(200).json({ message: "deleted", detials: deleteUnitById })
         : res
-            .status(404)
-            .json({ messageError: "error internal", details: false });
+          .status(404)
+          .json({ messageError: "error internal", details: false });
     } catch (error) {
       console.error(error);
     }
