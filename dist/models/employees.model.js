@@ -25,6 +25,12 @@ const employeesModel = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    salesProducts: {
+        type: Number,
+    },
+    productPrice: {
+        type: Number,
+    },
 });
 const employeeModel = mongoose_1.default.model("employees", employeesModel);
 exports.default = employeeModel;

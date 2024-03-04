@@ -5,12 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const units_cars_controllers_1 = __importDefault(require("../controllers/units-cars.controllers"));
-const cache_config_1 = __importDefault(require("../middlewares/cache.config"));
 const unitCar = new units_cars_controllers_1.default();
 const path = "/api/v1";
 const routerUnitCars = (0, express_1.Router)();
 // todo: render all cars unit
-routerUnitCars.get(`${path}/cars-units`, cache_config_1.default, (req, res) => {
+routerUnitCars.get(`${path}/cars-units`, (req, res) => {
     unitCar.getCarsUnit(req, res);
 });
 // todo: create a new unit car
