@@ -17,10 +17,10 @@ class requestProductsController {
       console.log(err);
     }
   }
-  async getUniqueRequestProductByUser(req: Request, res: Response) {
+  async getUniqueRequestProductByRoute(req: Request, res: Response) {
     try {
-      const { requestProductId } = req.params;
-      const requestAll = await requestProductsMarks.findOne({employee: requestProductId});
+      const { requestRouteId } = req.params;
+      const requestAll = await requestProductsMarks.findOne({route: requestRouteId});
       console.log(requestAll);
       if (requestAll) res.status(200).json({ details: requestAll });
     } catch (err) {
@@ -31,11 +31,11 @@ class requestProductsController {
   async createRequestProducts(req: Request, res: Response) {
     try {
       const {
-        employee,
+        route,
         products,
         state,
         dateTime
-      }: { employee: string; products: ProductRequest[], state:string, dateTime:string } = req.body;
+      }: { route: string; products: ProductRequest[], state:string, dateTime:string } = req.body;
 
       const productsExist = await productMarks.find({
         _id: { $in: products.map((prod) => prod.productId) },
@@ -46,7 +46,7 @@ class requestProductsController {
           .status(400)
           .json({ error: "Al menos un producto no existe" });
       const newRequest = new requestProductsMarks({
-        employee: employee,
+        route: route,
         state: state,
         dateTime: dateTime,
         products: products.map((prod) => ({
@@ -118,7 +118,9 @@ export default requestProductsController;
 
 //Example
 // {
-//   "employee": "65bd6be8c372708d150c594d",
+//   "route": "65bd6be8c372708d150c594d",
+//   "state": "pendiente" | "revisado" | "aprobado" | "rechazado"
+//   "dateTime": "123m13m2m31k2" toIso
 //   "products":[
 //       {
 //           "productId":"65ce73e864ac7951337b94ba",

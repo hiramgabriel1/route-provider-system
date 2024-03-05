@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 
 const requestProductsModel = new mongoose.Schema({
-  employee: {
+  route: {
     type: Schema.Types.ObjectId,
-    ref: "productos"
+    ref: "rutas"
   },
   state:{
     type: String

@@ -8,8 +8,8 @@ const path = "/api/v1";
 routerRequestProducts.get(`${path}/request-products/`, (req:Request, res:Response)=>{
     controllerRequestProducts.getAllRequestProducts(req, res)
 })
-routerRequestProducts.get(`${path}/request-product/user/:requestProductId`, (req:Request, res:Response)=>{
-    controllerRequestProducts.getUniqueRequestProductByUser(req, res)
+routerRequestProducts.get(`${path}/request-product/route/:requestRouteId`, (req:Request, res:Response)=>{
+    controllerRequestProducts.getUniqueRequestProductByRoute(req, res)
 })
 routerRequestProducts.post(`${path}/request-products/add`, (req:Request, res:Response)=>{
     controllerRequestProducts.createRequestProducts(req, res)
