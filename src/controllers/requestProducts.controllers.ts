@@ -17,13 +17,25 @@ class requestProductsController {
       console.log(err);
     }
   }
+  async getUniqueRequestProductByUser(req: Request, res: Response) {
+    try {
+      const { requestProductId } = req.params;
+      const requestAll = await requestProductsMarks.findOne({employee: requestProductId});
+      console.log(requestAll);
+      if (requestAll) res.status(200).json({ details: requestAll });
+    } catch (err) {
+      res.status(400).json({ details: "not found" });
+    }
+  }
 
   async createRequestProducts(req: Request, res: Response) {
     try {
       const {
         employee,
         products,
-      }: { employee: string; products: ProductRequest[] } = req.body;
+        state,
+        dateTime
+      }: { employee: string; products: ProductRequest[], state:string, dateTime:string } = req.body;
 
       const productsExist = await productMarks.find({
         _id: { $in: products.map((prod) => prod.productId) },
@@ -35,6 +47,8 @@ class requestProductsController {
           .json({ error: "Al menos un producto no existe" });
       const newRequest = new requestProductsMarks({
         employee: employee,
+        state: state,
+        dateTime: dateTime,
         products: products.map((prod) => ({
           product: prod.productId,
           amount: prod.amount,
@@ -49,19 +63,43 @@ class requestProductsController {
     }
   }
 
+  async updateRequestProduct(req: Request, res: Response) {
+    try {
+      const { requestProductId } = req.params;
+      const updateData = req.body;
+      const updateRequest = await requestProductsMarks.findByIdAndUpdate(
+        {_id: requestProductId},
+        {$set: updateData},
+        {new: true}
+      );
+
+      updateRequest
+        ? res.status(200).json({
+            message: "deleted successfully!",
+            details: updateRequest,
+            response: true,
+          })
+        : res
+            .status(404)
+            .json({ messageError: "deleted error", details: false });
+    } catch (err) {
+      return res.status(500).json({ error: "error interno del servidor" });
+    }
+  }
+
   async removeRequestProduct(req: Request, res: Response) {
     try {
       console.log("lol");
       const { requestProductId } = req.params;
       console.log(requestProductId);
-      const deleteProduct = await requestProductsMarks.findByIdAndDelete(
+      const deleteRequest = await requestProductsMarks.findByIdAndDelete(
         requestProductId
       );
 
-      deleteProduct
+      deleteRequest
         ? res.status(200).json({
             message: "deleted successfully!",
-            details: deleteProduct,
+            details: deleteRequest,
             response: true,
           })
         : res

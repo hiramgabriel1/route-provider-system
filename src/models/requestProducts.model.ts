@@ -5,6 +5,13 @@ const requestProductsModel = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "productos"
   },
+  state:{
+    type: String
+    // pendiente | revisado | aprobado | rechazado
+  },
+  dateTime:{
+    type: String
+  },
   products: [
     {
       product: {
