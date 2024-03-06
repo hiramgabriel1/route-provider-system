@@ -23,5 +23,9 @@ routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId`, (
     controllerRequestProducts.updateRequestProduct(req, res)
    
 })
+routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId/:productId`, (req:Request, res:Response)=>{
+    controllerRequestProducts.updateRequestOneProduct(req, res)
+   
+})
 
 export default routerRequestProducts;

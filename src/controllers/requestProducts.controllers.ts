@@ -20,7 +20,9 @@ class requestProductsController {
   async getUniqueRequestProductByRoute(req: Request, res: Response) {
     try {
       const { requestRouteId } = req.params;
-      const requestAll = await requestProductsMarks.findOne({route: requestRouteId});
+      const requestAll = await requestProductsMarks.findOne({
+        route: requestRouteId,
+      });
       console.log(requestAll);
       if (requestAll) res.status(200).json({ details: requestAll });
       else res.status(200).json({ details: null });
@@ -35,8 +37,13 @@ class requestProductsController {
         route,
         products,
         state,
-        dateTime
-      }: { route: string; products: ProductRequest[], state:string, dateTime:string } = req.body;
+        dateTime,
+      }: {
+        route: string;
+        products: ProductRequest[];
+        state: string;
+        dateTime: string;
+      } = req.body;
 
       const productsExist = await productMarks.find({
         _id: { $in: products.map((prod) => prod.productId) },
@@ -53,6 +60,7 @@ class requestProductsController {
         products: products.map((prod) => ({
           product: prod.productId,
           amount: prod.amount,
+          amountCurrent: prod.amount,
         })),
       });
 
@@ -69,9 +77,9 @@ class requestProductsController {
       const { requestProductId } = req.params;
       const updateData = req.body;
       const updateRequest = await requestProductsMarks.findByIdAndUpdate(
-        {_id: requestProductId},
-        {$set: updateData},
-        {new: true}
+        { _id: requestProductId },
+        { $set: updateData },
+        { new: true }
       );
 
       updateRequest
@@ -83,6 +91,38 @@ class requestProductsController {
         : res
             .status(404)
             .json({ messageError: "deleted error", details: false });
+    } catch (err) {
+      return res.status(500).json({ error: "error interno del servidor" });
+    }
+  }
+  async updateRequestOneProduct(req: Request, res: Response) {
+    try {
+      const { requestProductId, productId } = req.params;
+      const updateData = req.body;
+
+      const request = await requestProductsMarks.findById(requestProductId);
+      if (!request)
+        return res.status(404).json({ error: "Solicitud no encontrada" });
+
+      const productToUpdate = request.products.find((prod) => {
+        prod.product?.equals(productId);
+      });
+
+      if (!productToUpdate)
+        return res
+          .status(404)
+          .json({ error: "Producto no encontrado en la solicitud" });
+
+      // @ts-ignore
+      productToUpdate = { ...productToUpdate, updateData };
+
+      await request.save();
+
+      return res.status(200).json({
+        message: "deleted successfully!",
+        details: request,
+        response: true,
+      });
     } catch (err) {
       return res.status(500).json({ error: "error interno del servidor" });
     }
@@ -113,9 +153,6 @@ class requestProductsController {
 }
 
 export default requestProductsController;
-
-
-
 
 //Example
 // {

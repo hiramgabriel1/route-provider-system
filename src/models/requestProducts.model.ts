@@ -20,7 +20,10 @@ const requestProductsModel = new mongoose.Schema({
       },
       amount:{
         type: Number
-      }
+      },
+      amountCurrent:{
+        type: Number
+      },
     },
   ],
 });
