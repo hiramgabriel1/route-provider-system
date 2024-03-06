@@ -23,6 +23,7 @@ class requestProductsController {
       const requestAll = await requestProductsMarks.findOne({route: requestRouteId});
       console.log(requestAll);
       if (requestAll) res.status(200).json({ details: requestAll });
+      else res.status(200).json({ details: null });
     } catch (err) {
       res.status(400).json({ details: "not found" });
     }
