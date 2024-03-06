@@ -1,16 +1,12 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const employees_controller_1 = require("../controllers/employees.controller");
-const cache_config_1 = __importDefault(require("../middlewares/cache.config"));
 const employeesController = new employees_controller_1.employees();
 const routerEmployees = (0, express_1.Router)();
 const path = "/api/v1";
 // todo: render all employees
-routerEmployees.get(`${path}/employees`, cache_config_1.default, (req, res) => {
+routerEmployees.get(`${path}/employees`, (req, res) => {
     employeesController.getEmployees(req, res);
 });
 // todo: render employee by id
