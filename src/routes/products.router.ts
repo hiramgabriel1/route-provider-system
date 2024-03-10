@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import productsController from "../controllers/products.controllers";
-import cacheInit from "../middlewares/cache.config";
 
 const controllerProducts = new productsController();
 const routerProducts = Router();

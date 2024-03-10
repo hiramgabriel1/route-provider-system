@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import { employees } from "../controllers/employees.controller";
-import cacheInit from "../middlewares/cache.config";
 
 const employeesController = new employees();
 const routerEmployees = Router();
