@@ -2,7 +2,6 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 
-
 class employees {
   async getEmployees(req: Request, res: Response) {
     try {
