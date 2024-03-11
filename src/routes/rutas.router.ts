@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import rutasController from "../controllers/rutas.controllers";
-import cacheInit from "../middlewares/cache.config";
 
 const controllerRutas = new rutasController();
 const routerRutas = Router();

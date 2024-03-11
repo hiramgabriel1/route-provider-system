@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import unitCarsController from "../controllers/units-cars.controllers";
-import cacheInit from "../middlewares/cache.config";
 
 const unitCar = new unitCarsController();
 const path = "/api/v1";

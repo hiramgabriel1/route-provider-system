@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import homeController from "../controllers/home.controller";
-import cacheInit from "../middlewares/cache.config";
 
 const home = new homeController();
 const path = "/api/v1";
