@@ -1,7 +1,6 @@
 import employeeModel from "../models/employees.model";
 import {
   verifyPasswordSecurity,
-  encryptPasswordSecurity,
 } from "../validators/bcrypt.config";
 
 export class LoginSystem {

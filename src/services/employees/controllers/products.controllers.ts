@@ -2,13 +2,6 @@ import { Request, Response } from "express";
 import productMarks from "../../../models/products.model";
 
 class products {
-  // ! dont take
-  async createProduct(req: Request, res: Response) {
-    try {
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   async markProductIsSold(req: Request, res: Response) {
     try {

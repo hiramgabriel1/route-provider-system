@@ -19,6 +19,7 @@ const system_broker_router_1 = __importDefault(require("../routes/system.broker.
 const products_routes_1 = __importDefault(require("../services/employees/routes/products.routes"));
 const express_session_1 = __importDefault(require("express-session"));
 const morgan_1 = __importDefault(require("morgan"));
+const home_data_router_1 = __importDefault(require("../routes/home-data.router"));
 dotenv_1.default.config();
 (0, _mongo_connection_1.default)();
 (0, db_1.employeesDatabaseConnection)();
@@ -44,6 +45,7 @@ app.use(rutas_router_1.default);
 app.use(products_router_1.default);
 app.use(session_router_1.default);
 app.use(system_broker_router_1.default);
+app.use(home_data_router_1.default);
 // & endpoints employees here
 app.use(products_routes_1.default);
 // todo: run server!

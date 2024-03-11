@@ -1,20 +1,24 @@
 import { Request, Response, Router } from "express";
 import rutasController from "../controllers/rutas.controllers";
-import cacheInit from "../middlewares/cache.config";
 
 const controllerRutas = new rutasController();
 const routerRutas = Router();
 const path = "/api/v1";
 
-routerRutas.get(`${path}/rutas`, cacheInit, (req: Request, res: Response) => {
+routerRutas.get(`${path}/rutas`, (req: Request, res: Response) => {
   controllerRutas.getRutas(req, res);
 });
 
 routerRutas.get(
   `${path}/rutas/:rutaId`,
-  cacheInit,
   (req: Request, res: Response) => {
     controllerRutas.getRutaById(req, res);
+  }
+);
+routerRutas.get(
+  `${path}/rutas/employee/:rutaUserId`,
+  (req: Request, res: Response) => {
+    controllerRutas.getRutaByUserId(req, res);
   }
 );
 
@@ -31,7 +35,6 @@ routerRutas.patch(
 
 routerRutas.delete(
   `${path}/rutas/delete/:rutaId`,
-  cacheInit,
   (req: Request, res: Response) => {
     controllerRutas.deleteRutas(req, res);
   }

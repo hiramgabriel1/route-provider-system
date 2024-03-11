@@ -28,6 +28,20 @@ class rutasController {
       console.error(error);
     }
   }
+  async getRutaByUserId(req: Request, res: Response) {
+    try {
+      const { rutaUserId } = req.params;
+
+      const ruta = await rutasModels.find({empleado: rutaUserId});
+
+      ruta
+        ? res.status(200).json({ message: ruta, details: true })
+        : res.status(404).json({ message: "No existen rutas", details: false });
+    } catch (error) {
+      res.status(500).json({ response: "error internal" });
+      console.error(error);
+    }
+  }
 
   async editRuta(req: Request, res: Response) {
     try {

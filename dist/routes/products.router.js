@@ -5,14 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const products_controllers_1 = __importDefault(require("../controllers/products.controllers"));
-const cache_config_1 = __importDefault(require("../middlewares/cache.config"));
 const controllerProducts = new products_controllers_1.default();
 const routerProducts = (0, express_1.Router)();
 const path = "/api/v1";
-routerProducts.get(`${path}/products`, cache_config_1.default, (req, res) => {
+routerProducts.get(`${path}/view-products`, (req, res) => {
     controllerProducts.getProducts(req, res);
 });
-routerProducts.get(`${path}/product/:productId`, cache_config_1.default, (req, res) => {
+routerProducts.get(`${path}/product/:productId`, (req, res) => {
     controllerProducts.getProductById(req, res);
 });
 routerProducts.post(`${path}/products/new`, (req, res) => {
@@ -21,7 +20,7 @@ routerProducts.post(`${path}/products/new`, (req, res) => {
 routerProducts.patch(`${path}/products/edit/:productId`, (req, res) => {
     controllerProducts.editProduct(req, res);
 });
-routerProducts.delete(`${path}/products/delete/:productId`, cache_config_1.default, (req, res) => {
+routerProducts.delete(`${path}/products/delete/:productId`, (req, res) => {
     controllerProducts.deleteProduct(req, res);
 });
 exports.default = routerProducts;

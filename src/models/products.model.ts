@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const productsMark = new mongoose.Schema({
+  productIdScan: {
+    type: Number,
+    require: true
+  },
+
   productName: {
     type: String,
     require: true,
@@ -24,27 +29,4 @@ const productsMark = new mongoose.Schema({
 
 const productMarks = mongoose.model("productos", productsMark);
 
-export default productMarks
-// import mongoose from "mongoose";
-
-// const productsSchema = new mongoose.Schema({
-//     nombre: {
-//         type: String,
-//         required: true,
-//     },
-
-//     descripcion: {
-//         type: String,
-//         required: true,
-//     },
-
-//     precio: {
-//         type: Number,
-//         required: true,
-//     },
-
-// });
-
-// const productsModel = mongoose.model("productos", productsSchema);
-
-// export default productsModel
+export default productMarks;
