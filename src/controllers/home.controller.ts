@@ -28,6 +28,7 @@ class homeController {
         productsTotal: productsTotal,
         totalRoutesActivas: totalRoutes.length,
       });
+      
     } catch (error) {
       console.error(error);
     }
