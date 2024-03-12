@@ -20,7 +20,7 @@ class requestProductsController {
   async getUniqueRequestProductByRoute(req: Request, res: Response) {
     try {
       const { requestRouteId } = req.params;
-      const requestAll = await requestProductsMarks.findOne({
+      const requestAll = await requestProductsMarks.find({
         route: requestRouteId,
       });
       console.log(requestAll);
@@ -97,36 +97,40 @@ class requestProductsController {
   }
   async updateRequestOneProduct(req: Request, res: Response) {
     try {
-      const { requestProductId, productId } = req.params;
-      const updateData = req.body;
+        const { requestProductId, productId } = req.params;
+        const updateData = req.body;
 
-      const request = await requestProductsMarks.findById(requestProductId);
-      if (!request)
-        return res.status(404).json({ error: "Solicitud no encontrada" });
+        // Validar que updateData contenga los campos necesarios
+        if (!updateData || !updateData.amount || !updateData.amountCurrent) {
+            return res.status(400).json({ error: "Faltan datos de actualización" });
+        }
 
-      const productToUpdate = request.products.find((prod) => {
-        prod.product?.equals(productId);
-      });
+        const request = await requestProductsMarks.findById(requestProductId);
+        if (!request) {
+            return res.status(404).json({ error: "Solicitud no encontrada" });
+        }
 
-      if (!productToUpdate)
-        return res
-          .status(404)
-          .json({ error: "Producto no encontrado en la solicitud" });
+        // Encuentra el índice del producto dentro del array 'products'
+        const productIndex = request.products.findIndex(product => product._id && product._id.equals(productId));
 
-      // @ts-ignore
-      productToUpdate = { ...productToUpdate, updateData };
+        if (productIndex === -1) {
+            return res.status(404).json({ error: "Producto no encontrado" });
+        }
 
-      await request.save();
+        // Actualiza los campos 'amount' y 'amountCurrent' del producto
+        request.products[productIndex].amount = updateData.amount;
+        request.products[productIndex].amountCurrent = updateData.amountCurrent;
 
-      return res.status(200).json({
-        message: "deleted successfully!",
-        details: request,
-        response: true,
-      });
+        // Guarda el documento actualizado
+        const updatedRequest = await request.save();
+
+        return res.status(200).json({ message: updatedRequest, details: true });
     } catch (err) {
-      return res.status(500).json({ error: "error interno del servidor" });
+        console.log(err);
+        return res.status(500).json({ error: "Error interno del servidor" });
     }
-  }
+}
+
 
   async removeRequestProduct(req: Request, res: Response) {
     try {
