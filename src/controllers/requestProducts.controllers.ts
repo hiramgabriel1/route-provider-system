@@ -104,9 +104,14 @@ class requestProductsController {
       if (!request)
         return res.status(404).json({ error: "Solicitud no encontrada" });
 
-      const productToUpdate = request.products.find((prod) => {
-        prod.product?.equals(productId);
-      });
+      let productToUpdate = request.products.find((prod) => prod.product?.equals(productId));
+      // console.log("request:")
+      // console.log(request)
+      // console.log("\nroductToUpdate:")
+      // console.log(productToUpdate)
+      console.log("\nupdateData:")
+      console.log({ ...productToUpdate, ...updateData })
+
 
       if (!productToUpdate)
         return res
@@ -114,16 +119,17 @@ class requestProductsController {
           .json({ error: "Producto no encontrado en la solicitud" });
 
       // @ts-ignore
-      productToUpdate = { ...productToUpdate, updateData };
+      productToUpdate = { ...productToUpdate, ...updateData };
 
       await request.save();
 
       return res.status(200).json({
-        message: "deleted successfully!",
+        message: "update successfully!",
         details: request,
         response: true,
       });
     } catch (err) {
+      console.log(err)
       return res.status(500).json({ error: "error interno del servidor" });
     }
   }
