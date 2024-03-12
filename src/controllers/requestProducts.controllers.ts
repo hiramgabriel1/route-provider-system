@@ -134,7 +134,6 @@ class requestProductsController {
 
   async removeRequestProduct(req: Request, res: Response) {
     try {
-      console.log("lol");
       const { requestProductId } = req.params;
       console.log(requestProductId);
       const deleteRequest = await requestProductsMarks.findByIdAndDelete(
@@ -153,6 +152,37 @@ class requestProductsController {
     } catch (err) {
       return res.status(500).json({ error: "error interno del servidor" });
     }
+  }
+
+  async removeProductRequest(req: Request, res: Response) {
+    try {
+      const { requestProductId, productId } = req.params
+
+      const request = await requestProductsMarks.findById(requestProductId);
+      if (!request) {
+        return res.status(404).json({ error: "Solicitud no encontrada" });
+      }
+
+      // Almacenamos en productIndex el producto que va a ser identico(id) al que viene por params
+      const productIndex = request.products.findIndex(product => product._id && product._id.equals(productId.toString()));
+
+      if (productIndex === -1) {
+        return res.status(404).json({ error:"Producto no encontrado" })
+      }
+
+     const removeProduct = request.products.splice(productIndex, 1);
+
+      await request.save(); // Guardaríamos la request actualizada
+
+      return res.status(200).json({ 
+        message: "Producto eliminado exitosamente", 
+        details: removeProduct,
+        response: true })
+
+
+    } catch(err) {
+      return res.status(500).json({ error: "error interno del servidor" });
+    } 
   }
 }
 
