@@ -14,6 +14,9 @@ routerRutas.get(`${path}/rutas`, (req, res) => {
 routerRutas.get(`${path}/rutas/:rutaId`, (req, res) => {
     controllerRutas.getRutaById(req, res);
 });
+routerRutas.get(`${path}/rutas/employee/:rutaUserId`, (req, res) => {
+    controllerRutas.getRutaByUserId(req, res);
+});
 routerRutas.post(`${path}/rutas/new`, (req, res) => {
     controllerRutas.createRuta(req, res);
 });
