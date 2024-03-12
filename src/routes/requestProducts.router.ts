@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import requestProductsController from "../controllers/requestProducts.controllers";
+import { GeoReplyWith } from "redis";
 
 const controllerRequestProducts = new requestProductsController()
 const routerRequestProducts = Router()
@@ -25,7 +26,10 @@ routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId`, (
 })
 routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId/:productId`, (req:Request, res:Response)=>{
     controllerRequestProducts.updateRequestOneProduct(req, res)
-   
+})
+
+routerRequestProducts.delete(`${path}/request-products/remove/:requestProductId/:productId`, (req:Request,res:Response) => {
+    controllerRequestProducts.removeProductRequest(req, res)
 })
 
 export default routerRequestProducts;
