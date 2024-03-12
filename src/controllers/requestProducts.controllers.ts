@@ -20,7 +20,7 @@ class requestProductsController {
   async getUniqueRequestProductByRoute(req: Request, res: Response) {
     try {
       const { requestRouteId } = req.params;
-      const requestAll = await requestProductsMarks.findOne({
+      const requestAll = await requestProductsMarks.find({
         route: requestRouteId,
       });
       console.log(requestAll);
