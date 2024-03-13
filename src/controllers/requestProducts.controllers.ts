@@ -129,14 +129,30 @@ class requestProductsController {
         console.log(err);
         return res.status(500).json({ error: "Error interno del servidor" });
     }
-}
+  }
+
+  async deleteRequestByRuta(ruta:String,res:Response){
+    try{
+      const idRuta= ruta;
+
+      const deleted= await requestProductsMarks.deleteMany({
+        route:idRuta
+      });
+
+      if(deleted.deletedCount){
+        return true;
+      }
+      return false;
+      
+    }catch(error){
+      return res.status(500).json({error: "error interno del servidor" });
+    }
+  }
 
 
   async removeRequestProduct(req: Request, res: Response) {
     try {
-      console.log("lol");
       const { requestProductId } = req.params;
-      console.log(requestProductId);
       const deleteRequest = await requestProductsMarks.findByIdAndDelete(
         requestProductId
       );
