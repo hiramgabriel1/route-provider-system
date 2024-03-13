@@ -32,4 +32,8 @@ routerRequestProducts.delete(`${path}/request-products/remove/:requestProductId/
     controllerRequestProducts.removeProductRequest(req, res)
 })
 
+routerRequestProducts.get(`${path}/request-products/aproved`, (req, res) => {
+    controllerRequestProducts.aprovedRequest(req, res)
+})
+
 export default routerRequestProducts;

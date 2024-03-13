@@ -201,6 +201,21 @@ class requestProductsController {
       return res.status(500).json({ error: "error interno del servidor" });
     } 
   }
+
+  async aprovedRequest(req: Request, res: Response) {
+      try {
+        const aprovedRequest = await requestProductsMarks.find(
+          { state: "aprobado" }
+        )
+        if (aprovedRequest) res.status(200).json({ message: aprovedRequest })
+        
+        
+
+      } catch(error) {
+        res.status(500).json({ error: "error interno del servidor" })
+      }
+  }
+
 }
 
 export default requestProductsController;
