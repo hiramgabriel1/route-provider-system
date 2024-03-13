@@ -109,13 +109,22 @@ class requestProductsController {
         if (!request) {
             return res.status(404).json({ error: "Solicitud no encontrada" });
         }
+      let productToUpdate = request.products.find((prod) => prod.product?.equals(productId));
+      // console.log("request:")
+      // console.log(request)
+      // console.log("\nroductToUpdate:")
+      // console.log(productToUpdate)
+      console.log("\nupdateData:")
+      console.log({ ...productToUpdate, ...updateData })
 
         // Encuentra el índice del producto dentro del array 'products'
         const productIndex = request.products.findIndex(product => product._id && product._id.equals(productId));
-
+      
         if (productIndex === -1) {
             return res.status(404).json({ error: "Producto no encontrado" });
         }
+      // @ts-ignore
+      productToUpdate = { ...productToUpdate, ...updateData };
 
         // Actualiza los campos 'amount' y 'amountCurrent' del producto
         request.products[productIndex].amount = updateData.amount;
