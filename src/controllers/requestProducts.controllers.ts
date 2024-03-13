@@ -129,13 +129,30 @@ class requestProductsController {
         console.log(err);
         return res.status(500).json({ error: "Error interno del servidor" });
     }
-}
+  }
+
+  async deleteRequestByRuta(ruta:String,res:Response){
+    try{
+      const idRuta= ruta;
+
+      const deleted= await requestProductsMarks.deleteMany({
+        route:idRuta
+      });
+
+      if(deleted.deletedCount){
+        return true;
+      }
+      return false;
+      
+    }catch(error){
+      return res.status(500).json({error: "error interno del servidor" });
+    }
+  }
 
 
   async removeRequestProduct(req: Request, res: Response) {
     try {
       const { requestProductId } = req.params;
-      console.log(requestProductId);
       const deleteRequest = await requestProductsMarks.findByIdAndDelete(
         requestProductId
       );
@@ -184,6 +201,21 @@ class requestProductsController {
       return res.status(500).json({ error: "error interno del servidor" });
     } 
   }
+
+  async aprovedRequest(req: Request, res: Response) {
+      try {
+        const aprovedRequest = await requestProductsMarks.find(
+          { state: "aprobado" }
+        )
+        if (aprovedRequest) res.status(200).json({ message: aprovedRequest })
+        
+        
+
+      } catch(error) {
+        res.status(500).json({ error: "error interno del servidor" })
+      }
+  }
+
 }
 
 export default requestProductsController;

@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const rutas_model_1 = __importDefault(require("../models/rutas.model"));
+const requestProducts_controllers_1 = __importDefault(require("./requestProducts.controllers"));
 class rutasController {
     async getRutas(req, res) {
         try {
@@ -20,6 +21,19 @@ class rutasController {
         try {
             const { rutaId } = req.params;
             const ruta = await rutas_model_1.default.findById(rutaId);
+            ruta
+                ? res.status(200).json({ message: ruta, details: true })
+                : res.status(404).json({ message: "No existen rutas", details: false });
+        }
+        catch (error) {
+            res.status(500).json({ response: "error internal" });
+            console.error(error);
+        }
+    }
+    async getRutaByUserId(req, res) {
+        try {
+            const { rutaUserId } = req.params;
+            const ruta = await rutas_model_1.default.find({ empleado: rutaUserId });
             ruta
                 ? res.status(200).json({ message: ruta, details: true })
                 : res.status(404).json({ message: "No existen rutas", details: false });
@@ -86,15 +100,19 @@ class rutasController {
         try {
             const { rutaId } = req.params;
             const deleteRuta = await rutas_model_1.default.findByIdAndDelete(rutaId);
-            deleteRuta
-                ? res.status(200).json({
-                    message: "Deleted successfully!",
-                    details: deleteRuta,
-                    response: true,
-                })
-                : res
-                    .status(404)
-                    .json({ messageError: "Delete error", details: false });
+            if (deleteRuta) {
+                const ControllerRequestProducts = new requestProducts_controllers_1.default();
+                const deleted = await ControllerRequestProducts.deleteRequestByRuta(rutaId, res);
+                if (deleted) {
+                    res.status(200).json({ message: "La ruta y las solicitudes asociadas fueron eliminadas exitosamente." });
+                }
+                else {
+                    res.status(404).json({ message: "No se encontraron solicitudes asociadas a la ruta." });
+                }
+            }
+            else {
+                res.status(404).json({ message: "No se encontró la ruta para eliminar." });
+            }
         }
         catch (error) {
             console.error(error);
