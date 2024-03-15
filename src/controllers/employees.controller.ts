@@ -1,6 +1,7 @@
-
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
+import {Historial} from "../interfaces/interface";
+import { info } from "console";
 
 class employees {
   async getEmployees(req: Request, res: Response) {
@@ -14,12 +15,11 @@ class employees {
       renderData
         ? res.status(200).json({ message: filterEmployees, details: true })
         : res.status(500).json({
-          messageError: "error internal brother, de pana xd",
-          details: false,
-        });
-
+            messageError: "error internal brother, de pana xd",
+            details: false,
+          });
     } catch (error) {
-      console.error(error);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
   }
 
@@ -34,7 +34,7 @@ class employees {
         ? res.status(200).json(foundUserById)
         : res.status(404).json({ messageError: "not found user de pana xd" });
     } catch (error) {
-      console.error(error);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
   }
 
@@ -52,10 +52,10 @@ class employees {
       updateUserData
         ? res.status(200).json({ message: updateUserData, details: true })
         : res
-          .status(404)
-          .json({ messageError: "error internal", details: false });
+            .status(404)
+            .json({ messageError: "error internal", details: false });
     } catch (error) {
-      console.error(error);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
   }
 
@@ -68,7 +68,7 @@ class employees {
         username: username,
         lastnames: lastnames,
         role: role,
-        password: password
+        password: password,
       };
 
       // todo: verify data
@@ -87,7 +87,7 @@ class employees {
         ? res.status(200).json({ message: "creado éxitosamente" })
         : res.status(500).json({ message: "no se logró guardar usuario" });
     } catch (error) {
-      console.error(error);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
   }
 
@@ -99,16 +99,45 @@ class employees {
 
       deleteEmployee
         ? res.status(200).json({
-          message: "deleted successfully!",
-          details: deleteEmployee,
-          response: true,
-        })
+            message: "deleted successfully!",
+            details: deleteEmployee,
+            response: true,
+          })
         : res
-    
-          .status(404)
-          .json({ messageError: "deleted error", details: false });
+
+            .status(404)
+            .json({ messageError: "deleted error", details: false });
     } catch (error) {
-      console.error(error);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+  }
+
+  async addRecorderHistory(res: Response, data: Historial) {
+    try {
+      const { employeID, action,date } = data;
+
+      const movimiento={
+        action,
+        date
+      }
+  
+      const empleado = await employeeModel.findById(employeID);
+  
+      if (!empleado) {
+        return res.status(500).json({ error: "Employee not found" });
+      }
+  
+      empleado.recorder.push({ movimiento });
+  
+      await empleado.save();
+  
+      return res.status(200).json({
+        message: "Historial agregado exitosamente",
+        response: true,
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      return res.status(500).json({ error: "Error interno del servidor" });
     }
   }
 }
