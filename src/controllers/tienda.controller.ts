@@ -21,7 +21,7 @@ class tiendaController {
       const idTienda = req.params;
 
       const existTienda = await tienda.findById({
-        _id: idTienda,
+    idTienda,
       });
 
       existTienda
