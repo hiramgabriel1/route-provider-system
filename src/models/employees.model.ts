@@ -5,7 +5,6 @@ const employeesModel = new mongoose.Schema({
     type: String,
     required: true,
   },
-
   username: {
     type: String,
     required: true,
@@ -33,6 +32,18 @@ const employeesModel = new mongoose.Schema({
   productPrice: {
     type: Number,
   },
+  recorder: [
+    {
+      action: {
+        type: String,
+        required: true,
+      },
+      date:{
+        type: Date,
+        required: true,
+      },
+    },
+  ],
 });
 
 const employeeModel = mongoose.model("employees", employeesModel);
