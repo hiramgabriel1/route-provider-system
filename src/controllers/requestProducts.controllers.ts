@@ -216,7 +216,11 @@ class requestProductsController {
         const aprovedRequest = await requestProductsMarks.find(
           { state: "aprobado" }
         )
-        if (aprovedRequest) res.status(200).json({ message: aprovedRequest })
+        if (aprovedRequest) {
+          res.status(200).json({ message: aprovedRequest })
+        } else {
+          res.status(404).json({ error: "Solicitud no encontrada" })
+        }
         
         
 
