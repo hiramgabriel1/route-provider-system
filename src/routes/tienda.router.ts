@@ -44,4 +44,11 @@ routerTienda.delete(
   }
 );
 
+
+routerTienda.post(
+  `${path}/tienda/addproduct/:idTienda`,
+  (req: Request, res: Response) => {
+    tiendasController.addProductToTienda(req, res);
+  }
+)
 export default routerTienda;
