@@ -8,4 +8,12 @@ interface userRoute{
     LastMinuteSale: number
 }
 
+
+export interface Historial{
+    employeID:string, 
+    action:string, 
+    date:Date 
+}
+    
+
 // decorators

@@ -10,6 +10,7 @@ import routerRutas from "../routes/rutas.router";
 import routerProducts from "../routes/products.router";
 import routerSession from "../routes/session.router";
 import routerBrokerCourt from "../routes/system.broker.router";
+import routerTienda from "../routes/tienda.router";
 import routerMarkProducts from "../services/employees/routes/products.routes";
 import session from "express-session";
 import http from "http";
@@ -56,6 +57,7 @@ app.use(routerSession);
 app.use(routerBrokerCourt);
 app.use(routerHomeData);
 app.use(routerRequestProducts);
+app.use(routerTienda);
 
 // & endpoints employees here
 app.use(routerMarkProducts);
