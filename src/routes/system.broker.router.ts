@@ -12,8 +12,8 @@ routerBrokerCourt.get(
   }
 );
 
-// routerBrokerCourt.post(`${path}/close-court`, (req: Request, res: Response) => {
-//   system.closeCourt(req, res);
-// });
+routerBrokerCourt.post(`${path}/close-court`, (req: Request, res: Response) => {
+  system.closeCourt(req, res)
+})
 
 export default routerBrokerCourt;
