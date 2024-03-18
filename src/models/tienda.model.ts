@@ -6,10 +6,22 @@ const tiendamodel = new mongoose.Schema({
     require: true,
   },
 
-  direccion: {
-    type: String,
-    require: true,
+  coordinador:{
+    type:String,
+    require:true
   },
+
+  coordenadas: [{
+    x: {
+      type: Number,
+      required: true
+    },
+    y: {
+      type: Number,
+      required: true
+    }
+  }],
+  
   productos:[
     {
         product: {
