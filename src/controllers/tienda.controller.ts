@@ -21,7 +21,7 @@ class tiendaController {
       const idTienda = req.params;
 
       const existTienda = await tienda.findById({
-    idTienda,
+        idTienda,
       });
 
       existTienda
@@ -34,11 +34,11 @@ class tiendaController {
 
   async createTienda(req: Request, res: Response) {
     try {
-      const { nombre, direccion, products } = req.body;
+      const { nombre, coordinador, coordenadas } = req.body;
 
       const existTienda = await tienda.findOne({
         nombre: nombre,
-        direccion: direccion,
+        coordenadas: coordenadas,
       });
 
       if (existTienda) {
@@ -48,7 +48,8 @@ class tiendaController {
       }
       const data = {
         nombre,
-        direccion,
+        coordinador,
+        coordenadas,
       };
 
       const createdTienda = await tienda.create(data);
@@ -66,11 +67,12 @@ class tiendaController {
   async editTienda(req: Request, res: Response) {
     try {
       const idTienda = req.params;
-      const { nombre, direccion, products } = req.body;
+      const { nombre, coordinador, cordenadas } = req.body;
 
       const data = {
         nombre,
-        direccion,
+        coordinador,
+        cordenadas
       };
 
       const existTienda = await tienda.findOneAndUpdate(
@@ -99,9 +101,9 @@ class tiendaController {
         ? res.send(200).json({ message: "tienda deleted", details: true })
         : res.send(404).json({ message: "tienda not found", details: false });
     } catch (error) {
-        console.log((error))
+      console.log(error);
     }
   }
 }
 
-export default tiendaController
+export default tiendaController;
