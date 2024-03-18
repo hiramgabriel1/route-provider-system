@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
 import { productMarks } from "../services/employees/models/products";
+import { ErrorReply } from "redis";
+import rutasModels from "../models/rutas.model";
+import rutasController from "./rutas.controllers";
+import unitModel from "../models/units.model";
+import requestProductsMarks from "../models/requestProducts.model";
+import { model } from "mongoose";
 // import { createFileInventary } from "../services/employees/utils/pdf-create";
 // import pdf from "html-pdf";
 
@@ -55,19 +61,78 @@ class systemBroker {
     }
   }
 
-  // todo: create pdf with information to products
-  // !! todo: @roman
-  // async closeCourt(req: Request, res: Response) {
-  //   try {
-  //     res.json({ message: "corte finalizado" });
-  //     const pathPDF = "../pdf";
-  //     const content = "";
 
-  //   } catch (error) {
-  //     console.log(error);
-  //     return res.status(500).json({ responseError: error });
-  //   }
-  // }
+ async closeCourt(req: Request, res: Response) {
+  try { 
+    
+    const { rutaId } = req.params;
+
+    const ruta = await rutasModels.findById(rutaId);
+
+    if(!ruta) {
+      return res.status(404).json({ response: "route not found" });
+    }
+    
+
+    const { _id, empleado, vehicle } = ruta;
+
+    const employee = await employeeModel.findOne({ _id: empleado });
+
+    if(!employee) {
+      return res.status(404).json({ response: "employee not found" });
+    }
+    // nombre y apellido del empleado;
+    const user = employee.user;
+
+    const vehiculo = await unitModel.findOne({ _id: vehicle });
+
+    if(!vehiculo) {
+      return res.status(404).json({ response: "vehicle not found" });
+    }
+
+    const { marca, modelo } = vehiculo;
+
+    const requestProducts = await requestProductsMarks.findOne({ route: _id });
+
+    if(!requestProducts) {
+      return res.status(404).json({ response: "request product not found" });
+    }
+
+    const { products } = requestProducts;
+
+    // filtros
+
+    const ProductsSold: any = products.filter(
+      (product) => product.stateProduct === 'vendido'
+    );
+
+
+    const ProductsIsNotSold: any = products.filter(
+      (product) => product.stateProduct === 'no vendido'
+    );
+
+
+    const ProductDevolution: any = products.filter(
+      (product) => product.stateProduct === 'devolucion'
+    );
+
+    const ObjectData = {
+      id_Ruta: _id,
+      Usuario: user,
+      Marca: marca,
+      Modelo: modelo,
+      ProductosVendidos: ProductsSold,
+      ProductosNoVendidos: ProductsIsNotSold,
+      ProductosDevueltos: ProductDevolution
+    };
+
+    res.status(200).json({ response: ObjectData })
+
+  } catch(error) {
+    res.status(500).json({ response: error })
+  }
+ }
+
 }
 
 export default systemBroker;

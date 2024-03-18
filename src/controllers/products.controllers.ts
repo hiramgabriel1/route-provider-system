@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import productMarks from "../models/products.model";
+import { employees } from "./employees.controller";
 
 class productsController {
   async getProducts(req: Request, res: Response) {
@@ -97,7 +98,7 @@ class productsController {
       const createProduct = await productMarks.create(dataProduct);
 
       createProduct
-        ? res
+        ?  res
             .status(200)
             .json({ message: "product created", details: createProduct })
         : res.status(500).json({ message: "product could not be created" });

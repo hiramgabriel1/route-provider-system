@@ -1,9 +1,8 @@
 import express, { Express } from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import connection from "../db/[mongo]connection";
 import { employeesDatabaseConnection } from "../services/employees/db/db";
-import http from "http";
+import connection from "../db/[mongo]connection";
+import routerHomeData from "../routes/home-data.router";
+import routerRequestProducts from "../routes/requestProducts.router";
 import routerHome from "../routes/home.router";
 import routerEmployees from "../routes/employees.router";
 import routerUnitCars from "../routes/unit-cars.router";
@@ -11,11 +10,13 @@ import routerRutas from "../routes/rutas.router";
 import routerProducts from "../routes/products.router";
 import routerSession from "../routes/session.router";
 import routerBrokerCourt from "../routes/system.broker.router";
+import routerTienda from "../routes/tienda.router";
 import routerMarkProducts from "../services/employees/routes/products.routes";
 import session from "express-session";
+import http from "http";
 import morgan from "morgan";
-import routerHomeData from "../routes/home-data.router";
-import routerRequestProducts from "../routes/requestProducts.router";
+import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 connection();
@@ -56,6 +57,7 @@ app.use(routerSession);
 app.use(routerBrokerCourt);
 app.use(routerHomeData);
 app.use(routerRequestProducts);
+app.use(routerTienda);
 
 // & endpoints employees here
 app.use(routerMarkProducts);
