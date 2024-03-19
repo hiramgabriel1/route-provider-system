@@ -1,11 +1,7 @@
 import { Request, Response } from "express";
 import requestProductsMarks from "../models/requestProducts.model";
 import productMarks from "../models/products.model";
-
-interface ProductRequest {
-  productId: string;
-  amount: number;
-}
+import { ProductsInRequest } from "../interfaces/interface";
 
 class requestProductsController {
   async getAllRequestProducts(req: Request, res: Response) {
@@ -40,7 +36,7 @@ class requestProductsController {
         dateTime,
       }: {
         route: string;
-        products: ProductRequest[];
+        products: ProductsInRequest[];
         state: string;
         dateTime: string;
       } = req.body;
@@ -95,6 +91,7 @@ class requestProductsController {
       return res.status(500).json({ error: "error interno del servidor" });
     }
   }
+
   async updateRequestOneProduct(req: Request, res: Response) {
     try {
         const { requestProductId, productId } = req.params;
@@ -227,6 +224,29 @@ class requestProductsController {
       } catch(error) {
         res.status(500).json({ error: "error interno del servidor" })
       }
+  }
+
+  async addProductToRequest(req:Request,res:Response){
+    try {
+       const {idRequest} = req.params;
+       const {product}= req.body;
+
+       const request= await requestProductsMarks.findById(idRequest);
+
+       if(!request){
+        return res.status(404).json({message:"not found", details:false});
+       }
+
+       const productos= request.products;
+
+       productos.push(product);
+
+       await request.save();
+
+       res.status(200).json({message:"product created", details:true})
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 }

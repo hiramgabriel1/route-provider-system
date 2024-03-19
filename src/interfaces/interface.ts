@@ -16,4 +16,12 @@ export interface Historial{
 }
     
 
+export interface ProductsInRequest{
+        productId:string, 
+        stateProduct: "vendido" | "no vendido" | "devolucion",
+        amount:number,
+        amountCurrent:number
+    }
+
+
 // decorators
