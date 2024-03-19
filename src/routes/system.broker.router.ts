@@ -12,7 +12,7 @@ routerBrokerCourt.get(
   }
 );
 
-routerBrokerCourt.post(`${path}/close-court/:rutaId`, (req: Request, res: Response) => {
+routerBrokerCourt.get(`${path}/close-court/:rutaId`, (req: Request, res: Response) => {
   system.closeCourt(req, res)
 })
 
