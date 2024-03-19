@@ -34,11 +34,13 @@ class requestProductsController {
         products,
         state,
         dateTime,
+
       }: {
         route: string;
         products: ProductsInRequest[];
         state: string;
         dateTime: string;
+
       } = req.body;
 
       const productsExist = await productMarks.find({
