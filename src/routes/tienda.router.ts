@@ -50,5 +50,12 @@ routerTienda.post(
   (req: Request, res: Response) => {
     tiendasController.addProductToTienda(req, res);
   }
+);
+
+routerTienda.patch(
+  `${path}/tienda/rempleaceproducts/:idTienda`,
+  (req: Request, res: Response) => {
+    tiendasController.rempleaceProducts(req, res);
+  }
 )
 export default routerTienda;
