@@ -18,17 +18,19 @@ class tiendaController {
 
   async getTiendasById(req: Request, res: Response) {
     try {
-      const idTienda = req.params;
+      const {idTienda} = req.params;
 
-      const existTienda = await tienda.findById({
-        idTienda,
-      });
+      const existTienda = await tienda.findById(
+        idTienda
+      );
 
       existTienda
         ? res.status(200).json({ message: existTienda, details: true })
         : res.status(404).json({ message: "tienda not found", details: false });
     } catch (error) {
       console.error(error);
+      res.status(404).json({ message: "tienda not found", details: false });
+      
     }
   }
 

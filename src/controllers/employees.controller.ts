@@ -15,7 +15,7 @@ class employees {
       renderData
         ? res.status(200).json({ message: filterEmployees, details: true })
         : res.status(500).json({
-            messageError: "error internal brother, de pana xd",
+            messageError: "error internal",
             details: false,
           });
     } catch (error) {
@@ -32,7 +32,7 @@ class employees {
 
       foundUserById
         ? res.status(200).json(foundUserById)
-        : res.status(404).json({ messageError: "not found user de pana xd" });
+        : res.status(404).json({ messageError: "not found user" });
     } catch (error) {
       return res.status(500).json({ error: "Error interno del servidor" });
     }
