@@ -11,7 +11,7 @@ const tiendamodel = new mongoose.Schema({
     require:true
   },
 
-  coordenadas: [{
+  coordenadas: {
     x: {
       type: Number,
       required: true
@@ -20,16 +20,15 @@ const tiendamodel = new mongoose.Schema({
       type: Number,
       required: true
     }
-  }],
-  
-  productos:[
-    {
-        product: {
-          type: Schema.Types.ObjectId,
-          ref: "productos",
-        }
-    }
-  ]
+  },
+  direccion:{
+    type:String,
+    required:true
+  },
+  productos: [{
+    type: Schema.Types.ObjectId,
+    ref: "productos" // Ajusta este nombre según el nombre de tu modelo de producto
+  }]
 });
 
 const tienda = mongoose.model("tienda", tiendamodel);

@@ -16,6 +16,11 @@ routerRequestProducts.post(`${path}/request-products/add`, (req:Request, res:Res
     controllerRequestProducts.createRequestProducts(req, res)
     
 })
+routerRequestProducts.post(`${path}/request-products/addproduct/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.addProductToRequest(req, res)
+    
+})
+
 routerRequestProducts.delete(`${path}/request-products/remove/:requestProductId`, (req:Request, res:Response)=>{
     controllerRequestProducts.removeRequestProduct(req, res)
    

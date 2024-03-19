@@ -1,5 +1,5 @@
-import tienda from "../models/tienda.model";
 import { Request, Response } from "express";
+import tienda from "../models/tienda.model";
 
 class tiendaController {
   async getTiendas(req: Request, res: Response) {
@@ -36,22 +36,23 @@ class tiendaController {
 
   async createTienda(req: Request, res: Response) {
     try {
-      const { nombre, coordinador, coordenadas } = req.body;
-
+      const { nombre, coordinador, coordenadas, direccion } = req.body;
+      
       const existTienda = await tienda.findOne({
         nombre: nombre,
-        coordenadas: coordenadas,
+        coordenadas: direccion,
       });
 
       if (existTienda) {
         return res
-          .send(404)
+          .status(404)
           .json({ message: "la tienda ya existe", details: false });
       }
       const data = {
         nombre,
         coordinador,
         coordenadas,
+        direccion
       };
 
       const createdTienda = await tienda.create(data);
@@ -69,12 +70,13 @@ class tiendaController {
   async editTienda(req: Request, res: Response) {
     try {
       const idTienda = req.params;
-      const { nombre, coordinador, cordenadas } = req.body;
+      const { nombre, coordinador, cordenadas,direccion } = req.body;
 
       const data = {
         nombre,
         coordinador,
-        cordenadas
+        cordenadas,
+        direccion
       };
 
       const existTienda = await tienda.findOneAndUpdate(
@@ -86,7 +88,7 @@ class tiendaController {
       existTienda
         ? res.status(200).json({ message: existTienda, details: true })
         : res
-            .send(404)
+            .status(404)
             .json({ message: "la tienda no existe", details: false });
     } catch (error) {
       console.log(error);
@@ -100,12 +102,39 @@ class tiendaController {
       const deleted = await tienda.findByIdAndDelete(idTienda);
 
       deleted
-        ? res.send(200).json({ message: "tienda deleted", details: true })
-        : res.send(404).json({ message: "tienda not found", details: false });
+        ? res.status(200).json({ message: "tienda deleted", details: true })
+        : res.status(404).json({ message: "tienda not found", details: false });
     } catch (error) {
       console.log(error);
     }
   }
+
+  async  addProductToTienda(req:Request, res:Response) {
+    try {
+        const { idTienda } = req.params;
+        const { productId } = req.body; // Suponiendo que el cuerpo de la solicitud contiene el ID del producto a agregar
+
+
+        // Encuentra la tienda por su ID
+        const tiendaToAdd = await tienda.findById(idTienda);
+
+        if (!tiendaToAdd) {
+            return res.status(404).json({ message: "Tienda no encontrada." });
+        }
+
+        // Agrega el ID del producto al array de productos de la tienda
+        tiendaToAdd.productos.push(productId);
+
+        // Guarda la tienda actualizada en la base de datos
+        await tiendaToAdd.save();
+
+        // Envía una respuesta al cliente
+        return res.status(200).json({ message: "Producto agregado a la tienda exitosamente." });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Error interno del servidor." });
+    }
 }
 
+}
 export default tiendaController;
