@@ -26,4 +26,4 @@ const productsMark = new mongoose.Schema({
   },
 });
 
-export const productMarks = mongoose.model("productos-marcados", productsMark);
+export const productMarksEmployees = mongoose.model("productos-marcados", productsMark);
