@@ -1,4 +1,4 @@
-import mongoose,{ Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const tiendamodel = new mongoose.Schema({
   nombre: {
@@ -6,29 +6,37 @@ const tiendamodel = new mongoose.Schema({
     require: true,
   },
 
-  coordinador:{
-    type:String,
-    require:true
+  coordinador: {
+    type: String,
+    require: true,
   },
 
   coordenadas: {
     x: {
       type: Number,
-      required: true
+      required: true,
     },
     y: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
-  direccion:{
-    type:String,
-    required:true
+  direccion: {
+    type: String,
+    required: true,
   },
-  productos: [{
-    type: Schema.Types.ObjectId,
-    ref: "productos" // Ajusta este nombre según el nombre de tu modelo de producto
-  }]
+  productos: [
+    {
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "productos", 
+      },
+      price:{
+        type:Number,
+        required:true
+      }
+    },
+  ],
 });
 
 const tienda = mongoose.model("tienda", tiendamodel);

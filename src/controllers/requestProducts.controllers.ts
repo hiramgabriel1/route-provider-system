@@ -254,6 +254,28 @@ class requestProductsController {
     }
   }
 
+
+  async rempleaceProducts(req:Request,res:Response){
+    try {
+      const {idRequest}= req.params;
+      const products = req.body
+
+      const requestToUpdate= await requestProductsMarks.findById(idRequest);
+      console.log(requestToUpdate,idRequest)
+
+      if(!requestToUpdate){
+        return res.status(404).json({ message: "request no encontrada." });
+      }
+      
+      requestToUpdate.products=products;
+
+      await requestToUpdate.save();
+
+      return res.status(200).json({ message: "Productos rempleazadon en la request exitosamente." });
+    } catch (error) {
+      return res.status(500).json({ message: "Error interno del servidor." });
+    }
+  }
 }
 
 export default requestProductsController;

@@ -115,6 +115,7 @@ class systemBroker {
     const ProductDevolution: any = products.filter(
       (product) => product.stateProduct === 'devolucion'
     );
+    
 
     const ObjectData = {
       id_Ruta: _id,

@@ -112,8 +112,13 @@ class tiendaController {
   async  addProductToTienda(req:Request, res:Response) {
     try {
         const { idTienda } = req.params;
-        const { productId } = req.body; // Suponiendo que el cuerpo de la solicitud contiene el ID del producto a agregar
+        const { productId, price } = req.body;
 
+
+        const data={
+          productId,
+          price
+        } 
 
         // Encuentra la tienda por su ID
         const tiendaToAdd = await tienda.findById(idTienda);
@@ -123,7 +128,7 @@ class tiendaController {
         }
 
         // Agrega el ID del producto al array de productos de la tienda
-        tiendaToAdd.productos.push(productId);
+        tiendaToAdd.productos.push(data);
 
         // Guarda la tienda actualizada en la base de datos
         await tiendaToAdd.save();
@@ -134,7 +139,29 @@ class tiendaController {
         console.log(error);
         return res.status(500).json({ message: "Error interno del servidor." });
     }
-}
+  }
+
+
+  async rempleaceProducts(req:Request,res:Response){
+    try {
+      const {idTienda}= req.params;
+      const products = req.body
+
+      const tiendaToUpdate= await tienda.findById(idTienda);
+
+      if(!tiendaToUpdate){
+        return res.status(404).json({ message: "Tienda no encontrada." });
+      }
+      
+      tiendaToUpdate.productos=products;
+
+      await tiendaToUpdate.save();
+
+      return res.status(200).json({ message: "Productos rempleazadon en la tienda exitosamente." });
+    } catch (error) {
+      return res.status(500).json({ message: "Error interno del servidor." });
+    }
+  }
 
 }
 export default tiendaController;
