@@ -18,6 +18,10 @@ const requestProductsModel = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "productos",
       },
+      unitPrice:{
+        type: Number,
+        require: true
+      },
       stateProduct: {
         type: String,  // vendido | no vendido | devolucion
         require: true
@@ -28,8 +32,17 @@ const requestProductsModel = new mongoose.Schema({
       amountCurrent:{
         type: Number
       },
+      priceSold:{
+        type:Number
+      }
     },
   ],
+  store:{
+    type: Schema.Types.ObjectId,
+    ref:  "tienda"
+  },
+  
+
 });
 
 const requestProductsMarks = mongoose.model(

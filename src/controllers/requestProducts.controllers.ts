@@ -41,22 +41,27 @@ class requestProductsController {
         dateTime: string;
       } = req.body;
 
+
+      console.log(products)
+     
+
       const productsExist = await productMarks.find({
-        _id: { $in: products.map((prod) => prod.productId) },
+        _id: { $in: products.map((prod) => prod.product) },
       });
 
       if (productsExist.length !== products.length)
         return res
           .status(400)
           .json({ error: "Al menos un producto no existe" });
-      const newRequest = new requestProductsMarks({
+      const newRequest = await requestProductsMarks.create({
         route: route,
         state: state,
         dateTime: dateTime,
         products: products.map((prod) => ({
-          product: prod.productId,
+          product: prod.product,
           amount: prod.amount,
           amountCurrent: prod.amount,
+          stateProduct:prod.stateProduct,
         })),
       });
 
@@ -245,7 +250,7 @@ class requestProductsController {
 
        res.status(200).json({message:"product created", details:true})
     } catch (error) {
-      console.log(error)
+      console.log()
     }
   }
 
