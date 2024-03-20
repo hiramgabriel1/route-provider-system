@@ -12,6 +12,11 @@ routerRequestProducts.get(`${path}/request-products/`, (req:Request, res:Respons
 routerRequestProducts.get(`${path}/request-product/route/:requestRouteId`, (req:Request, res:Response)=>{
     controllerRequestProducts.getUniqueRequestProductByRoute(req, res)
 })
+
+routerRequestProducts.get(`${path}/request-products/aproved`, (req, res) => {
+    controllerRequestProducts.aprovedRequest(req, res)
+})
+
 routerRequestProducts.post(`${path}/request-products/add`, (req:Request, res:Response)=>{
     controllerRequestProducts.createRequestProducts(req, res)
     
@@ -25,6 +30,11 @@ routerRequestProducts.delete(`${path}/request-products/remove/:requestProductId`
     controllerRequestProducts.removeRequestProduct(req, res)
    
 })
+
+routerRequestProducts.delete(`${path}/request-products/remove/:requestProductId/:productId`, (req:Request,res:Response) => {
+    controllerRequestProducts.removeProductRequest(req, res)
+})
+
 routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId`, (req:Request, res:Response)=>{
     controllerRequestProducts.updateRequestProduct(req, res)
    
@@ -33,12 +43,10 @@ routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId/:pr
     controllerRequestProducts.updateRequestOneProduct(req, res)
 })
 
-routerRequestProducts.delete(`${path}/request-products/remove/:requestProductId/:productId`, (req:Request,res:Response) => {
-    controllerRequestProducts.removeProductRequest(req, res)
+routerRequestProducts.patch(`${path}/request-products/remplaceproducts/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.rempleaceProducts(req, res)
 })
 
-routerRequestProducts.get(`${path}/request-products/aproved`, (req, res) => {
-    controllerRequestProducts.aprovedRequest(req, res)
-})
+
 
 export default routerRequestProducts;

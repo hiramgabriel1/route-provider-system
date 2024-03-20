@@ -16,13 +16,14 @@ class unitCarsController {
 
   async createCarUnit(req: Request, res: Response) {
     try {
-      const { marca, modelo, lastOilChange, nextOilChange } = req.body;
+      const { marca, modelo, lastOilChange, nextOilChange,kilometros } = req.body;
 
       const dataCarUnitReceived = {
         marca: marca,
         modelo: modelo,
         lastOilChange: lastOilChange,
         nextOilChange: nextOilChange,
+        kilometros:kilometros
       };
 
       const saveUnitCarInDatabase = await unitModel.create(dataCarUnitReceived);

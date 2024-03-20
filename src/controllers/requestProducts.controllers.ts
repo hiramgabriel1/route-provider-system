@@ -41,22 +41,27 @@ class requestProductsController {
         dateTime: string;
       } = req.body;
 
+
+      console.log(products)
+     
+
       const productsExist = await productMarks.find({
-        _id: { $in: products.map((prod) => prod.productId) },
+        _id: { $in: products.map((prod) => prod.product) },
       });
 
       if (productsExist.length !== products.length)
         return res
           .status(400)
           .json({ error: "Al menos un producto no existe" });
-      const newRequest = new requestProductsMarks({
+      const newRequest = await requestProductsMarks.create({
         route: route,
         state: state,
         dateTime: dateTime,
         products: products.map((prod) => ({
-          product: prod.productId,
+          product: prod.product,
           amount: prod.amount,
           amountCurrent: prod.amount,
+          stateProduct:prod.stateProduct,
         })),
       });
 
@@ -245,10 +250,32 @@ class requestProductsController {
 
        res.status(200).json({message:"product created", details:true})
     } catch (error) {
-      console.log(error)
+      console.log()
     }
   }
 
+
+  async rempleaceProducts(req:Request,res:Response){
+    try {
+      const {idRequest}= req.params;
+      const products = req.body
+
+      const requestToUpdate= await requestProductsMarks.findById(idRequest);
+      console.log(requestToUpdate,idRequest)
+
+      if(!requestToUpdate){
+        return res.status(404).json({ message: "request no encontrada." });
+      }
+      
+      requestToUpdate.products=products;
+
+      await requestToUpdate.save();
+
+      return res.status(200).json({ message: "Productos rempleazadon en la request exitosamente." });
+    } catch (error) {
+      return res.status(500).json({ message: "Error interno del servidor." });
+    }
+  }
 }
 
 export default requestProductsController;
