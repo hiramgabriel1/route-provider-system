@@ -67,8 +67,7 @@ class rutasController {
       const {
         empleado,
         vehicle,
-        start,
-        end,
+        tienda,
         status,
         amountOfMerchandise,
         LastMinuteSale,
@@ -77,8 +76,7 @@ class rutasController {
       const dataUser = {
         empleado: empleado,
         vehicle: vehicle,
-        start: start,
-        end: end,
+        tienda:tienda,
         status: status,
         amountOfMerchandise: amountOfMerchandise,
         LastMinuteSale: LastMinuteSale,
@@ -88,8 +86,7 @@ class rutasController {
       const isExists = await rutasModels.findOne({
         empleado,
         vehicle,
-        start,
-        end,
+        tienda,
         status,
         amountOfMerchandise,
         LastMinuteSale,

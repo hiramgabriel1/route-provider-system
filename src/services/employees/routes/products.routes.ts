@@ -6,6 +6,8 @@ const path = "/api/v1/employees/products";
 const productsControllers = new products();
 
 // ? endpoint para marcar como vendidos
+
+
 routerMarkProducts.post(
   `${path}/mark-sold/:productId`,
   (req: Request, res: Response) => {

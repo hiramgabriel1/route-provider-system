@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema }  from "mongoose";
 
 const rutasSchema = new mongoose.Schema({
   empleado: {
@@ -11,15 +11,12 @@ const rutasSchema = new mongoose.Schema({
     required: true,
   },
 
-  start: {
-    type: [Number], 
-    required: true,
-  },
-
-  end: {
-    type: [Number], 
-    required: true,
-  },
+  tiendas: [ 
+    {
+        type: Schema.Types.ObjectId,
+        ref: "tienda",
+      }
+    ],
 
   status: {
     type: Boolean,
