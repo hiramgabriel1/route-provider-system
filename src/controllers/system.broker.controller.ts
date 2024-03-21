@@ -1,12 +1,17 @@
 import { Request, Response } from "express";
 import employeeModel from "../models/employees.model";
-import { productMarks } from "../services/employees/models/products";
+import { productMarksEmployees } from "../services/employees/models/products";
 import { ErrorReply } from "redis";
 import rutasModels from "../models/rutas.model";
 import rutasController from "./rutas.controllers";
 import unitModel from "../models/units.model";
 import requestProductsMarks from "../models/requestProducts.model";
 import { model } from "mongoose";
+import { afterEach } from "node:test";
+import { ADDRGETNETWORKPARAMS } from "node:dns";
+import { stringify } from "node:querystring";
+import productMarks from "../models/products.model";
+import { json } from "sequelize";
 // import { createFileInventary } from "../services/employees/utils/pdf-create";
 // import pdf from "html-pdf";
 
@@ -14,7 +19,7 @@ class systemBroker {
   async viewHistoryCourt(req: Request, res: Response) {
     try {
 
-      const products = await productMarks.find();
+      const products = await productMarksEmployees.find();
       const queryUserInfo = await employeeModel.find();
 
       const filterSoldProducts: any = products.filter(
@@ -106,26 +111,78 @@ class systemBroker {
       (product) => product.stateProduct === 'vendido'
     );
 
+    const prodSoldComplete = await Promise.all(ProductsSold.map( async (producto: any) => {
+      return await productMarks.findById(producto.product);
+    } ))
+
+    const resultProdSolds = [];
+
+    for (let i = 0; i < ProductsSold.length; i++) {
+      let info = {
+        "ProductName": prodSoldComplete[i].productName,
+        "ProductPrice": prodSoldComplete[i].productPrice,
+        "Amount": ProductsSold[i].amount,
+        "Amount_Current": ProductsSold[i].amount_current
+      }
+
+      resultProdSolds.push(info);
+
+    }
+
 
     const ProductsIsNotSold: any = products.filter(
       (product) => product.stateProduct === 'no vendido'
     );
 
+    const prodIsNotSoldComplete = await Promise.all(ProductsIsNotSold.map( async (producto: any) => {
+      return await productMarks.findById(producto.product);
+    } ))
+
+    const resultProdNotSold = [];
+
+    for (let i = 0; i < ProductsIsNotSold.length; i++) {
+      let info = {
+        "ProductName": prodIsNotSoldComplete[i].productName,
+        "ProductPrice": prodIsNotSoldComplete[i].productPrice,
+        "Amount": ProductsIsNotSold[i].amount,
+        "Amount_Current": ProductsIsNotSold[i].amount_current
+      }
+
+      resultProdNotSold.push(info);
+
+    }
 
     const ProductDevolution: any = products.filter(
       (product) => product.stateProduct === 'devolucion'
     );
 
+    const prodDevolutionComplete = await Promise.all(ProductDevolution.map( async (producto: any) =>{
+      return await productMarks.findById(producto.product);
+    } ))
     
+
+    const resultProdDevolution = [];
+
+    for (let i = 0; i < ProductDevolution.length; i++) {
+      let info = {
+        "ProductName": prodDevolutionComplete[i].productName,
+        "ProductPrice": prodDevolutionComplete[i].productPrice,
+        "Amount": ProductDevolution[i].amount,
+        "Amount_Current": ProductDevolution[i].amount_current
+      }
+
+      resultProdDevolution.push(info);
+
+    }
 
     const ObjectData = {
       id_Ruta: _id,
       Usuario: user,
-      Marca: marca,
       Modelo: modelo,
-      ProductosVendidos: ProductsSold,
-      ProductosNoVendidos: ProductsIsNotSold,
-      ProductosDevueltos: ProductDevolution
+      Marca: marca,
+      ProductosVendidos: resultProdSolds,
+      ProductosNoVendidos: resultProdNotSold,
+      ProductosDevueltos: resultProdDevolution,
     };
 
     res.status(200).json({ response: ObjectData })
