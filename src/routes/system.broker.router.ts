@@ -5,12 +5,12 @@ const system = new systemBroker();
 const routerBrokerCourt = Router();
 const path = "/api/v1";
 
-// routerBrokerCourt.get(
-//   `${path}/view-history/:id`,
-//   (req: Request, res: Response) => {
-//     system.viewHistoryCourt(req, res);
-//   }
-// );
+ routerBrokerCourt.get(
+   `${path}/view-history/:id`,
+   (req: Request, res: Response) => {
+     system.viewHistoryCourt(req, res);
+  }
+ );
 
 routerBrokerCourt.get(`${path}/close-court/:rutaId`, (req: Request, res: Response) => {
   system.closeCourt(req, res)
