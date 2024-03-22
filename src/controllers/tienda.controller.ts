@@ -79,6 +79,8 @@ class tiendaController {
         direccion
       };
 
+      
+
       const existTienda = await tienda.findOneAndUpdate(
         { _id: idTienda },
         { $set: data },
