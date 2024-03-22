@@ -69,13 +69,13 @@ class tiendaController {
 
   async editTienda(req: Request, res: Response) {
     try {
-      const idTienda = req.params;
-      const { nombre, coordinador, cordenadas,direccion } = req.body;
+      const {idTienda} = req.params;
+      const { nombre, coordinador, coordenadas,direccion } = req.body;
 
       const data = {
         nombre,
         coordinador,
-        cordenadas,
+        coordenadas,
         direccion
       };
 

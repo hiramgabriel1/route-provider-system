@@ -18,7 +18,7 @@ export interface Historial{
 
 export interface ProductsInRequest{
         product:string, 
-        stateProduct: "vendido" | "no vendido" | "devolucion",
+        stateProduct: "registrado" | "despachado" | "vendido"| "devolucion",
         amount:number,
         amountCurrent:number
     }
