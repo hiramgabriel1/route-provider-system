@@ -165,5 +165,44 @@ class tiendaController {
     }
   }
 
+
+  async editProductTienda(req: Request, res: Response) {
+    try {
+        const { idTienda, idProduct } = req.params;
+        const { price } = req.body;
+
+        const tiendaToUpdate = await tienda.findById(idTienda);
+
+        if (!tiendaToUpdate) {
+            return res.status(400).json({ message: "Tienda not found", details: false });
+        }
+
+        const products = tiendaToUpdate.productos;
+        const productIndex = products.findIndex((product) => {
+          if (product.product) {
+              return product.product.toString() === idProduct;
+          }
+          return false;
+      });
+      
+
+        if (productIndex === -1) {
+            return res.status(404).json({ message: "Product not found in this tienda", details: false });
+        }
+
+        // Update the price of the product
+        products[productIndex].price = price;
+
+        // Save the changes
+        await tiendaToUpdate.save();
+
+        res.status(200).json({ message: "Precio de producto actualizado", details: true });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error", details: false });
+    }
+}
+
+
 }
 export default tiendaController;

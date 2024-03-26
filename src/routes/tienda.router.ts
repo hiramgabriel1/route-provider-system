@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import tiendaController from "../controllers/tienda.controller";
+import tienda from "../models/tienda.model";
 
 
 
@@ -56,6 +57,12 @@ routerTienda.patch(
   `${path}/tienda/rempleaceproducts/:idTienda`,
   (req: Request, res: Response) => {
     tiendasController.rempleaceProducts(req, res);
+  }
+)
+
+routerTienda.patch(
+  `${path}/tienda/editproduct/:idTienda/:idProduct`,(req:Request,res:Response)=>{
+    tiendasController.editProductTienda(req,res);
   }
 )
 export default routerTienda;
