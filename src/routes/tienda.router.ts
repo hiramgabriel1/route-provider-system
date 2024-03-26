@@ -61,7 +61,7 @@ routerTienda.patch(
 )
 
 routerTienda.patch(
-  `${path}/tienda/editproduct/:idtienda/:idproduct`,(req:Request,res:Response)=>{
+  `${path}/tienda/editproduct/:idTienda/:idProduct`,(req:Request,res:Response)=>{
     tiendasController.editProductTienda(req,res);
   }
 )
