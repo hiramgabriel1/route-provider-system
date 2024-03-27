@@ -17,6 +17,10 @@ routerRequestProducts.get(`${path}/request-products/aproved`, (req, res) => {
     controllerRequestProducts.aprovedRequest(req, res)
 })
 
+routerRequestProducts.get(`${path}/request-products/aproved/:requestRouteId`, (req:Request, res:Response) => {
+    controllerRequestProducts.getUniqueRequestProductAprovedByRoute(req, res);
+})
+
 routerRequestProducts.post(`${path}/request-products/add`, (req:Request, res:Response)=>{
     controllerRequestProducts.createRequestProducts(req, res)
     
