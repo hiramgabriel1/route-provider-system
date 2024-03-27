@@ -234,6 +234,28 @@ class requestProductsController {
       }
   }
 
+  async getUniqueRequestProductAprovedByRoute(req: Request, res: Response) {
+    try {
+
+      const { requestRouteId } = req.params;
+
+      const aprovedRequest = await requestProductsMarks.find( 
+        { state: "aprobado" }
+      );
+
+      const aprovedRequestByRoute = aprovedRequest.filter(request => request.route?.equals(requestRouteId.toString()));
+
+      if (aprovedRequestByRoute.length > 0) {
+        res.status(200).json({ message: aprovedRequestByRoute, details: true });
+      } else {
+        res.status(404).json({ error: "Solicitud no encontrada", details: false });
+      }
+
+    } catch(error) {
+      res.status(500).json({ error: "error interno en el servidor" })
+    }
+  }
+
   async addProductToRequest(req:Request,res:Response){
     try {
        const {idRequest} = req.params;
