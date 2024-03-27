@@ -32,6 +32,12 @@ const rutasSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  productsAccepted:[
+        {
+        type: Schema.Types.ObjectId,
+          ref: "productos",
+        }
+    ]
 });
 
 const rutasModels = mongoose.model("rutas", rutasSchema);

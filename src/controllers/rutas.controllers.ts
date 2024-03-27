@@ -137,9 +137,26 @@ class rutasController {
     }
 }
 
-  
+async addProductToRuta(rutaId: any, products: any,req:Request,res:Response) {
+  try {
+    const ruta = await rutasModels.findById(rutaId);
 
-
+    if (ruta) {
+      const productsRuta = ruta.productsAccepted.concat(products); // Crear un nuevo array con los productos añadidos
+      ruta.productsAccepted = productsRuta; // Asignar el nuevo array a la propiedad productsAccepted
+      await ruta.save(); // Guardar los cambios en la ruta
+      res.status(200).json({message:"product añadidos",details:true})
+    } else {
+      res.status(404).json({message:"no se encontro la ruta",details:true})
+    }
+  } catch (error) {
+    res.status(400).json({message:"internal server error",details:true})
+  }
 }
+
+  
+ }
+
+
 
 export default rutasController;
