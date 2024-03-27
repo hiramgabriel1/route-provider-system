@@ -37,7 +37,10 @@ routerRequestProducts.delete(`${path}/request-products/remove/:requestProductId/
 
 routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId`, (req:Request, res:Response)=>{
     controllerRequestProducts.updateRequestProduct(req, res)
-   
+})
+
+routerRequestProducts.patch(`${path}/request-products/update-acepted/:idRequest`, (req, res) => {
+    controllerRequestProducts.updateAcepted(req, res)
 })
 routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId/:productId`, (req:Request, res:Response)=>{
     controllerRequestProducts.updateRequestOneProduct(req, res)
