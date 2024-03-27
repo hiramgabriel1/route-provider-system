@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import requestProductsMarks from "../models/requestProducts.model";
 import productMarks from "../models/products.model";
 import { ProductsInRequest } from "../interfaces/interface";
+import rutasController from "./rutas.controllers";
+
 
 class requestProductsController {
   async getAllRequestProducts(req: Request, res: Response) {
@@ -13,6 +15,7 @@ class requestProductsController {
       console.log(err);
     }
   }
+  
   async getUniqueRequestProductByRoute(req: Request, res: Response) {
     try {
       const { requestRouteId } = req.params;
@@ -276,6 +279,36 @@ class requestProductsController {
       return res.status(500).json({ message: "Error interno del servidor." });
     }
   }
+
+  async updateAcepted(req: Request, res: Response) {
+    try {
+      const { idRequest } = req.params;
+      const updateData = req.body;
+
+        const updateRequest = await requestProductsMarks.findByIdAndUpdate(
+        { _id: idRequest },
+        { $set: updateData },
+        { new: true }
+      );
+
+      console.log(updateRequest);
+
+  
+      if (updateRequest) {
+        const productIds = updateRequest.products.map(product => product.product);
+        //todo bien
+        const controllerRutas= new rutasController();
+        controllerRutas.addProductToRuta(updateRequest.route,productIds, req,res);
+      } else {
+        // Manejar el caso donde no se encuentra la solicitud
+        res.status(404).json({ error: "Solicitud no encontrada" });
+      }
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: "error interno del servidor" });
+    }
+  }
+  
 }
 
 export default requestProductsController;
