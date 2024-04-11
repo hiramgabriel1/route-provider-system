@@ -7,6 +7,7 @@ import {
   ProductInRequestProductsInterface,
   RequestProductsInterface,
 } from "../types/requestProducts";
+import products from "../services/employees/controllers/products.controllers";
 
 class requestProductsController {
   async getAllRequestProducts(req: Request, res: Response) {
@@ -348,24 +349,35 @@ class requestProductsController {
     const mapa: { [id: string]: ProductInRequestProductsInterface } = {};
 
     arr1.forEach((obj: ProductInRequestProductsInterface) => {
-      mapa[obj._id] = {
+      const productId =
+        //@ts-ignore
+        typeof obj.product === "object" ? obj.product.toString() : obj.product;
+      mapa[productId] = {
         ...obj,
-        amount: (mapa[obj._id]?.amount || 0) + obj.amount,
-        amountCurrent: (mapa[obj._id]?.amount || 0) + obj.amountCurrent,
+        amount: (mapa[productId]?.amount || 0) + obj.amount,
+        amountCurrent:
+          (mapa[productId]?.amountCurrent || 0) + obj.amountCurrent,
       } as ProductInRequestProductsInterface;
     });
 
+    arr2.forEach((obj) => {
+      const productId =
+        //@ts-ignore
+        typeof obj.product === "object" ? obj.product.toString() : obj.product;
 
-    arr2.forEach(obj=>{
-      mapa[obj._id] = {
+      mapa[productId] = {
         ...obj,
-        amount: (mapa[obj._id]?.amount || 0) + obj.amount,
-        amountCurrent: (mapa[obj._id]?.amount || 0) + obj.amountCurrent,
+        amount: (mapa[productId]?.amount || 0) + obj.amount,
+        amountCurrent:
+          (mapa[productId]?.amountCurrent || 0) + obj.amountCurrent,
       } as ProductInRequestProductsInterface;
-    })
+    });
 
-    const result = Object.keys(mapa).map(id=>(mapa[id] as ProductInRequestProductsInterface))
-    console.log(result)
+    const result = Object.keys(mapa).map(
+      (id) => mapa[id] as ProductInRequestProductsInterface
+    );
+
+    return result;
   }
 
   async updateToAcepted(req: Request, res: Response) {
@@ -386,11 +398,48 @@ class requestProductsController {
 
       if (updateRequestInFather) {
         // aumentar en el que existe
-        // @ts-ignore
-        const updateRequestInFatherConvert = updateRequestInFather as RequestProductsInterface;
+        const updateRequestInFatherConvert =
+          // @ts-ignore
+          updateRequestInFather as RequestProductsInterface;
+
+        const updateReq = await requestProductsMarks.findByIdAndUpdate(
+          { _id: updateRequestInFather._id },
+          {
+            $set: {
+              products: this.concatProductsInRequest(
+                updateRequestInFatherConvert.products,
+                updateData.products || []
+              ),
+            },
+          },
+          { new: true }
+        );
+
+        
 
 
-        this.concatProductsInRequest(updateRequestInFatherConvert.products, (updateData.products || []));
+        if (updateReq) {
+          
+          // const updateReq = await requestProductsMarks.findByIdAndDelete(
+          //   idRequest
+          // );
+          return res.status(200).json({
+            message: updateReq,
+          });
+        }
+      } else {
+        const updateReqToNew = await requestProductsMarks.findByIdAndUpdate(
+          { _id: idRequest },
+          { $set: updateData },
+          { new: true }
+        );
+        if (!updateReqToNew) {
+          throw new Error("No se ha creado el padre correctamente");
+        }
+
+        return res.status(200).json({
+          message: updateReqToNew,
+        });
       }
 
       // console.log(updateData);
@@ -419,7 +468,6 @@ class requestProductsController {
       return res.status(200).json({
         message: "Productos rempleazadon en la request exitosamente.",
       });
-
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "error interno del servidor" });
