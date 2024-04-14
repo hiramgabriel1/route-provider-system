@@ -415,22 +415,18 @@ class requestProductsController {
           { new: true }
         );
 
-        
-
-
         if (updateReq) {
-          
-          // const updateReq = await requestProductsMarks.findByIdAndDelete(
-          //   idRequest
-          // );
+          const updateReq = await requestProductsMarks.findByIdAndDelete(
+            idRequest
+          );
           return res.status(200).json({
             message: updateReq,
           });
         }
       } else {
         const updateReqToNew = await requestProductsMarks.findByIdAndUpdate(
-          { _id: idRequest },
-          { $set: updateData },
+          { _id: updateData._id },
+          { $set: { ...updateData, state: "aprobado" } },
           { new: true }
         );
         if (!updateReqToNew) {
