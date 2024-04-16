@@ -240,16 +240,13 @@ class requestProductsController {
     try {
       const { requestRouteId } = req.params;
 
-      const aprovedRequest = await requestProductsMarks.find({
+      const aprovedRequest = await requestProductsMarks.findOne({
         state: "aprobado",
+        route: requestRouteId
       });
 
-      const aprovedRequestByRoute = aprovedRequest.filter((request) =>
-        request.route?.equals(requestRouteId.toString())
-      );
-
-      if (aprovedRequestByRoute.length > 0) {
-        res.status(200).json({ message: aprovedRequestByRoute, details: true });
+      if (aprovedRequest) {
+        res.status(200).json({ message: aprovedRequest, details: true });
       } else {
         res
           .status(404)
