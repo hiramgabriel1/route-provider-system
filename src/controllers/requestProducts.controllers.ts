@@ -240,16 +240,13 @@ class requestProductsController {
     try {
       const { requestRouteId } = req.params;
 
-      const aprovedRequest = await requestProductsMarks.find({
+      const aprovedRequest = await requestProductsMarks.findOne({
         state: "aprobado",
+        route: requestRouteId
       });
 
-      const aprovedRequestByRoute = aprovedRequest.filter((request) =>
-        request.route?.equals(requestRouteId.toString())
-      );
-
-      if (aprovedRequestByRoute.length > 0) {
-        res.status(200).json({ message: aprovedRequestByRoute, details: true });
+      if (aprovedRequest) {
+        res.status(200).json({ message: aprovedRequest, details: true });
       } else {
         res
           .status(404)
@@ -415,22 +412,18 @@ class requestProductsController {
           { new: true }
         );
 
-        
-
-
         if (updateReq) {
-          
-          // const updateReq = await requestProductsMarks.findByIdAndDelete(
-          //   idRequest
-          // );
+          const updateReq = await requestProductsMarks.findByIdAndDelete(
+            idRequest
+          );
           return res.status(200).json({
             message: updateReq,
           });
         }
       } else {
         const updateReqToNew = await requestProductsMarks.findByIdAndUpdate(
-          { _id: idRequest },
-          { $set: updateData },
+          { _id: updateData._id },
+          { $set: { ...updateData, state: "aprobado" } },
           { new: true }
         );
         if (!updateReqToNew) {
