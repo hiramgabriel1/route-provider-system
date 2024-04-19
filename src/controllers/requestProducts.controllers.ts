@@ -466,6 +466,112 @@ class requestProductsController {
       return res.status(500).json({ error: "error interno del servidor" });
     }
   }
+
+
+
+  async updateAmmountDispatched(req: Request, res: Response) {
+    try {
+      const { idRequest } = req.params;
+      const { productId, ammountDispatched } = req.body;
+  
+      const request = await requestProductsMarks.findById(idRequest);
+  
+      if (!request) {
+        return res.status(404).json({ message: "Request not found", details: false });
+      }
+  
+      const indexProduct = request.products.findIndex(product => product._id?.toString() === productId);
+  
+      if (indexProduct === -1) {
+        return res.status(404).json({ message: "Product not found", details: false });
+      }
+  
+      // Accede al objeto productStateDSR
+      const productStateDSR = request.products[indexProduct].productStateDSR[0]; 
+  
+      // Asigna el valor de ammountDispatched
+      if (productStateDSR) {
+        productStateDSR.ammountDispatched = ammountDispatched;
+      }
+  
+      await request.save();
+  
+      return res.status(200).json({ message: "Ammount dispatched updated successfully", details: true });
+    } catch (error) {
+      console.error("Error:", error);
+      return res.status(500).json({ message: "Internal server error", details: false });
+    }
+  }
+  
+
+  async updateAmmountSold(req: Request, res: Response) {
+    try {
+      const { idRequest } = req.params;
+      const { productId, ammountSold } = req.body;
+  
+      const request = await requestProductsMarks.findById(idRequest);
+  
+      if (!request) {
+        return res.status(404).json({ message: "Request not found", details: false });
+      }
+  
+      const indexProduct = request.products.findIndex(product => product._id?.toString() === productId);
+  
+      if (indexProduct === -1) {
+        return res.status(404).json({ message: "Product not found", details: false });
+      }
+  
+      // Accede al objeto productStateDSR
+      const productStateDSR = request.products[indexProduct].productStateDSR[0]; 
+  
+      // Asigna el valor de ammountSold
+      if (productStateDSR) {
+        productStateDSR.ammountSold = ammountSold;
+      }
+  
+      await request.save();
+  
+      return res.status(200).json({ message: "Ammount dispatched updated successfully", details: true });
+    } catch (error) {
+      console.error("Error:", error);
+      return res.status(500).json({ message: "Internal server error", details: false });
+    }
+  }
+  
+
+  async updateAmmountReturn(req: Request, res: Response) {
+    try {
+      const { idRequest } = req.params;
+      const { productId, ammountReturn } = req.body;
+  
+      const request = await requestProductsMarks.findById(idRequest);
+  
+      if (!request) {
+        return res.status(404).json({ message: "Request not found", details: false });
+      }
+  
+      const indexProduct = request.products.findIndex(product => product._id?.toString() === productId);
+  
+      if (indexProduct === -1) {
+        return res.status(404).json({ message: "Product not found", details: false });
+      }
+  
+      // Accede al objeto productStateDSR
+      const productStateDSR = request.products[indexProduct].productStateDSR[0]; 
+  
+      // Asigna el valor de ammountDispatched
+      if (productStateDSR) {
+        productStateDSR.ammountReturn = ammountReturn;
+      }
+  
+      await request.save();
+  
+      return res.status(200).json({ message: "Ammount dispatched updated successfully", details: true });
+    } catch (error) {
+      console.error("Error:", error);
+      return res.status(500).json({ message: "Internal server error", details: false });
+    }
+  }
 }
 
 export default requestProductsController;
