@@ -58,5 +58,16 @@ routerRequestProducts.patch(`${path}/request-products/remplaceproducts/:idReques
 })
 
 
+routerRequestProducts.patch(`${path}/request-products/update/ammountdispatched/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.updateAmmountDispatched(req, res);
+})
+routerRequestProducts.patch(`${path}/request-products/update/ammountsold/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.updateAmmountSold(req, res);
+})
+routerRequestProducts.patch(`${path}/request-products/update/ammountreturn/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.updateAmmountReturn(req, res);
+})
+
+
 
 export default routerRequestProducts;

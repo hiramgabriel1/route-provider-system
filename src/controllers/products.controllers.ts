@@ -126,6 +126,7 @@ class productsController {
       console.error(error);
     }
   }
+  
 }
 
 export default productsController;
