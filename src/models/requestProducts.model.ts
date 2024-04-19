@@ -3,14 +3,14 @@ import mongoose, { Schema } from "mongoose";
 const requestProductsModel = new mongoose.Schema({
   route: {
     type: Schema.Types.ObjectId,
-    ref: "rutas"
+    ref: "rutas",
   },
-  state:{
-    type: String
+  state: {
+    type: String,
     // pendiente | revisado | aprobado | rechazado
   },
-  dateTime:{
-    type: String
+  dateTime: {
+    type: String,
   },
   products: [
     {
@@ -18,31 +18,47 @@ const requestProductsModel = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "productos",
       },
-      unitPrice:{
+      unitPrice: {
         type: Number,
-        require: true
+        require: true,
       },
       stateProduct: {
-        type: String,  // vendido | no vendido | devolucion
-        require: true
+        type: String, // vendido | no vendido | devolucion
+        require: true,
       },
-      amount:{
-        type: Number
+      amount: {
+        type: Number,
       },
-      amountCurrent:{
-        type: Number
+      amountCurrent: {
+        type: Number,
       },
-      priceSold:{
-        type:Number
-      }
+      priceSold: {
+        type: Number,
+      },
+
+      productStateDSR: [
+        {
+          store: {
+            type: Schema.Types.ObjectId,
+            ref: "tienda",
+          },
+          ammountDispatched: {
+            type: Number,
+          },
+          ammountSold: {
+            type: Number,
+          },
+          ammountReturn: {
+            type: Number,
+          },
+        },
+      ],
     },
   ],
-  store:{
+  store: {
     type: Schema.Types.ObjectId,
-    ref:  "tienda"
+    ref: "tienda",
   },
-  
-
 });
 
 const requestProductsMarks = mongoose.model(

@@ -46,12 +46,26 @@ routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId`, (
 routerRequestProducts.patch(`${path}/request-products/update-acepted/:idRequest`, (req, res) => {
     controllerRequestProducts.updateAcepted(req, res)
 })
+routerRequestProducts.patch(`${path}/request-products/update-to-acepted/:idRequest`, (req, res) => {
+    controllerRequestProducts.updateToAcepted(req, res)
+})
 routerRequestProducts.patch(`${path}/request-products/edit/:requestProductId/:productId`, (req:Request, res:Response)=>{
     controllerRequestProducts.updateRequestOneProduct(req, res)
 })
 
 routerRequestProducts.patch(`${path}/request-products/remplaceproducts/:idRequest`, (req:Request, res:Response)=>{
     controllerRequestProducts.rempleaceProducts(req, res)
+})
+
+
+routerRequestProducts.patch(`${path}/request-products/update/ammountdispatched/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.updateAmmountDispatched(req, res);
+})
+routerRequestProducts.patch(`${path}/request-products/update/ammountsold/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.updateAmmountSold(req, res);
+})
+routerRequestProducts.patch(`${path}/request-products/update/ammountreturn/:idRequest`, (req:Request, res:Response)=>{
+    controllerRequestProducts.updateAmmountReturn(req, res);
 })
 
 
