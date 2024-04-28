@@ -12,19 +12,26 @@ creditStoreRouter.get(
   }
 );
 
+creditStoreRouter.get(
+  `${path}/stores`,
+  (req: Request, res: Response) => {
+    credit.showAllStores(req, res);
+  }
+);
+
 creditStoreRouter.post(`${path}/credit`, (req: Request, res: Response) => {
   credit.addCreditToNewStore(req, res);
 });
 
 creditStoreRouter.put(
-  `${path}/creditstore/edit/:nameStore`,
+  `${path}/creditstore/edit/:storeName`,
   (req: Request, res: Response) => {
     credit.editCreditStore(req, res);
   }
 );
 
 creditStoreRouter.delete(
-  `${path}/creditstore/delete/:nameStore`,
+  `${path}/creditstore/delete/:storeName`,
   (req: Request, res: Response) => {
     credit.deleteCreditStore(req, res);
   }
