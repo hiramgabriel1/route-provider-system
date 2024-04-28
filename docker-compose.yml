@@ -2,25 +2,14 @@
 version: '3'
 
 services:
-  redis_cache: 
-    image: redis:latest
-    restart: always
-    ports: 
-      - "6379:6379" 
-    volumes:
-      - redis_data:/data
-      
   postgres_db:
     image: postgres:latest
     restart: always
     ports:
-      - "5432:5432"
+      - "5433:5433"
     environment:
       POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
       POSTGRES_DB: ${DATABASE_NAME}
     container_name: router_db
     volumes:
       - ./postgres:/var/lib/postgresql/data
-  
-volumes:
-  redis_data:
