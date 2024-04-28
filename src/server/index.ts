@@ -12,6 +12,7 @@ import routerSession from "../routes/session.router";
 import routerBrokerCourt from "../routes/system.broker.router";
 import routerTienda from "../routes/tienda.router";
 import routerMarkProducts from "../services/employees/routes/products.routes";
+import creditStoreRouter from "../routes/creditStore.router";
 import session from "express-session";
 import http from "http";
 import morgan from "morgan";
@@ -37,17 +38,19 @@ declare module "express-session" {
   }
 }
 
-app.use(
-  session({
-    secret: "3903DJS_DJSDKSddew@-dsjk2983",
-    resave: false,
-    saveUninitialized: true,
-    // role: false
-  })
-);
-// devolver un role en la sessión tambien ademas de la secret
+// app.use(
+//   session({
+//     // en caso de error quitar este env y ponerlo drectamente sin el process
+//     secret: String(process.env.SECRET_KEY),
+//     resave: false,
+//     saveUninitialized: true,
+//     // role: false
+//   })
+// );
 
 // & endpoints administrador here
+app.use(creditStoreRouter);
+
 app.use(routerHome);
 app.use(routerEmployees);
 app.use(routerUnitCars);
@@ -65,6 +68,7 @@ app.use(routerMarkProducts);
 // todo: run server!
 const bootstrap = () => {
   try {
+    console.log(PORT);
     server.listen(PORT);
   } catch (error) {
     console.error(error);

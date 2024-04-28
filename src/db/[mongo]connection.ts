@@ -8,7 +8,8 @@ const connection = async () => {
 
     // @ts-ignore
     await mongoose.connect(process.env.MONGO_URI);
-
+    console.log('conectado');
+    
 } catch (error) {
     console.error(error);
   }
