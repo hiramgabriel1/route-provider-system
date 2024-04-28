@@ -19,7 +19,7 @@ creditStoreRouter.get(
   }
 );
 
-creditStoreRouter.post(`${path}/credit`, (req: Request, res: Response) => {
+creditStoreRouter.post(`${path}/add-credit`, (req: Request, res: Response) => {
   credit.addCreditToNewStore(req, res);
 });
 

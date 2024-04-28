@@ -17,8 +17,9 @@ class creditStore {
   async addCreditToNewStore(req: Request, res: Response) {
     try {
       const { storeName, credit } = req.body;
-      const store = await this.searchStore(storeName, res, req);
-      console.log(store);
+      const queryStore = await creditStoreModel.findOne({ storeName });
+      if (queryStore)
+        return res.json({ message: "ya existe", details: queryStore });
 
       const storeCreditBody = {
         storeName: storeName,
