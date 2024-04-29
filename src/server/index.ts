@@ -38,15 +38,15 @@ declare module "express-session" {
   }
 }
 
-// app.use(
-//   session({
-//     // en caso de error quitar este env y ponerlo drectamente sin el process
-//     secret: String(process.env.SECRET_KEY),
-//     resave: false,
-//     saveUninitialized: true,
-//     // role: false
-//   })
-// );
+app.use(
+  session({
+    // en caso de error quitar este env y ponerlo drectamente sin el process
+    secret: String(process.env.SECRET_KEY),
+    resave: false,
+    saveUninitialized: true,
+    // role: false
+  })
+);
 
 // & endpoints administrador here
 app.use(creditStoreRouter);
