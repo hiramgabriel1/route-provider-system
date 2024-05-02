@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const creditStore = new mongoose.Schema({
     // storeId: {
     //     type: Number
-    // },
+    // },   
 
     storeName: {
         type: String,

@@ -12,19 +12,16 @@ creditStoreRouter.get(
   }
 );
 
-creditStoreRouter.get(
-  `${path}/stores`,
-  (req: Request, res: Response) => {
-    credit.showAllStores(req, res);
-  }
-);
+creditStoreRouter.get(`${path}/stores`, (req: Request, res: Response) => {
+  credit.showAllStores(req, res);
+});
 
 creditStoreRouter.post(`${path}/add-credit`, (req: Request, res: Response) => {
   credit.addCreditToNewStore(req, res);
 });
 
 creditStoreRouter.put(
-  `${path}/creditstore/edit/:storeName`,
+  `${path}/creditstore/edi  t/:storeName`,
   (req: Request, res: Response) => {
     credit.editCreditStore(req, res);
   }
