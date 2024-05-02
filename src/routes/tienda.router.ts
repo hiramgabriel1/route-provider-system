@@ -2,31 +2,23 @@ import { Request, Response, Router } from "express";
 import tiendaController from "../controllers/tienda.controller";
 import tienda from "../models/tienda.model";
 
-
-
 const tiendasController = new tiendaController();
 const routerTienda = Router();
 const path = "/api/v1";
 
 // todo: render all tiendas
-routerTienda.get(
-  `${path}/tiendas`,
-  (req: Request, res: Response) => {
-    tiendasController.getTiendas(req,res)
-  }
-);
+routerTienda.get(`${path}/tiendas`, (req: Request, res: Response) => {
+  tiendasController.getTiendas(req, res);
+});
 
 // todo: render tienda by id
-routerTienda.get(
-  `${path}/tienda/:idTienda`,
-  (req: Request, res: Response) => {
-    tiendasController.getTiendasById(req, res);
-  }
-);
+routerTienda.get(`${path}/tienda/:idTienda`, (req: Request, res: Response) => {
+  tiendasController.getTiendasById(req, res);
+});
 
 // todo: create a new tienda
 routerTienda.post(`${path}/tienda/new`, (req: Request, res: Response) => {
-    tiendasController.createTienda(req, res);
+  tiendasController.createTienda(req, res);
 });
 
 // todo: edit a tienda PENDIENTE POR HACER
@@ -45,7 +37,6 @@ routerTienda.delete(
   }
 );
 
-
 routerTienda.post(
   `${path}/tienda/addproduct/:idTienda`,
   (req: Request, res: Response) => {
@@ -58,11 +49,29 @@ routerTienda.patch(
   (req: Request, res: Response) => {
     tiendasController.rempleaceProducts(req, res);
   }
-)
+);
 
 routerTienda.patch(
-  `${path}/tienda/editproduct/:idTienda/:idProduct`,(req:Request,res:Response)=>{
-    tiendasController.editProductTienda(req,res);
+  `${path}/tienda/editproduct/:idTienda/:idProduct`,
+  (req: Request, res: Response) => {
+    tiendasController.editProductTienda(req, res);
   }
-)
+);
+
+routerTienda.post(`${path}/create-mercancia`, (req: Request, res: Response) => {
+  tiendasController.createMercancia(req, res);
+});
+
+routerTienda.get(`${path}/show-mercancia`, (req: Request, res: Response) => {
+  tiendasController.getMercancia(req, res);
+});
+
+routerTienda.post(`${path}/create-efectivo`, (req: Request, res: Response) => {
+  tiendasController.editProductTienda(req, res);
+});
+
+routerTienda.get(`${path}/show-efectivo`, (req: Request, res: Response) => {
+  tiendasController.editProductTienda(req, res);
+});
+
 export default routerTienda;

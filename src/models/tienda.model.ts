@@ -29,12 +29,12 @@ const tiendamodel = new mongoose.Schema({
     {
       product: {
         type: Schema.Types.ObjectId,
-        ref: "productos", 
+        ref: "productos",
       },
-      price:{
-        type:Number,
-        required:true
-      }
+      price: {
+        type: Number,
+        required: true,
+      },
     },
   ],
 });
