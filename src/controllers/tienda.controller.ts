@@ -11,8 +11,8 @@ class tiendaController {
       tiendas
         ? res.status(200).json({ message: tiendas, details: true })
         : res
-          .status(404)
-          .json({ message: "no existen tiendas", details: false });
+            .status(404)
+            .json({ message: "no existen tiendas", details: false });
     } catch (error) {
       console.error(error);
     }
@@ -59,8 +59,8 @@ class tiendaController {
       createdTienda
         ? res.status(200).json({ message: createdTienda, details: true })
         : res
-          .status(400)
-          .json({ messga: "intenral server error", details: false });
+            .status(400)
+            .json({ messga: "intenral server error", details: false });
     } catch (error) {
       console.log(error);
     }
@@ -87,8 +87,8 @@ class tiendaController {
       existTienda
         ? res.status(200).json({ message: existTienda, details: true })
         : res
-          .status(404)
-          .json({ message: "la tienda no existe", details: false });
+            .status(404)
+            .json({ message: "la tienda no existe", details: false });
     } catch (error) {
       console.log(error);
     }
