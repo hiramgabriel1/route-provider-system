@@ -2,8 +2,6 @@ import { Request, Response, Router } from "express";
 import tiendaController from "../controllers/tienda.controller";
 import tienda from "../models/tienda.model";
 
-
-
 const tiendasController = new tiendaController();
 const routerTienda = Router();
 const path = "/api/v1";
