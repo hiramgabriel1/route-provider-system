@@ -3,22 +3,22 @@ import mongoose from "mongoose";
 const unitModelCar = new mongoose.Schema({
   marca: {
     type: String,
-    required: true,
+    // required: true,
   },
 
   modelo: {
     type: Number,
-    required: true,
+    // required: true,
   },
 
   lastOilChange: {
     type: Date,
-    required: true,
+    // required: true,
   },
 
   nextOilChange: {
     type: Date,
-    required: true,
+    // required: true,
   },
 
   kilometros: {
