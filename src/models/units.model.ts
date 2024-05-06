@@ -20,10 +20,12 @@ const unitModelCar = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  kilometros:{
-    type : Number,
-    required:true
-  }
+
+  kilometros: {
+    type: Number,
+    default: 0,
+    // required:true
+  },
 });
 
 const unitModel = mongoose.model("unitCars", unitModelCar);
