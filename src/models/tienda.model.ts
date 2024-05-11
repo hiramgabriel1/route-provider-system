@@ -3,27 +3,27 @@ import mongoose, { Schema } from "mongoose";
 const tiendamodel = new mongoose.Schema({
   nombre: {
     type: String,
-    require: true,
+    // require: true,
   },
 
   coordinador: {
     type: String,
-    require: true,
+    // require: true,
   },
 
   coordenadas: {
     x: {
       type: Number,
-      required: true,
+      // required: true,
     },
     y: {
       type: Number,
-      required: true,
+      // required: true,
     },
   },
   direccion: {
     type: String,
-    required: true,
+    // required: true,
   },
   productos: [
     {
@@ -31,10 +31,16 @@ const tiendamodel = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "productos",
       },
+    
       price: {
         type: Number,
-        required: true,
+        // required: true,
       },
+
+      utils: {
+        type: Number
+      }
+
     },
   ],
 });

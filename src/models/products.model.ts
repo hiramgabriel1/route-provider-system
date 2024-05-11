@@ -25,6 +25,10 @@ const productsMark = new mongoose.Schema({
     type: Boolean,
     require: true,
   },
+
+  utils: {
+    type: Number
+  }
 });
 
 const productMarks = mongoose.model("productos", productsMark);

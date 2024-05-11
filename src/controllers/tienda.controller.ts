@@ -11,8 +11,8 @@ class tiendaController {
       tiendas
         ? res.status(200).json({ message: tiendas, details: true })
         : res
-            .status(404)
-            .json({ message: "no existen tiendas", details: false });
+          .status(404)
+          .json({ message: "no existen tiendas", details: false });
     } catch (error) {
       console.error(error);
     }
@@ -59,8 +59,8 @@ class tiendaController {
       createdTienda
         ? res.status(200).json({ message: createdTienda, details: true })
         : res
-            .status(400)
-            .json({ messga: "intenral server error", details: false });
+          .status(400)
+          .json({ messga: "intenral server error", details: false });
     } catch (error) {
       console.log(error);
     }
@@ -87,8 +87,8 @@ class tiendaController {
       existTienda
         ? res.status(200).json({ message: existTienda, details: true })
         : res
-            .status(404)
-            .json({ message: "la tienda no existe", details: false });
+          .status(404)
+          .json({ message: "la tienda no existe", details: false });
     } catch (error) {
       console.log(error);
     }
@@ -141,6 +141,7 @@ class tiendaController {
     }
   }
 
+  // utilidades
   async rempleaceProducts(req: Request, res: Response) {
     try {
       const { idTienda } = req.params;
@@ -148,11 +149,11 @@ class tiendaController {
 
       const tiendaToUpdate = await tienda.findById(idTienda);
 
-      if (!tiendaToUpdate) {
-        return res.status(404).json({ message: "Tienda no encontrada." });
-      }
+      if (!tiendaToUpdate) return res.status(404).json({ message: "Tienda no encontrada." });
 
-      tiendaToUpdate.productos = products;
+      const Update = tiendaToUpdate.productos = products;
+
+      console.log(Update)
 
       await tiendaToUpdate.save();
 
@@ -262,6 +263,21 @@ class tiendaController {
     try {
       const efectivo = await efectivoModel.find();
       res.json(efectivo);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Internal server error", details: false });
+    }
+  }
+
+  async utilsStoreProducts(req: Request, res: Response) {
+    try {
+      const { tiendaId, utils } = req.body;
+      const searchStore = await tienda.findByIdAndUpdate(tiendaId, {
+        $set: { "productos.$[].utils": utils },
+      });
+
+      res.json(searchStore);
     } catch (error) {
       res
         .status(500)
