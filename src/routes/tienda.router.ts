@@ -73,7 +73,7 @@ routerTienda.get(`${path}/show-efectivo`, (req: Request, res: Response) => {
   tiendasController.editProductTienda(req, res);
 });
 
-routerTienda.post(`${path}/add-util`, (req: Request, res: Response) => {
+routerTienda.put(`${path}/add-util`, (req: Request, res: Response) => {
   tiendasController.utilsStoreProducts(req, res);
 });
 
