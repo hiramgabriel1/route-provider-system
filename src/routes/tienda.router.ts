@@ -1,6 +1,5 @@
 import { Request, Response, Router } from "express";
 import tiendaController from "../controllers/tienda.controller";
-import tienda from "../models/tienda.model";
 
 const tiendasController = new tiendaController();
 const routerTienda = Router();
@@ -72,6 +71,10 @@ routerTienda.post(`${path}/create-efectivo`, (req: Request, res: Response) => {
 
 routerTienda.get(`${path}/show-efectivo`, (req: Request, res: Response) => {
   tiendasController.editProductTienda(req, res);
+});
+
+routerTienda.post(`${path}/add-util`, (req: Request, res: Response) => {
+  tiendasController.utilsStoreProducts(req, res);
 });
 
 export default routerTienda;
