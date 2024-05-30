@@ -1,7 +1,6 @@
 import moment from "moment-timezone";
 import cron from "node-cron";
 import requestProductsMarks from "../models/requestProducts.model";
-import colors from "colors"
 
 const timezone = "America/Monterrey";
 

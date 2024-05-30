@@ -9,7 +9,7 @@ import { EventEmitter } from "events";
 export function schedule(
     cronExpression: string,
     func: ((now: Date | "manual" | "init") => void) | string,
-    options?: ScheduleOptions,
+    options?: ScheduleOptions
 ): ScheduledTask;
 
 /**

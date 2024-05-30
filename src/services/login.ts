@@ -1,25 +1,42 @@
 import employeeModel from "../models/employees.model";
-import {
-  verifyPasswordSecurity,
-} from "../validators/bcrypt.config";
+import { verifyPasswordSecurity } from "../validators/bcrypt.config";
+import { Request, Response } from "express";
+
+type userInterface = {
+  username: string;
+  password: string;
+};
+
+interface typeUserRegister {
+  user: string;
+  username: string;
+  lastnames: string;
+  password: string;
+  rol: string;
+}
 
 export class LoginSystem {
-  async loginUser(username: string, password: string) {
+  async loginUser(
+    username: string,
+    password: string,
+    _req: Request,
+    res: Response
+  ) {
     try {
-      const usuario = await employeeModel.findOne({
+      const usuario: userInterface | null = await employeeModel.findOne({
         where: { nombre: username },
       });
-      if (!usuario) {
-        console.log("Usuario no encontrado");
-        return undefined;
-      }
+
+      if (!usuario) res.json("no encontrado");
 
       const passwordValid = await verifyPasswordSecurity(
         password,
-        usuario.password
+        usuario!.password
       );
 
-      passwordValid ? usuario : false; //Contraseña incorrecta
+      if (passwordValid) res.json(usuario);
+
+      res.json("contraseña incorrecta");
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
@@ -30,17 +47,16 @@ export class LoginSystem {
     username: string,
     lastnames: String,
     password: string,
-    rol: Boolean
+    rol: Boolean,
+    _req: Request,
+    res: Response
   ) {
     try {
-      const usuario = await employeeModel.findOne({
+      const usuario: userInterface | null = await employeeModel.findOne({
         where: { nombre: username },
       });
 
-      if (usuario) {
-        console.log("Ya existe el usuario");
-        return false;
-      }
+      if (usuario) res.json("usuario ya existe");
 
       const usercreated = await employeeModel.create({
         user: user,
@@ -49,8 +65,6 @@ export class LoginSystem {
         password: password,
         rol: rol,
       });
-
-      
 
       return usercreated;
     } catch (error) {
