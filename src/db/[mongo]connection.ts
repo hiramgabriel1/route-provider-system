@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { deleteDataCronJob } from "../middlewares/cronjob";
 
 dotenv.config();
-
+const URI: string = process.env.MONGO_URI || '';
 const connection = async () => {
   try {
 
-    // @ts-ignore
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('conectado');
-    
+    let connection = await mongoose.connect(URI);
+
+    if(connection) deleteDataCronJob()
+        
 } catch (error) {
     console.error(error);
   }

@@ -13,7 +13,7 @@ export interface ProductInRequestProductsInterface {
   product: string;
   amount: number;
   amountCurrent: number;
-  unitPrice: number, //added
-  priceSold: number //added
+  unitPrice: number, 
+  priceSold: number 
   _id: string;
 }

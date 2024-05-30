@@ -7,7 +7,6 @@ import {
   ProductInRequestProductsInterface,
   RequestProductsInterface,
 } from "../types/requestProducts";
-import products from "../services/employees/controllers/products.controllers";
 
 class requestProductsController {
   async getAllRequestProducts(req: Request, res: Response) {
@@ -382,12 +381,6 @@ class requestProductsController {
       const { idRequest } = req.params;
       const updateData = req.body as RequestProductsInterface;
 
-      // const updateRequest = await requestProductsMarks.findByIdAndUpdate(
-      //   { _id: idRequest },
-      //   { $set: updateData },
-      //   { new: true }
-      // );
-
       const updateRequestInFather = await requestProductsMarks.findOne({
         route: updateData.route,
         state: "aprobado",
@@ -500,12 +493,10 @@ class requestProductsController {
 
       await request.save();
 
-      return res
-        .status(200)
-        .json({
-          message: "Ammount dispatched updated successfully",
-          details: true,
-        });
+      return res.status(200).json({
+        message: "Ammount dispatched updated successfully",
+        details: true,
+      });
     } catch (error) {
       console.error("Error:", error);
       return res
@@ -531,28 +522,23 @@ class requestProductsController {
         (product) => product._id?.toString() === productId
       );
 
-      if (indexProduct === -1) {
+      if (indexProduct === -1)
         return res
           .status(404)
           .json({ message: "Product not found", details: false });
-      }
 
       // Accede al objeto productStateDSR
       const productStateDSR = request.products[indexProduct].productStateDSR[0];
 
       // Asigna el valor de ammountSold
-      if (productStateDSR) {
-        productStateDSR.ammountSold = ammountSold;
-      }
+      if (productStateDSR) productStateDSR.ammountSold = ammountSold;
 
       await request.save();
 
-      return res
-        .status(200)
-        .json({
-          message: "Ammount dispatched updated successfully",
-          details: true,
-        });
+      return res.status(200).json({
+        message: "Ammount dispatched updated successfully",
+        details: true,
+      });
     } catch (error) {
       console.error("Error:", error);
       return res
@@ -568,38 +554,32 @@ class requestProductsController {
 
       const request = await requestProductsMarks.findById(idRequest);
 
-      if (!request) {
+      if (!request)
         return res
           .status(404)
           .json({ message: "Request not found", details: false });
-      }
 
       const indexProduct = request.products.findIndex(
         (product) => product._id?.toString() === productId
       );
 
-      if (indexProduct === -1) {
+      if (indexProduct === -1)
         return res
           .status(404)
           .json({ message: "Product not found", details: false });
-      }
 
       // Accede al objeto productStateDSR
       const productStateDSR = request.products[indexProduct].productStateDSR[0];
 
       // Asigna el valor de ammountDispatched
-      if (productStateDSR) {
-        productStateDSR.ammountReturn = ammountReturn;
-      }
+      if (productStateDSR) productStateDSR.ammountReturn = ammountReturn;
 
       await request.save();
 
-      return res
-        .status(200)
-        .json({
-          message: "Ammount dispatched updated successfully",
-          details: true,
-        });
+      return res.status(200).json({
+        message: "Ammount dispatched updated successfully",
+        details: true,
+      });
     } catch (error) {
       console.error("Error:", error);
       return res
