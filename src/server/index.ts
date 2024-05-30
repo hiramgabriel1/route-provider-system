@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import { employeesDatabaseConnection } from "../services/employees/db/db";
-import connection from "../db/[mongo]connection";
+import connection from "../db/connection";
 import routerHomeData from "../routes/home-data.router";
 import routerRequestProducts from "../routes/requestProducts.router";
 import routerHome from "../routes/home.router";
@@ -18,7 +18,6 @@ import http from "http";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
-import { deleteDataCronJob } from "../middlewares/cronjob";
 
 dotenv.config();
 connection();
